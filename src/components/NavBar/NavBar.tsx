@@ -12,9 +12,9 @@ export default function NavBar() {
             </div>
             <div className="flex items-center text-[12px] gap-16 font-extrabold">
                 <Link href="/" className="">HOME</Link>
-                <Link href="/phones">PHONES</Link>
-                <Link href="/contact">TABLETS</Link>
-                <Link href="/contact">ACCESSORIES</Link>
+                <Link href="/phone">PHONES</Link>
+                <Link href="/tablets">TABLETS</Link>
+                <Link href="/accessories">ACCESSORIES</Link>
             </div>
             <div className="flex gap-11 items-center">
                 <Link href="/favorites">
