@@ -5,7 +5,8 @@ import { HeartIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 export default function NavBar() {
     return (
         <div className="flex justify-between items-center w-full h-16 bg-white mb-0.5 shadow-md">
-            <div>
+           <div className="flex items-center gap-3 ml-6">
+             <div>
                 <Link href="/">
                     <Image src="/img/icons/logo.png" alt="logo" width={168} height={104} />
                 </Link>
@@ -16,6 +17,7 @@ export default function NavBar() {
                 <Link href="/tablets">TABLETS</Link>
                 <Link href="/accessories">ACCESSORIES</Link>
             </div>
+           </div>
             <div className="flex gap-11 items-center">
                 <Link href="/favorites">
                     <HeartIcon className="w-6 h-6" />

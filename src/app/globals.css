@@ -8,5 +8,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Verdana, Geneva, Tahoma, sans-serif
+  font-family: 'Roboto', sans-serif;
 }
