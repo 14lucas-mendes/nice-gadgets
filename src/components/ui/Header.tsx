@@ -8,43 +8,95 @@ import Link from "next/link";
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [activeLink, setActiveLink] = useState('home');
 
 
     return (
         <header className="bg-white shadow-md h-12 relative">
             <div className="flex items-center justify-between px-4 w-full pt-3">
-                <Image src="/img/icons/Logo.png" width={64} height={20} alt='logo' />
-
+                <Link href='/' onClick={() => {
+                            setIsMenuOpen(false)
+                            setActiveLink('home')
+                        }}>
+                    <Image src="/img/icons/Logo.png" width={64} height={20} alt='logo'/>
+                </Link>
+        
                 {/*Botão de menu*/}
                 {!isMenuOpen ? 
-                    (<Bars3Icon width={24} height={24} onClick={() => setIsMenuOpen(prev => !prev)}/>
+                    (<Bars3Icon width={24} height={24} onClick={() => setIsMenuOpen(prev => !prev)} className="cursor-pointer"/>
                     ) : (
-                    <XMarkIcon width={24} height={24} onClick={() => setIsMenuOpen(prev => !prev)}/>
+                    <XMarkIcon width={24} height={24} onClick={() => setIsMenuOpen(prev => !prev)} className="cursor-pointer"/>
                     )}
             
             {/*Menu coms os links de navegação*/}
             {isMenuOpen && (
-            <div className="absolute top-full left-0 w-full h-screen bg-white flex flex-col justify-between p-8">
-                <div className="flex flex-col items-center gap-4 text-lg">
-                    <Link href='/' className="cursor-pointer">Home</Link>
-                    <Link href='/phones' className="cursor-pointer">Phones</Link>
-                    <Link href='/accessories' className="cursor-pointer">Accessories</Link>
-                    <Link href='/tablets' className="cursor-pointer">Tablets</Link>
+            <div className="fixed top-0 left-0 w-full h-screen mt-[50px] bg-white flex flex-col justify-between p-8 text-[#89939A]">
+                <div className="flex flex-col items-center gap-4 text-lg pt-20">
+                    <Link href='/' 
+                        onClick={() => {
+                            setIsMenuOpen(false);
+                            setActiveLink('home')
+                        }}
+                        className={activeLink === 'home' ? 'border-b-2 border-black pb-1 text-[#313237]' : 'text-[#89939A]'}>
+
+                        Home
+
+                        </Link>
+                    <Link href='/phones' 
+                        onClick={() => {
+                            setIsMenuOpen(false);
+                            setActiveLink('phones')
+                        }}
+                        className={activeLink === 'phones' ? 'border-b-2 border-black pb-1 text-[#313237]' : 'text-[#89939A]'}>
+
+                        Phones
+
+                    </Link>
+                    <Link href='/accessories' 
+                        onClick={() => {
+                            setIsMenuOpen(false);
+                            setActiveLink('accessories')
+                        }}
+                        className={activeLink === 'accessories' ? 'border-b-2 border-black pb-1 text-[#313237]' : 'text-[#89939A]'}>
+
+                        Accessories
+
+                    </Link>
+                    <Link href='/tablets' 
+                        onClick={() => {
+                            setIsMenuOpen(false);
+                            setActiveLink('tablets')
+                        }}
+                        className={activeLink === 'tablets' ? 'border-b-2 border-black pb-1 text-[#313237]' : 'text-[#89939A]'}>
+
+                        Tablets
+                        
+                    </Link>
                 </div>
 
                  {/*Botões de favoritos e carrinho*/}
-                 <div className="flex justify-center gap-8 p-4 border-t">
-                    <Link href='/favorites'>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
+                <div className="flex justify-center w-full text-black border-t-[#E2E6E9] border-t border-b border-gray-300">
+                    <div className="w-1/2 h-16 flex justify-center items-center border-r-[#E2E6E9] relative border-r border-gray-300">
+                    <Link href='/favorites' onClick={() => {
+                        setIsMenuOpen(false);
+                        setActiveLink('favorites')
+                    }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                         </svg>
                     </Link>
-                    <Link href='/cart'>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                    </div>
+                   <div className="w-1/2 h-16 flex justify-center items-center">
+                    <Link href='/cart' onClick={() => {
+                        setIsMenuOpen(false);
+                        setActiveLink('cart')
+                    }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                         </svg>
                     </Link>
-                 </div>
+                   </div>
+                </div>
              </div> 
             )} 
             </div>

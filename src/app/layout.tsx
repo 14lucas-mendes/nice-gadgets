@@ -1,4 +1,6 @@
+import Header from '@/components/ui/Header';
 import './globals.css'
+import Footer from '@/components/ui/Footer';
 
 export default function RootLayout({
   children,
@@ -8,9 +10,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className="antialiased"
+        className="antialiased flex flex-col min-h-screen justify-between"
       >
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
