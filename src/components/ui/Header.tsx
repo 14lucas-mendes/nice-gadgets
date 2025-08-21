@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/16/solid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 
@@ -10,6 +10,20 @@ export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeLink, setActiveLink] = useState('home');
 
+    useEffect(() => {
+        //Se o menu estiver aberto impede o scroll
+        if (isMenuOpen) {
+            document.body.classList.add('overflow-hidden');
+        } else {
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        //Impede que o scroll fique travado por acidente
+        return () => {
+            document.body.classList.remove('overflow-hidden');
+        };
+        //so roda quando o o estado do menu mudar.
+    }, [isMenuOpen]);
 
     return (
         <header className="bg-white shadow-md h-12 relative">
@@ -77,7 +91,7 @@ export default function Header() {
                  {/*Botões de favoritos e carrinho*/}
                 <div className="flex justify-center w-full text-black border-t-[#E2E6E9] border-t border-b border-gray-300">
                     <div className="w-1/2 h-16 flex justify-center items-center border-r-[#E2E6E9] relative border-r border-gray-300">
-                    <Link href='/favorites' onClick={() => {
+                    <Link href='/favorite' onClick={() => {
                         setIsMenuOpen(false);
                         setActiveLink('favorites')
                     }}>
