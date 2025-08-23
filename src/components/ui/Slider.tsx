@@ -74,18 +74,20 @@ export default function Slider() {
 
     return (
         <div 
-        className="relative w-full max-w-4xl mx-auto"
+        className="relative w-full max-w-4xl mx-auto aspect-video mt-6 bg-black"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         >
-            <h2 className="text-center mb-2">{activeSlider.description}</h2>
-            <Image 
-            src={activeSlider.src}
-            alt={activeSlider.alt}
-            width={400}
-            height={400}
-            className="object-cover w-full h-auto rounded-lg"
-            />
+            {slides.map((slide, index) => (
+                <Image 
+                key={slide.id}
+                src={slide.src}
+                alt={slide.alt}
+                fill
+                className={`absolute inset-0 object-cover transition-opacity duration-700 ease-in-out
+                    ${index === currentSlide ? ' opacity-100' : ' opacity-0'}`}
+                />
+            ))} 
         </div>
     )
 }
