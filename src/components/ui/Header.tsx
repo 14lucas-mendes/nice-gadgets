@@ -26,7 +26,7 @@ export default function Header() {
     }, [isMenuOpen]);
 
     return (
-        <header className="bg-white shadow-md h-12 relative">
+        <header className="bg-white shadow-md h-12 fixed top-0 w-full z-10">
             <div className="flex items-center justify-between px-4 w-full pt-3">
                 <Link href='/' onClick={() => {
                             setIsMenuOpen(false)

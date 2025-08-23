@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className="antialiased flex flex-col min-h-screen justify-between"
+        className="flex flex-col min-h-screen"
       >
         <Header />
         {children}

@@ -1,7 +1,7 @@
 'use client'
 
 import Image from "next/image";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function Slider() {
     const [currentSlide, setCurrentSlide] = useState(0)
@@ -37,11 +37,16 @@ export default function Slider() {
         setCurrentSlide(nextSlide);
     }
 
-    const handleTouchStart = (e) => {
+    const handlePrevSlide = () => {
+        const prevSlide = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+        setCurrentSlide(prevSlide);
+    }
+
+    const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
         setTouchStartX(e.touches[0].clientX);
     }
 
-    const handleTouchEnd = (e) => {
+    const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
         const touchEndX = e.changedTouches[0].clientX;
 
         const difference = touchEndX - touchStartX;
@@ -49,18 +54,37 @@ export default function Slider() {
         const threshold = 50
 
         if(difference < -threshold) {
+            //usuario arrastou para a esquerda, então avance.
             handleNextSlide();
+        }
+
+        if (difference > threshold) {
+            //usuario arrastou para a direita, então retroceda.
+            handlePrevSlide();
         }
     }
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            handleNextSlide();
+        }, 5000);
+
+        return () => clearInterval(interval);
+    })
+
     return (
-        <div onTouchStart={handleTouchStart}>
-            <h2>{activeSlider.description}</h2>
+        <div 
+        className="relative w-full max-w-4xl mx-auto"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        >
+            <h2 className="text-center mb-2">{activeSlider.description}</h2>
             <Image 
             src={activeSlider.src}
             alt={activeSlider.alt}
             width={400}
             height={400}
+            className="object-cover w-full h-auto rounded-lg"
             />
         </div>
     )
