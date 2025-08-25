@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { CardNewModelsType } from "@/types/Product-type";
 import Image from "next/image";
+import Link from "next/link";
 
 
 export default function CardNewModels() {
@@ -13,7 +14,7 @@ export default function CardNewModels() {
         fetch('./api/products.json')
             .then(response => response.json())
             .then(data => {
-                const fatiados = data.slice(0, 1)
+                const fatiados = data.slice(0, 10)
 
                 console.log("Quantidade de itens fatiados: ", fatiados.length)
 
@@ -27,20 +28,41 @@ export default function CardNewModels() {
         <div className="flex gap-4">
             {dadosCard.map((item) => (
                 <div key={item.id}
-                className="w-[212px] h-[439px] border-[1px] rounded-[8px] bg-white"
+                className="w-[212px] h-auto p-4 flex flex-col gap-1 border-[1px] border-[#89939A] rounded-[8px] bg-white"
                 >
-                <Image
-                    src={`/${item.image}`}
-                    alt={item.name}
-                    width={100}
-                    height={100}
+                <div className="flex flex-col items-center mt-6">
+                    <Image
+                        src={`/${item.image}`}
+                        alt={item.name}
+                        width={100}
+                        height={100}
                      />
-                     <p>{item.itemId}</p>
-                     <p>{item.price}</p>
-                     <p>{item.screen}</p>
-                     <p>{item.capacity}</p>
-                     <p>{item.ram}</p>
-                     <button>Add to cart</button>
+                     <p className="font-semibold text-[14px] mt-6 break-normal uppercase text-center">{item.itemId}</p>
+                     <div className="flex gap-1 mt-2">
+                        <p className="font-extrabold text-[22px]">{`$${item.price}`}</p>
+                        <p className="text-[22px] text-[#89939A] line-through">{`$${item.fullPrice}`}</p>
+                     </div>
+                    </div>
+                     <div className="flex justify-between w-full font-bold text-[12px]">
+                        <p className="text-[#89939A]">Screen</p>
+                        <p>{item.screen}</p>
+                     </div>
+                     <div className="flex justify-between w-full font-bold text-[12px]">
+                        <p className="text-[#89939A]">Capacity</p>
+                        <p>{item.capacity}</p>
+                     </div>
+                     <div className="flex justify-between w-full font-bold text-[12px]">
+                        <p className="text-[#89939A]">RAM</p>
+                        <p>{item.ram}</p>
+                     </div>
+                     <div className="flex justify-center w-full gap-2">
+                        <button className="bg-orange-500 h-10 w-[100px] rounded-[8px] text-white text-[14px] font-semibold">Add to cart</button>
+                        <Link href={`/product/${item.id}`} className="flex justify-center items-center rounded-full border border-gray-400 w-10 h-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-[#0F0F11]">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                            </svg>
+                        </Link>
+                     </div>
                 </div>
             ))}
         </div>
