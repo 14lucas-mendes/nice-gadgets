@@ -1,6 +1,7 @@
 'use client'
 
 import CardNewModels from "@/components/ui/CardNewModels";
+import ShopyCategory from "@/components/ui/ShopyCategory";
 import Slider from "@/components/ui/Slider";
 
 export default function Home() {
@@ -13,6 +14,9 @@ export default function Home() {
                 <div className="w-full overflow-hidden">
                     <div className="mt-6 ml-4">
                         <CardNewModels /> 
+                    </div>
+                    <div>
+                        <ShopyCategory />
                     </div>
                 </div>
             </section>
