@@ -44,7 +44,7 @@ export default function CardNewModels() {
 
         const difference = e.touches[0].clientX - touchStartX;
 
-        setDragX(difference)
+        setDragX(-difference)
 
     }
 
@@ -55,12 +55,12 @@ export default function CardNewModels() {
 
         if(dragX < -threshold) {
             //usuario arrastou para a esquerda, então avance.
-           handleNextCard();
+           handlePrevCard();
         }
 
         if (dragX > threshold) {
             //usuario arrastou para a direita, então retroceda.
-            handlePrevCard();
+            handleNextCard();
         }
 
         setDragX(0)
@@ -100,11 +100,12 @@ export default function CardNewModels() {
                         src={`/${item.image}`}
                         alt={item.itemId}
                         fill={true}
-                        className="object-contain"
+                        className="object-contain transition transform hover:scale-110 duration-300 ease-in-out"
+                        onClick={() => handleNextCard()}
                      />
                     </div>
-                     <p className="font-semibold text-[12px] mt-6 break-normal uppercase text-center w-[148px]">{item.name}</p>
-                     <div className="flex gap-1 mt-2 mr-12">
+                     <p className="font-semibold text-[12px] mt-2 break-normal uppercase text-center w-[148px]">{item.name}</p>
+                     <div className="flex gap-1 mt-4 mr-10">
                         <p className="font-bold text-[22px]">{`$${item.price}`}</p>
                         <p className="text-[22px] text-[#89939A] line-through">{`$${item.fullPrice}`}</p>
                      </div>
