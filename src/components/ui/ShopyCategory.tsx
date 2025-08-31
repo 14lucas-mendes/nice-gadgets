@@ -13,8 +13,10 @@ export default function ShopyCategory() {
                         className="absolute object-cover top-10 left-10 scale-130"
                         />
                 </div>
-                <span>Mobile Phones</span>
-                <span>95 Phones</span>
+                <div className="flex flex-col mt-6">
+                    <span className="font-bold text-[20px]" >Mobile Phones</span>
+                    <span className="font-semibold text-[14px] text-[#89939A]">95 Phones</span>
+                </div>
                 </div>
                 
                 <div className="flex flex-col">
@@ -25,8 +27,10 @@ export default function ShopyCategory() {
                         className="absolute object-cover scale-185 bottom-12 left-36"
                         />
                 </div>
-                <span>Accessories</span>
-                <span>100 Models</span>
+                <div className="flex flex-col mt-6">
+                    <span className="font-bold text-[20px]">Accessories</span>
+                    <span className="font-semibold text-[14px] text-[#89939A]">100 Models</span>
+                </div>
                 </div>
                 
                 <div className="flex flex-col">
@@ -37,8 +41,10 @@ export default function ShopyCategory() {
                         className="absolute object-cover scale-150 top-24 left-20"
                         />  
                 </div>
-                <span>Tablets</span>
-                <span>24 Models</span>
+                <div className="flex flex-col mt-6">
+                    <span className="font-bold text-[20px]">Tablets</span>
+                    <span className="font-semibold text-[14px] text-[#89939A]">24 Models</span>
+                </div>
                 </div>
             </section>
         </div>

@@ -1,5 +1,4 @@
-'use client'
-
+import CardHotPrice from "@/components/ui/CardHotPrice";
 import CardNewModels from "@/components/ui/CardNewModels";
 import ShopyCategory from "@/components/ui/ShopyCategory";
 import Slider from "@/components/ui/Slider";
@@ -17,6 +16,9 @@ export default function Home() {
                     </div>
                     <div>
                         <ShopyCategory />
+                    </div>
+                    <div className="mt-14 ml-4 mb-16">
+                        <CardHotPrice />
                     </div>
                 </div>
             </section>
