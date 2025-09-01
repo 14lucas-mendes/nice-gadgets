@@ -92,7 +92,7 @@ export default function CardHotPrice() {
             >
             {dadosCard.map((item) => (
                 <div key={item.id}
-                className="w-[212px] h-auto p-6 flex flex-col gap-1 border-[1px] border-[#89939A] rounded-[8px] bg-white"
+                className="w-[212px] h-auto p-6 flex flex-col gap-1 border-[1px] border-[#E2E6E9] rounded-[8px] bg-white"
                 >
                 <div className="flex flex-col items-center mt-4">
                     <div className="w-[148px] h-[129px] relative">
