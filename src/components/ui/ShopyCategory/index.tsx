@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function ShopyCategory() {
     return (
         <div>
-            <section className="ml-4 mt-14">
+            <section className="mt-14">
                 <h1 className="font-extrabold text-[22px]">Shop by category</h1>
                 <div className="flex flex-col">
                 <div className=" bg-yellow-200 w-[288px] h-[288px] rounded-[8px] relative overflow-hidden mt-6">

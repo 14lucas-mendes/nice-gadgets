@@ -71,8 +71,8 @@ export default function Slider() {
 
     return (
         <div 
-        className="w-full max-w-4xl mx-auto"
-        >
+        className="max-w-screen w-full -mx-4"
+        >   <h1 className="font-extrabold text-[32px] mt-6 px-4">Welcome to Nice Gadgets store!</h1>
             <div className="relative aspect-video mt-6 bg-black"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
