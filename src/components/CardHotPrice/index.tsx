@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import { CardNewModelsType } from "@/types/Product-type";
 import Image from "next/image";
 import Link from "next/link";
+import { HeadingCard } from "../HeadingCard";
 
 
-export default function CardNewModels() {
+export default function CardHotPrice() {
     const [dadosCard, setDadosCard] = useState<CardNewModelsType[]>([]);
     const [currentCard, setCurrentCard] = useState(0)
     const [touchStartX, setTouchStartX] = useState(0);
@@ -17,7 +18,7 @@ export default function CardNewModels() {
         fetch('./api/products.json')
             .then(response => response.json())
             .then(data => {
-                const fatiados = data.slice(0, 10)
+                const fatiados = data.slice(36, 47)
 
                 console.log("Quantidade de itens fatiados: ", fatiados.length)
 
@@ -70,7 +71,7 @@ export default function CardNewModels() {
     return (
         <div className="flex flex-col gap-4">
             <div className="flex justify-between">
-                <h1 className="font-extrabold text-[22px]">Brand new models</h1>
+                <HeadingCard as="h2">Hot prices</HeadingCard>
                 <div className="hidden">
                     <button className="gap-4 text-gray-300" onClick={() => handlePrevCard()}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8">

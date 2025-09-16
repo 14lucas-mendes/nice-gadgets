@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import { CardNewModelsType } from "@/types/Product-type";
 import Image from "next/image";
 import Link from "next/link";
+import { HeadingCard } from "../HeadingCard";
 
 
-export default function CardHotPrice() {
+export default function CardNewModels() {
     const [dadosCard, setDadosCard] = useState<CardNewModelsType[]>([]);
     const [currentCard, setCurrentCard] = useState(0)
     const [touchStartX, setTouchStartX] = useState(0);
@@ -17,9 +18,10 @@ export default function CardHotPrice() {
         fetch('./api/products.json')
             .then(response => response.json())
             .then(data => {
-                const fatiados = data.slice(36, 47)
+               data.sort((a: CardNewModelsType, b: CardNewModelsType) => b.year - a.year)
+                const fatiados = data.slice(0, 10)
 
-                console.log("Quantidade de itens fatiados: ", fatiados.length)
+                console.log("Quantidade de itens fatiados: ", fatiados.map((item: CardNewModelsType) => ({id: item.id, year: item.year })))
 
                 setDadosCard(fatiados)
             })
@@ -70,7 +72,7 @@ export default function CardHotPrice() {
     return (
         <div className="flex flex-col gap-4">
             <div className="flex justify-between">
-                <h1 className="font-extrabold text-[22px]">Hot prices</h1>
+                <HeadingCard as="h2">Brand new models</HeadingCard>
                 <div className="hidden">
                     <button className="gap-4 text-gray-300" onClick={() => handlePrevCard()}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8">

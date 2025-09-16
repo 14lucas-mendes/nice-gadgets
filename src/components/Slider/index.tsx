@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react"
+import { HeadingCard } from "../HeadingCard";
 
 export default function Slider() {
     const [currentSlide, setCurrentSlide] = useState(0)
@@ -70,22 +71,30 @@ export default function Slider() {
     })
 
     return (
-        <div 
-        className="max-w-screen w-full -mx-4"
-        >   <h1 className="font-extrabold text-[32px] mt-6 px-4">Welcome to Nice Gadgets store!</h1>
-            <div className="relative aspect-video mt-6 bg-black"
+        <div className="max-w-screen w-full -mx-4">   
+            <HeadingCard as="h1">Welcome to Nice Gadgest store!</HeadingCard>
+            <div className="flex relative aspect-video bg-black"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
             >
                 {slides.map((slide, index) => (
-                    <Image 
+                <div key={slide.id} className="flex absolute w-full h-full items-center">
+                    <div className="w-[40%] h-full bg-red-500">
+                        <p>{slide.description}</p>         
+                    </div>
+                    <div className="w-[60%] h-[50%] right-0">
+                    <Image
                     key={slide.id}
                     src={slide.src}
                     alt={slide.alt}
-                    fill
-                    className={`absolute inset-0 object-cover transition-opacity duration-700 ease-in-out
+                    width={300}
+                    height={300}
+                    objectFit="cover"
+                    className={`object-cover transition-opacity duration-700 ease-in-out
                         ${index === currentSlide ? ' opacity-100' : ' opacity-0'}`}
                 />
+                    </div>
+                </div>
                 ))}
             </div>
             <div className="flex justify-center z-10 space-x-2 mt-4">
