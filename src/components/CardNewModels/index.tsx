@@ -1,14 +1,14 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { CardNewModelsType } from "@/types/Product-type";
+import { Product } from "@/types/Product";
 import Image from "next/image";
 import Link from "next/link";
 import { HeadingCard } from "../HeadingCard";
 
 
 export default function CardNewModels() {
-    const [dadosCard, setDadosCard] = useState<CardNewModelsType[]>([]);
+    const [dadosCard, setDadosCard] = useState<Product[]>([]);
     const [currentCard, setCurrentCard] = useState(0)
     const [touchStartX, setTouchStartX] = useState(0);
     const [dragX, setDragX] = useState(0);
@@ -18,10 +18,10 @@ export default function CardNewModels() {
         fetch('./api/products.json')
             .then(response => response.json())
             .then(data => {
-               data.sort((a: CardNewModelsType, b: CardNewModelsType) => b.year - a.year)
+               data.sort((a: Product, b: Product) => b.year - a.year)
                 const fatiados = data.slice(0, 10)
 
-                console.log("Quantidade de itens fatiados: ", fatiados.map((item: CardNewModelsType) => ({id: item.id, year: item.year })))
+                console.log("Quantidade de itens fatiados: ", fatiados.map((item: Product) => ({id: item.id, year: item.year })))
 
                 setDadosCard(fatiados)
             })

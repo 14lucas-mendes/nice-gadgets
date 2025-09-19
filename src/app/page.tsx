@@ -1,12 +1,13 @@
+import { getProductsByHotPrice } from "@/api/products";
+import CardHotPrice from "@/components/CardHotPrice";
 import Container from "@/components/Container";
 
-export default function Home() {
+export default async function Home() {
+    const products = await getProductsByHotPrice();
+
     return (
         <Container>
-            <div className="flex flex-col my-60">
-
-            </div>
-        
+           <CardHotPrice products={products} /> 
         </Container>
     )
 }

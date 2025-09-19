@@ -1,13 +1,13 @@
 'use client'
 
-import { CardNewModelsType } from "@/types/Product-type";
+import { Product } from "@/types/Product";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function PhonesPage() {
 
-    const [dadosPhones, setDadosPhones] = useState<CardNewModelsType[]>([]);
+    const [dadosPhones, setDadosPhones] = useState<Product[]>([]);
 
     useEffect(() => {
         fetch('./api/products.json')

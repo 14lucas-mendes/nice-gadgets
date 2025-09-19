@@ -1,4 +1,4 @@
-export interface CardNewModelsType {
+export interface Product {
     id: number;
     category: string;
     itemId: string;
@@ -13,4 +13,4 @@ export interface CardNewModelsType {
     image: string,
 }
 
-export type CardNewModels = CardNewModelsType[];
+export type CardNewModels = Product[];
