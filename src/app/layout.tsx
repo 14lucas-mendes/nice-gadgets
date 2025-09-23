@@ -2,6 +2,7 @@
 import Header from '@/components/Header';
 import './globals.css'
 import Footer from '@/components/Footer';
+import Container from '@/components/Container';
 
 
 export default function RootLayout({
@@ -15,7 +16,11 @@ export default function RootLayout({
         className="flex flex-col min-h-screen w-full"
       >
         <Header />
-        {children}
+
+        <Container>
+          {children}
+        </Container>
+        
         <Footer />
       </body>
     </html>

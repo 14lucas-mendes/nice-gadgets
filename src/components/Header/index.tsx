@@ -7,11 +7,11 @@ import { useState } from "react";
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [activeLink, setActiveLink] = useState('/');
+    const [activeLink, setActiveLink] = useState('home');
 
     return (
         <header className="bg-white shadow-md h-[48px] md:h-[64px] lg:h-[64px] flex">
-            <div className="px-4 py-[13px] w-[96] h-[48px]">
+            <div className="px-4 py-[13px]">
                 <Link href="/">
                     <Image
                     src='/img/icons/logo.png'
