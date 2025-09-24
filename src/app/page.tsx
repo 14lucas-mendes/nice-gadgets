@@ -1,15 +1,18 @@
-import { getProductsByHotPrice } from "@/api/products";
-import SpinLoader from "@/components/SpinLoader";
+import { getAllProductsSlider, getProductsByHotPrice } from "@/utils/products";
+import Slider from "@/components/Slider";
 import CardHotPrice from "@/components/CardHotPrice";
-import { Suspense } from "react";
 
 export default async function Home() {
     const products = await getProductsByHotPrice();
+    console.log('Podutos Carregados', products);
+    const slider = await getAllProductsSlider();
+    console.log('Slider Carregado', slider);
 
     return (
-
-        <Suspense fallback={<SpinLoader className="min-h-20 mb-16"/>}>
-            <CardHotPrice products={products} /> 
-        </Suspense>
+        <>  
+            <CardHotPrice products={products} />
+            <Slider slider={slider} />
+        </>
+         
     )
 }

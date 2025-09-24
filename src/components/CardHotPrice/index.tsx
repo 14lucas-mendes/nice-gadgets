@@ -7,7 +7,7 @@ import { HeadingCard } from "../HeadingCard";
 import { useState } from "react";
 
 
-export default function CardHotPrice({ products }: { products: Product[] | null }) {
+export default function CardHotPrice({ products }: { products: Product[]}) {
 
     const [currentCard, setCurrentCard] = useState(0)
     const [touchStartX, setTouchStartX] = useState(0);
@@ -79,7 +79,7 @@ export default function CardHotPrice({ products }: { products: Product[] | null 
             onTouchMove={handleTouchMove}
             style={{ transform: `translateX(-${currentCard * 212 + dragX}px)` }}
             >
-            {products?.map((product) => (
+            {products.map((product) => (
                 <div key={product.id}
                 className="w-[212px] h-auto p-6 flex flex-col gap-1 border-[1px] border-[#E2E6E9] rounded-[8px] bg-white"
                 >

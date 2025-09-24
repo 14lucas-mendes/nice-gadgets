@@ -3,40 +3,20 @@
 import Image from "next/image";
 import { useEffect, useState } from "react"
 import { HeadingCard } from "../HeadingCard";
+import type { Slider } from "@/types/Slider";
 
-export default function Slider() {
+export default function Slider({slider}: { slider: Slider[] }) {
     const [currentSlide, setCurrentSlide] = useState(0)
     const [touchStartX, setTouchStartX] = useState(0);
 
 
-    const slides = [
-        {
-            id: 1,
-            src:'/img/layout/banner-phones.png',
-            alt:'phones',
-            description:'Se our especial offers',
-        },
-        {
-            id: 2,
-            src:'/img/layout/banner-tablets.png',
-            alt:'tablets',
-            description:'Make your best chance',
-        },
-        {
-            id: 3,
-            src:'/img/layout/banner-accessories.png',
-            alt:'accessories',
-            description:'Avaliables in our store',
-        }
-    ]
-
     const handleNextSlide = () => {
-        const nextSlide = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
+        const nextSlide = currentSlide === slider.length - 1 ? 0 : currentSlide + 1;
         setCurrentSlide(nextSlide);
     }
 
     const handlePrevSlide = () => {
-        const prevSlide = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+        const prevSlide = currentSlide === 0 ? slider.length - 1 : currentSlide - 1;
         setCurrentSlide(prevSlide);
     }
 
@@ -77,7 +57,7 @@ export default function Slider() {
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
             >
-                {slides.map((slide, index) => (
+                {slider.map((slide, index) => (
                 <div key={slide.id} className="flex absolute w-full h-full items-center">
                     <div className="w-[40%] h-full bg-red-500">
                         <p>{slide.description}</p>         
@@ -98,7 +78,7 @@ export default function Slider() {
                 ))}
             </div>
             <div className="flex justify-center z-10 space-x-2 mt-4">
-                {slides.map((_, index) => (
+                {slider.map((_, index) => (
                     <button
                         key={index}
                         className={`w-3.5 h-1 ${currentSlide === index ? 'bg-[#0F0F11]' : 'bg-[#E2E6E9]'}`}

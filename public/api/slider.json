@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "src": "/banner-phones.png",
+        "alt": "phones",
+        "description": "Se our especial offers"
+    },
+    {
+        "id": 2,
+        "src": "/banner-tablets.png",
+        "alt": "tablets",
+        "description": "Make your best chance"
+    },
+    {
+        "id": 3,
+        "src": "/banner-accessories.png",
+        "alt": "accessories",
+        "description": "Avaliables in our store"
+    }
+]
