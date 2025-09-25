@@ -1,20 +1,22 @@
+import { Product } from '@/types/Product';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Card() {
+export default function Card({products}: {products: Product[]}) {
   return (
-    <div className="w-[272px] h-[506px] bg-white rounded-lg border-2 border-[#E2E6E9] shadow-md">
-      <div className='px-8 py-8 flex flex-col gap-2'>
+    <div className="w-[272px] h-[506px] bg-white rounded-lg border border-slate-400 shadow-md">
+      {products.map(product => (
+        <div key={product.id} className='px-8 py-8 flex flex-col gap-2'>
         <Image
-          src='/img/layout/banner-accessories.png'
+          src={product.image}
           alt="Category Accessories"
           width={208}
           height={196}
         />
-        <p className='font-semibold text-[14px] text-[#0F0F11]'>Apple iPhone Xs 64GB Silver (iMT9G2FS/A)</p>
+        <p className='font-semibold text-[14px] text-[#0F0F11]'>{product.name}</p>
         <div className='flex flex-row gap-2'>
-          <p className='font-extrabold text-[22px] text-[#0F0F11]'>$799</p>
-          <p className='font-medium text-[22px] text-[#89939A] line-through'>$899</p>
+          <p className='font-extrabold text-[22px] text-[#0F0F11]'>{product.price}</p>
+          <p className='font-medium text-[22px] text-[#89939A] line-through'>{product.fullPrice}</p>
         </div>
         <hr />
         <div className='font-semibold text-[12px] text-[#89939A]'>
@@ -31,6 +33,8 @@ export default function Card() {
           </Link>
         </div>
       </div>
+      ))}
+      
     </div>
   )
 }

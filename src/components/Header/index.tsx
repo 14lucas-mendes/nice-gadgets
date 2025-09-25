@@ -28,28 +28,28 @@ export default function Header() {
             lg:flex lg:ml-16 lg:gap-16 lg:items-center lg:text-[#89939A] lg:text-[12px] lg:font-extrabold lg:uppercase lg:transition-all
             ">
                 <Link 
-                className={activeLink === 'home' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 sm:text-[#89939A]"} 
+                className={activeLink === 'home' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 sm:text-[#89939A]"} 
                 onClick={() => setActiveLink('home')}
                 href="/">
                     Home
                 </Link>
 
                 <Link 
-                className={activeLink === 'phone' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 sm:text-[#89939A]"} 
+                className={activeLink === 'phone' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 sm:text-[#89939A]"} 
                 onClick={() => setActiveLink('phone')}
                 href='/phones'>
                     Phones
                 </Link>
 
                 <Link 
-                className={activeLink === 'accessories' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 sm:text-[#89939A]"}
+                className={activeLink === 'accessories' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 sm:text-[#89939A]"}
                 onClick={() => setActiveLink('accessories')}
                 href='/accessories'>
                     Accessories
                 </Link>
 
                 <Link 
-                className={activeLink === 'tablets' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 sm:text-[#89939A]"} 
+                className={activeLink === 'tablets' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 sm:text-[#89939A]"} 
                 onClick={() => setActiveLink('tablets')}
                 href='/tablets'>
                     Tablets
@@ -85,8 +85,8 @@ export default function Header() {
                                 Tablets
                             </Link>
                         </div>
-                    <div className="flex justify-center mb-12 border-b-2 border-t-2 border-[#E2E6E9]">
-                        <div className="w-full h-[64px] items-center justify-center flex border-x-2 border-[#E2E6E9]">
+                    <div className="flex justify-center mb-12 border-b-2 border-t-2 border-[#E2E6E9] sm:hidden md:hidden lg:hidden">
+                        <div className="w-full h-[64px] items-center justify-center flex border-x-2 border-[#E2E6E9] sm:flex sm:flex-row">
                             <Link href="/cart">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
@@ -113,6 +113,34 @@ export default function Header() {
                 (<XMarkIcon className="w-5 h-5" onClick={() => setIsMenuOpen(false)} />)  
             }
            </div>
+
+           <div className="justify-center mb-12 border-b-2 border-t-2 border-[#E2E6E9] hidden
+           sm:flex sm:flex-row sm:ml-auto sm:border-t-0 sm:border-b-0
+           md:flex md:flex-row md:ml-auto md:border-t-0 md:border-b-0
+           lg:flex lg:flex-row lg:ml-auto lg:border-t-0 lg:border-b-0
+           ">
+                <div className="w-full h-[64px] items-center justify-center flex border-x-2 border-[#E2E6E9]
+                 sm:w-12 sm:h-12 
+                 md:w-16 md:h-16 
+                 
+                 ">
+                    <Link href="/cart">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 text-slate-800">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                        </svg>
+                    </Link>
+                </div>
+                <div className="w-full h-[64px] items-center justify-center flex 
+                sm:w-12 sm:h-12 
+                md:w-16 md:h-16 
+                ">
+                    <Link href="">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 text-slate-800">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                        </svg>
+                    </Link>
+                </div>
+            </div>
         </header>
     )
 }
