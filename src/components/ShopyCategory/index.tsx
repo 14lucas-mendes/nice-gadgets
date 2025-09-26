@@ -1,10 +1,11 @@
 import Image from "next/image";
+import { HeadingCard } from "../HeadingCard";
 
 export default function ShopyCategory() {
     return (
         <div>
             <section className="mt-14">
-                <h1 className="font-extrabold text-[22px]">Shop by category</h1>
+                <HeadingCard as="h2">Shop by Category</HeadingCard>
                 <div className="flex flex-col">
                 <div className=" bg-yellow-200 w-[288px] h-[288px] rounded-[8px] relative overflow-hidden mt-6">
                         <Image src="/img/layout/category-phones.png" 

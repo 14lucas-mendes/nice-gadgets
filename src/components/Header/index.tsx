@@ -28,28 +28,28 @@ export default function Header() {
             lg:flex lg:ml-16 lg:gap-16 lg:items-center lg:text-[#89939A] lg:text-[12px] lg:font-extrabold lg:uppercase lg:transition-all
             ">
                 <Link 
-                className={activeLink === 'home' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 sm:text-[#89939A]"} 
+                className={activeLink === 'home' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 md:hover:py-5 lg:hover:py-6' sm:text-[#89939A]"} 
                 onClick={() => setActiveLink('home')}
                 href="/">
                     Home
                 </Link>
 
                 <Link 
-                className={activeLink === 'phone' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 sm:text-[#89939A]"} 
+                className={activeLink === 'phone' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 md:hover:py-5 lg:hover:py-6' sm:text-[#89939A]"} 
                 onClick={() => setActiveLink('phone')}
                 href='/phones'>
                     Phones
                 </Link>
 
                 <Link 
-                className={activeLink === 'accessories' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 sm:text-[#89939A]"}
+                className={activeLink === 'accessories' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 md:hover:py-5 lg:hover:py-6' sm:text-[#89939A]"}
                 onClick={() => setActiveLink('accessories')}
                 href='/accessories'>
                     Accessories
                 </Link>
 
                 <Link 
-                className={activeLink === 'tablets' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 sm:text-[#89939A]"} 
+                className={activeLink === 'tablets' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 md:hover:py-5 lg:hover:py-6' sm:text-[#89939A]"} 
                 onClick={() => setActiveLink('tablets')}
                 href='/tablets'>
                     Tablets

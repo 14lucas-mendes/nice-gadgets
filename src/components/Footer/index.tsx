@@ -48,8 +48,8 @@ export default function Footer() {
                 onClick={handleScrollToTop}
                 className="font-bold text-[#89939A] text-[14px] flex flex-row items-center gap-2 mt-8 justify-center
                 sm:mt-0 sm:justify-start sm:font-extrabold 
-                md:mt-0 md:justify-start md:font-extrabold md:cursor-pointer md:hover:scale-110 md:transition-transform md:duration-300 md:ease-in-out
-                lg:mt-0 lg:justify-start lg:font-extrabold lg:cursor-pointer lg:hover:scale-110 lg:transition-transform lg:duration-300 lg:ease-in-out
+                md:mt-0 md:justify-start md:font-extrabold md:cursor-pointer 
+                lg:mt-0 lg:justify-start lg:font-extrabold lg:cursor-pointer 
 
                 ">
                 Back to top

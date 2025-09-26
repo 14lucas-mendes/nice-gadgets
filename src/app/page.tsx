@@ -1,15 +1,19 @@
-import Card from "@/components/Card";
-import { getAllProducts } from "@/utils/products";
+import CardNewModels from "@/components/CardNewModels";
+import Container from "@/components/Container";
+import ShopyCategory from "@/components/ShopyCategory";
+import { getTop10Products } from "@/utils/products";
 
 
 
 export default async function Home() {
-    const products = await getAllProducts();
+    const products = await getTop10Products();
+    console.log('meus produtos', products);
 
     return (
-        <div className="py-20">  
-            <Card products={products} />
-        </div>
+        <Container> 
+            <CardNewModels products={products} />
+            <ShopyCategory />
+        </Container>
          
     )
 }
