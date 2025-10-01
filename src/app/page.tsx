@@ -1,18 +1,23 @@
 import CardNewModels from "@/components/CardNewModels";
+import Slider from "@/components/Slider";
 import Container from "@/components/Container";
 import ShopyCategory from "@/components/ShopyCategory";
-import { getTop10Products } from "@/utils/products";
+import { getTop10Products, getTopYearProducts } from "@/utils/products";
+import CardHotPrice from "@/components/CardHotPrice";
+
 
 
 
 export default async function Home() {
     const products = await getTop10Products();
-    console.log('meus produtos', products);
+    const productsByYear = await getTopYearProducts();
 
     return (
         <Container> 
-            <CardNewModels products={products} />
+            <Slider />
+            <CardNewModels products={productsByYear} />
             <ShopyCategory />
+            <CardHotPrice products={products} />
         </Container>
          
     )

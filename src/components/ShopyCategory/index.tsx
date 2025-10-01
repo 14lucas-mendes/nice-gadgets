@@ -3,11 +3,12 @@ import { HeadingCard } from "../HeadingCard";
 
 export default function ShopyCategory() {
     return (
-        <div>
-            <section className="mt-14">
+        <div className="pb-14">
+            <section className="w-full ">
                 <HeadingCard as="h2">Shop by Category</HeadingCard>
-                <div className="flex flex-col">
-                <div className=" bg-yellow-200 w-[288px] h-[288px] rounded-[8px] relative overflow-hidden mt-6">
+                <div className="md:grid md:grid-cols-3 md:gap-6">
+                    <div className="flex flex-col">
+                <div className=" bg-yellow-200 w-[288px] h-[288px] rounded-[8px] relative overflow-hidden mt-10">
                         <Image src="/img/layout/category-phones.png" 
                         alt="category-phones" 
                         width={400} height={400}
@@ -45,6 +46,7 @@ export default function ShopyCategory() {
                 <div className="flex flex-col mt-6">
                     <span className="font-bold text-[20px]">Tablets</span>
                     <span className="font-semibold text-[14px] text-[#89939A]">24 Models</span>
+                </div>
                 </div>
                 </div>
             </section>

@@ -5,9 +5,29 @@ import { useEffect, useState } from "react"
 import { HeadingCard } from "../HeadingCard";
 import type { Slider } from "@/types/Slider";
 
-export default function Slider({slider}: { slider: Slider[] }) {
-    const [currentSlide, setCurrentSlide] = useState(0)
-    const [touchStartX, setTouchStartX] = useState(0);
+export default function Slider() {
+    const [currentSlide, setCurrentSlide] = useState(0);
+
+    const slider = [
+    {
+        id: 1,
+        src: "/img/layout/banner-phones.png",
+        alt: "phones",
+        description: "See our special offers" // Corrigido o typo em "Se"
+    },
+    {
+        id: 2,
+        src: "/img/layout/banner-tablets.png",
+        alt: "tablets",
+        description: "Make your best chance"
+    },
+    {
+        id: 3,
+        src: "/img/layout/banner-accessories.png",
+        alt: "accessories",
+        description: "Available in our store" // Corrigido o typo em "Avaliables"
+    }
+]
 
 
     const handleNextSlide = () => {
@@ -20,27 +40,6 @@ export default function Slider({slider}: { slider: Slider[] }) {
         setCurrentSlide(prevSlide);
     }
 
-    const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-        setTouchStartX(e.touches[0].clientX);
-    }
-
-    const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
-        const touchEndX = e.changedTouches[0].clientX;
-
-        const difference = touchEndX - touchStartX;
-
-        const threshold = 50
-
-        if(difference < -threshold) {
-            //usuario arrastou para a esquerda, então avance.
-            handleNextSlide();
-        }
-
-        if (difference > threshold) {
-            //usuario arrastou para a direita, então retroceda.
-            handlePrevSlide();
-        }
-    }
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -51,24 +50,24 @@ export default function Slider({slider}: { slider: Slider[] }) {
     })
 
     return (
-        <div className="max-w-screen w-full -mx-4">   
+        <div className="max-w-screen w-full ">   
             <HeadingCard as="h1">Welcome to Nice Gadgest store!</HeadingCard>
-            <div className="flex relative aspect-video bg-black"
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
+            <div className="flex relative aspect-video bg-black 
+            sm:rounded-[8px]
+            md:rounded-[12px] 
+            lg:rounded-[16px]"
             >
                 {slider.map((slide, index) => (
                 <div key={slide.id} className="flex absolute w-full h-full items-center">
-                    <div className="w-[40%] h-full bg-red-500">
-                        <p>{slide.description}</p>         
+                    <div className="w-[40%] h-[350px] bg-red-500 ml-4 sm:rouded-[8px] md:rounded-[12px] lg:rounded-[16px]">
+                        <p className="flex justify-center items-center">{slide.description}</p>         
                     </div>
                     <div className="w-[60%] h-[50%] right-0">
                     <Image
-                    key={slide.id}
                     src={slide.src}
                     alt={slide.alt}
-                    width={300}
-                    height={300}
+                    width={600}
+                    height={600}
                     objectFit="cover"
                     className={`object-cover transition-opacity duration-700 ease-in-out
                         ${index === currentSlide ? ' opacity-100' : ' opacity-0'}`}
