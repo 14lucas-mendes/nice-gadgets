@@ -5,7 +5,7 @@ type HeadingCardProps = {
 
 export function HeadingCard({children, as: Tag}: HeadingCardProps) {
     const headingClass = {
-        h1: 'text-5xl tracking-tighter font-extrabold py-14',
+        h1: 'text-5xl tracking-tighter font-extrabold',
         h2: 'text-4xl tracking-tight font-extrabold',
         h3: 'text-3xl font-medium',
         h4: 'text-2xl font-normal',  
