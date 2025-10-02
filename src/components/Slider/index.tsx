@@ -65,40 +65,45 @@ export default function Slider() {
             >
         {slider.map((slide) => (
           <SwiperSlide key={slide.id}>
-            <div className="relative w-full sm:w-[490px] sm:h-[189px] md:w-[1040px] md:h-[400px] mx-auto">
-              {/* Imagem de fundo */}
-              <Image
-                src={slide.src}
-                alt={slide.alt}
-                fill
-                className="object-cover rounded-lg"
-                priority={slide.id === 1}
-              />
+            <div className="relative w-full sm:w-[490px] sm:h-[189px] md:w-[1040px] md:h-[400px] mx-auto bg-gray-100 overflow-hidden rounded-2xl">
               
-              {/* Overlay escuro para melhor legibilidade */}
-              <div className="absolute inset-0 bg-black/10 rounded-lg" />
-              
-              {/* Card com conteúdo - posicionado no canto superior esquerdo */}
-              <div className="absolute top-4 left-4 md:top-8 md:left-8">
-                <div className="bg-white rounded-xl shadow-lg p-4 md:p-6 w-[200px] sm:w-[220px] md:w-[320px] md:h-[350px] flex flex-col items-center text-center justify-center">
-                  <h2 className="text-lg md:text-2xl font-bold text-gray-900 mb-2 md:mb-3">
-                    {slide.title}
-                  </h2>
-                  <p className="text-gray-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">
-                    {slide.description}
-                  </p>
-                  <Link
-                    href={slide.buttonLink}
-                    className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 md:px-6 py-2 md:py-2.5 rounded-lg transition-colors duration-300 text-sm md:text-base"
-                  >
-                    {slide.buttonText}
-                  </Link>
+              {/* Container flex para dividir em 50/50 */}
+              <div className="flex h-full">
+                
+                {/* Card com conteúdo - 50% esquerda */}
+                <div className="w-1/2 flex items-center justify-center p-4 md:p-8 bg-slate-600">
+                  <div className="max-w-sm">
+                    <h2 className="text-lg md:text-3xl font-bold text-slate-100 mb-2 md:mb-4">
+                      {slide.title}
+                    </h2>
+                    <p className="text-slate-100 text-xs md:text-base mb-3 md:mb-6 leading-relaxed">
+                      {slide.description}
+                    </p>
+                    <Link
+                      href={slide.buttonLink}
+                      className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 md:px-8 py-2 md:py-3 rounded-lg transition-colors duration-300 text-sm md:text-base"
+                    >
+                      {slide.buttonText}
+                    </Link>
+                  </div>
                 </div>
+
+                {/* Imagem - 50% direita */}
+                <div className="relative w-1/2 bg-slate-900">
+                  <Image
+                    src={slide.src}
+                    alt={slide.alt}
+                    fill
+                    className="object-cover"
+                    priority={slide.id === 1}
+                  />
+                </div>
+
               </div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
-        </div>
+    </div>
     )
 }

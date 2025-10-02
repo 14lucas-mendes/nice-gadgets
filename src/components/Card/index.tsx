@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function Card({products}: {products: Product[]}) {
   return (
-   <div className='flex flex-row gap-6 overflow-auto pb-4'>
+   <div className='flex flex-row gap-6 overflow-x-auto pb-4'>
       {products.map((product) => (
         <div key={product.id} className="w-[272px] h-[506px] bg-white rounded-lg border border-slate-400 shadow-md">
           <div className='px-8 py-8 flex flex-col gap-2'>
