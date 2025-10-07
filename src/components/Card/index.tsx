@@ -4,11 +4,13 @@ import Link from 'next/link';
 
 export default function Card({products}: {products: Product[]}) {
   return (
-   <div className='flex flex-row gap-6 overflow-x-auto pb-4'>
+   <div className='flex flex-row gap-2 sm:overflow-hidden md:overflow-hidden'>
       {products.map((product) => (
         <div key={product.id} className="w-[272px] h-[506px] bg-white rounded-lg border border-slate-400 shadow-md">
           <div className='px-8 py-8 flex flex-col gap-2'>
-            <div className='w-[208px] h-[196px] flex'>
+            <div className='w-[208px] h-[196px] flex
+            md:hover:scale-105 md:transition-transform md:duration-300 md:ease-in-out
+            '>
               <Image
               src={`/${product.image}`}
               alt="Category Accessories"
@@ -18,7 +20,7 @@ export default function Card({products}: {products: Product[]}) {
             />
             </div>
             <div className='w-[208px] h-[58px]'>
-              <p className='font-semibold text-[14px] mt-4 text-[#0F0F11]'>{product.name}</p>
+              <p className='font-semibold text-[14px] mt-4 line-clamp-2 text-[#0F0F11]'>{product.name}</p>
             </div>
             <div className='flex flex-row gap-2'>
               <p className='font-extrabold text-[22px] text-[#0F0F11]'>{'$' + product.price}</p>

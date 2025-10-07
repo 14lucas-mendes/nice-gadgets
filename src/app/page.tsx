@@ -17,10 +17,10 @@ export default async function Home() {
     return (
         <Container>
             <Suspense fallback={<Loading />}>
-            <Slider />
-            <CardNewModels products={productsByYear} />
-            <ShopyCategory />
-            <CardHotPrice products={products} />
+                <Slider />
+                <CardNewModels products={productsByYear} />
+                <ShopyCategory />
+                <CardHotPrice products={products} />
             </Suspense>
         </Container>
          

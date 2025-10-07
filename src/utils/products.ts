@@ -13,3 +13,24 @@ export async function getTopYearProducts(): Promise<Product[]> {
     .then(response => response.json())
     .then(data => data.products as Product[])
 }
+
+export async function getAllPhonesProducts(): Promise<Product[]> {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    return fetch(`${baseUrl}/api/products?category=phones&limit=120&skip=0&sortBy=yearDesc`)
+    .then(response => response.json())
+    .then(data => data.products as Product[])
+}
+
+export async function getAllAccessoriesProducts(): Promise<Product[]> {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    return fetch(`${baseUrl}/api/products?category=accessories&limit=120&skip=0&sortBy=yearDesc`)
+    .then(response => response.json())
+    .then(data => data.products as Product[])
+}
+
+export async function getAllTabletsProducts(): Promise<Product[]> {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    return fetch(`${baseUrl}/api/products?category=tablets&limit=120&skip=0&sortBy=yearDesc`)
+    .then(response => response.json())
+    .then(data => data.products as Product[])
+}

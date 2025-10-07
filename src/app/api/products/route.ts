@@ -7,6 +7,7 @@ enum Sorting {
   PRICE_DESC = "priceDesc",
   YEAR_ASC = "yearAsc",    // Ordenar por ano crescente (mais antigo → mais novo)
   YEAR_DESC = "yearDesc",  // Ordenar por ano decrescente (mais novo → mais antigo)
+  TYPE_PRODUCTS = "all",
 }
 
 type Product = {
@@ -29,6 +30,7 @@ const sortHandlers: Record<Sorting, (a: Product, b: Product) => number> = {
   [Sorting.PRICE_DESC]: (a: Product, b: Product) => (b.fullPrice -b.price - a.fullPrice - a.price),
   [Sorting.YEAR_ASC]: (a: Product, b: Product) => (a.year - b.year),   // 2020, 2021, 2022...
   [Sorting.YEAR_DESC]: (a: Product, b: Product) => (b.year - a.year),  // 2024, 2023, 2022...
+  [Sorting.TYPE_PRODUCTS]: (a: Product, b: Product) => b.category.localeCompare(a.category)
 };
 
 export async function GET(req: NextRequest) {
@@ -37,12 +39,25 @@ export async function GET(req: NextRequest) {
   // Parâmetros de paginação
   const limit = Number(searchParams.get('limit')) || 10;
   const skip = Number(searchParams.get('skip')) || 0;
+
+  // Parametro de filtro por categoria
+  const categoryParam = searchParams.get('category');
   
   // Parâmetro de ordenação (agora inclui year)
-  const sortBy = searchParams.get('sortBy') as Sorting ?? Sorting.PRICE_ASC;
+  const sortBy = searchParams.get('sortBy') as Sorting ?? '';
+
+  // Filtro por categoria
+  const filteredProducts = jsonProducts.filter((product: Product) => {
+    if(!categoryParam) {
+      return true;
+    }
+
+    return product.category.toLowerCase() === categoryParam.toLowerCase();
+  })
   
   // Ordenar os produtos
-  const sortedProducts = [...jsonProducts].sort(sortHandlers[sortBy]);
+  const sortHandler = sortHandlers[sortBy] || sortHandlers[Sorting.TYPE_PRODUCTS];
+  const sortedProducts = [...filteredProducts].sort(sortHandler);
   
   // Aplicar paginação
   const products = sortedProducts.slice(skip, skip + limit);
