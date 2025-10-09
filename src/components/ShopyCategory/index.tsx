@@ -1,60 +1,100 @@
 import Image from "next/image";
 import { HeadingCard } from "../HeadingCard";
+import Link from "next/link";
 
 export default function ShopyCategory() {
     return (
-       <div className="bg-amber-100 max-w-6xl">
+    <div className="w-full max-w-6xl mx-auto mb-10"> 
+        
+        <div className="mb-6">
             <HeadingCard as="h2">Sort By</HeadingCard>
         </div>
-               
-    )
+
+        
+        <div className="
+            grid 
+            grid-cols-1       {/* Mobile-first: 1 coluna por padrão (abaixo de sm) */}
+            gap-8             {/* Espaçamento em mobile */}
+            sm:grid-cols-3    {/* A partir de 'sm' (640px), muda para 3 colunas */}
+            sm:gap-4          {/* Espaçamento menor para 3 colunas (opcional, use o que preferir) */}
+        ">
+            
+            <div className="w-full"> 
+                <div>
+                    <div className="
+                    w-full h-auto aspect-[16/9] min-h-[187px]
+                    sm:h-[187px]
+                    md:h-[368px]
+                    rounded-lg relative overflow-hidden">
+                        <Link href="/phones">
+                            <Image src="/img/layout/banners_phones.png" 
+                                alt="category-phones" 
+                                fill
+                                className="object-cover md:hover:scale-110 md:transition-transform md:ease-in-out md:duration-300"
+                            /> 
+                        </Link>
+                    </div>
+                    <Link href="/phones">
+                        <div className="flex flex-col mt-6">
+                            <span className="font-bold text-[20px]" >Mobile Phones</span>
+                            <span className="font-semibold text-[14px] text-[#89939A]">95 Phones</span>
+                        </div>
+                    </Link>
+                </div>
+            </div>
+            
+            
+            <div className="w-full">
+                <div>
+                    <div className="
+                    w-full h-auto aspect-[16/9] min-h-[187px]
+                    sm:h-[187px] 
+                    md:h-[368px]
+                    rounded-lg relative overflow-hidden">
+                        <Link href="/accessories">
+                            <Image src="/img/layout/banners_accessories.png" 
+                                alt="category-accessories" 
+                                fill
+                                className="object-cover md:hover:scale-110 md:transition-transform md:ease-in-out md:duration-300"
+                            />
+                        </Link>
+                    </div>
+                    <Link href="/accessories">
+                        <div className="flex flex-col mt-6">
+                            <span className="font-bold text-[20px]">Accessories</span>
+                            <span className="font-semibold text-[14px] text-[#89939A]">100 Models</span>
+                        </div>
+                    </Link>
+                </div>
+            </div>
+            
+            
+            <div className="w-full">
+                <div>
+                    <div className="
+                    w-full h-auto aspect-[16/9] min-h-[187px]
+                    sm:h-[187px] 
+                    md:h-[368px] 
+                    rounded-lg relative overflow-hidden">
+                        <Link href="/tablets">
+                            <Image src="/img/layout/banners_tablets.png" 
+                                alt="category-tablets" 
+                                fill
+                                className="object-cover md:hover:scale-110 md:transition-transform md:ease-in-out md:duration-300"
+                            /> 
+                        </Link>
+                    </div>
+                    <Link href="/tablets">
+                        <div className="flex flex-col mt-6">
+                            <span className="font-bold text-[20px]">Tablets</span>
+                            <span className="font-semibold text-[14px] text-[#89939A]">24 Models</span>
+                        </div>
+                    </Link>
+                </div>
+            </div>
+        </div>
+    </div>
+)
 }
 
-{/*<div className="">
-                    <div className=" bg-yellow-200 w-[288px] h-[288px] rounded-[8px] relative overflow-hidden mt-10
-                    md:hover:scale-105 md:transition-transform md:duration-300 md:ease-in-out
-                    ">
-                        <Image src="/img/layout/category-phones.png" 
-                        alt="category-phones" 
-                        width={400} height={400}
-                        className="absolute object-cover top-10 left-10 scale-130"
-                        />
-                    </div>
-                    <div className="flex flex-col mt-6">
-                        <span className="font-bold text-[20px]" >Mobile Phones</span>
-                        <span className="font-semibold text-[14px] text-[#89939A]">95 Phones</span>
-                    </div>
-                </div>
-                <div className="flex flex-col">
-                    <div className="w-[288px] h-[288px] relative bg-rose-900 mt-10 rounded-[8px] overflow-hidden
-                    md:hover:scale-105 md:transition-transform md:duration-300 md:ease-in-out
-                    ">
-                        <Image src="/img/layout/category-accessories.png" 
-                        alt="category-accessories" 
-                        width={400} height={400} 
-                        className="absolute object-cover scale-185 bottom-12 left-36"
-                        />
-                    </div>
-
-                    <div className="flex flex-col mt-6">
-                        <span className="font-bold text-[20px]">Accessories</span>
-                        <span className="font-semibold text-[14px] text-[#89939A]">100 Models</span>
-                    </div>
-                </div>
-                
-                <div className="flex flex-col">
-                    <div className="w-[288px] h-[288px] relative bg-gray-500 mt-10 rounded-[8px] overflow-hidden
-                    md:hover:scale-105 md:transition-transform md:duration-300 md:ease-in-out
-                    ">
-                        <Image src="/img/layout/category-tablets.png" 
-                        alt="category-tablets" 
-                        width={500} height={500} 
-                        className="absolute object-cover scale-150 top-24 left-20"
-                        />  
-                    </div>
-                    <div className="flex flex-col mt-6">
-                        <span className="font-bold text-[20px]">Tablets</span>
-                        <span className="font-semibold text-[14px] text-[#89939A]">24 Models</span>
-                    </div>
-                </div>
-            </div>*/}
+           

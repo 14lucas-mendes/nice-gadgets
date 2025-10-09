@@ -47,9 +47,9 @@ export default function Slider() {
 ]
 
 
-  return (
-    <div className=" w-full md:max-w-6xl md: relative mx-auto">
-        <div className="mb-8 sm:mb-10 lg:mb-14">
+ return (
+    <div className="w-full relative sm:max-w-[490px] md:max-w-6xl"> 
+        <div className="mb-8 sm:mb-10 md:mb-14 md:max-w-6xl mx-auto">
             <HeadingCard as="h1">Welcome to Nice Gadgets store!</HeadingCard>
         </div>
         <Swiper
@@ -61,28 +61,32 @@ export default function Slider() {
             autoplay={{ delay: 5000, disableOnInteraction: false }}
             loop={true}
             effect="fade"
-            className="mySwiper"
+            className="mySwiper" // Mantenha esta classe para o CSS
         >
             {slider.map((slide) => (
                 <SwiperSlide key={slide.id}>
-                    <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] mx-auto bg-gray-100 overflow-hidden rounded-lg sm:rounded-xl lg:rounded-2xl">
+                    <div className="relative w-full h-[300px] sm:h-[200px] md:h-[400px] mx-auto bg-gray-100 overflow-hidden rounded-none sm:rounded-xl md:rounded-2xl
+                    transition-all duration-500 ease-in-out
+                    sm:transition-all
+                    md:transition-all
+                    ">
                         {/* Container flex responsivo */}
                         <div className="flex flex-col sm:flex-row h-full">
                             {/* Card com conteúdo - adaptável para mobile */}
                             <div className="w-full sm:w-1/2 flex items-center justify-center p-4 sm:p-6 md:p-8 lg:p-10 bg-slate-600">
-                                <div className="max-w-xs sm:max-w-sm lg:max-w-md">
-                                    <h2 className="text-base sm:text-lg md:text-2xl lg:text-3xl font-bold text-slate-100 mb-2 sm:mb-3 lg:mb-4">
+                                <div className="max-w-xs sm:max-w-sm md:max-w-md">
+                                    <h2 className="text-base sm:text-lg md:text-2xl lg:text-3xl font-bold text-slate-100 mb-2 sm:mb-3 md:mb-4">
                                         {slide.title}
                                     </h2>
-                                    <p className="text-slate-100 text-xs sm:text-sm md:text-base lg:text-lg mb-3 sm:mb-4 lg:mb-6 leading-relaxed">
+                                    <p className="text-slate-100 text-xs sm:text-sm md:text-base lg:text-lg mb-3 sm:mb-4 md:mb-6 leading-relaxed">
                                         {slide.description}
                                     </p>
                                     <Link
                                         href={slide.buttonLink}
                                         className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold 
-                                        px-3 sm:px-4 md:px-6 lg:px-8 
-                                        py-2 sm:py-2 md:py-2.5 lg:py-3 
-                                        text-xs sm:text-sm md:text-base lg:text-lg
+                                        px-3 sm:px-4 md:px-6 
+                                        py-2 sm:py-2 md:py-2.5
+                                        text-xs sm:text-sm md:text-base
                                         rounded-md sm:rounded-lg transition-colors duration-300"
                                     >
                                         {slide.buttonText}
