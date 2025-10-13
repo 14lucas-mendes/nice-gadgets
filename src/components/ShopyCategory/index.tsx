@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function ShopyCategory() {
     return (
-    <div className="w-full max-w-6xl mx-auto mb-10"> 
+    <div className="w-full max-w-6xl mx-auto mt-6 mb-10"> 
         
         <div className="mb-6">
             <HeadingCard as="h2">Sort By</HeadingCard>

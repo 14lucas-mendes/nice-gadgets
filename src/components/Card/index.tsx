@@ -1,18 +1,26 @@
-import { Product } from '@/types/Product';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Card({products}: {products: Product[]}) {
+type CardProps = {
+  image: string;
+  name: string;
+  price: number,
+  fullPrice: number;
+  screen: string;
+  capacity: string;
+  ram: string
+}
+
+export default function Card({image, name, price, fullPrice, screen, capacity, ram}: CardProps) {
   return (
-   <div className='flex flex-row gap-2 sm:overflow-hidden md:overflow-hidden'>
-      {products.map((product) => (
-        <div key={product.id} className="w-[272px] h-[506px] bg-white rounded-lg border border-slate-400 shadow-md">
+   <div className='flex flex-col'>
+        <div className="w-[272px] h-[506px] bg-white rounded-lg border border-slate-400 shadow-md">
           <div className='px-8 py-8 flex flex-col gap-2'>
             <div className='w-[208px] h-[196px] flex
             md:hover:scale-105 md:transition-transform md:duration-300 md:ease-in-out
             '>
               <Image
-              src={`/${product.image}`}
+              src={`/${image}`}
               alt="Category Accessories"
               width={208}
               height={196}
@@ -20,25 +28,25 @@ export default function Card({products}: {products: Product[]}) {
             />
             </div>
             <div className='w-[208px] h-[58px]'>
-              <p className='font-semibold text-[14px] mt-4 line-clamp-2 text-[#0F0F11]'>{product.name}</p>
+              <p className='font-semibold text-[14px] mt-4 line-clamp-2 text-[#0F0F11]'>{name}</p>
             </div>
             <div className='flex flex-row gap-2'>
-              <p className='font-extrabold text-[22px] text-[#0F0F11]'>{'$' + product.price}</p>
-              <p className='font-medium text-[22px] text-[#89939A] line-through'>{'$' + product.fullPrice}</p>
+              <p className='font-extrabold text-[22px] text-[#0F0F11]'>{price}</p>
+              <p className='font-medium text-[22px] text-[#89939A] line-through'>{fullPrice}</p>
             </div>
             <hr />
             <div className='font-semibold text-[14px] text-[#89939A] mt-2'>
               <div className='flex flex-row justify-between'>
                  <p>Screen</p>
-                 <p className='font-bold text-[#0F0F11]'>{product.screen}</p>
+                 <p className='font-bold text-[#0F0F11]'>{screen}</p>
               </div>
               <div className='flex flex-row justify-between'>
                 <p>Capacity</p>
-                <p className='font-bold text-[#0F0F11]'>{product.capacity}</p>
+                <p className='font-bold text-[#0F0F11]'>{capacity}</p>
               </div>
               <div className='flex flex-row justify-between'>
                 <p>RAM</p>
-                <p className='font-bold text-[#0F0F11]'>{product.ram}</p>
+                <p className='font-bold text-[#0F0F11]'>{ram}</p>
               </div>
             </div>
             <div className='flex flex-row gap-2 font-bold text-[14px] text-white mt-4'>
@@ -51,8 +59,6 @@ export default function Card({products}: {products: Product[]}) {
             </div>
           </div>
         </div>
-      ))}
-   </div>
-      
+   </div>  
   )
 }
