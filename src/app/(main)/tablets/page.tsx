@@ -45,8 +45,20 @@ export default async function TabletsPage() {
                     </select>
                 </div>
             </div>
-            <div className="mt-6">
-                <Card products={products} />
+            <div className="grid grid-cols-4 mt-6 gap-4 overflow-hidden">
+                {products.map(product => (
+                <div key={product.id}>
+                    <Card 
+                        image={product.image} 
+                        name={product.name} 
+                        price={product.price} 
+                        fullPrice={product.fullPrice} 
+                        screen={product.screen}
+                        capacity={product.capacity}
+                        ram={product.ram}
+                     />
+                </div>
+                ))}
             </div>
         </div>
     );
