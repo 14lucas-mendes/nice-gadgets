@@ -1,5 +1,6 @@
 import Card from "@/components/Card";
 import { HeadingCard } from "@/components/HeadingCard";
+import ItemSelect from "@/components/Select";
 import { getAllTabletsProducts } from "@/utils/products";
 import Link from "next/link";
 
@@ -27,35 +28,18 @@ export default async function TabletsPage() {
                 <p className="font-semibold text-[14px] text-[#89939A] mt-2">95 Models</p>
             </div>
             <div className="flex items-center gap-4 mt-6">
-                <div className="flex flex-col gap-1">
-                    <label htmlFor="sort" className="font-bold text-[12px] text-[#89939A]">Sort by</label>
-                    <select name="sort" id="sort" className="bg-[#FAFBFC] w-[136px] h-[40px] rounded-[8px] border-[1px] border-[#B4BDC3]">
-                        <option value="newest" className="font-bold text-[12px] text-[#89939A]">Newest</option>
-                        <option value="alphabetically" className="font-bold text-[12px] text-[#89939A]">Alphabetically</option>
-                        <option value="cheapest" className="font-bold text-[12px] text-[#89939A]">Cheapest</option>
-                    </select>
+                <div className="w-[136px] h-[40px]">
+                   <ItemSelect />
                 </div>
-                <div className="flex flex-col gap-1">
-                    <label htmlFor="view" className="font-bold text-[12px] text-[#89939A]">Itens on page</label>
-                    <select name="view" id="view" className="bg-[#FAFBFC] w-[136px] h-[40px] rounded-[8px] border-[1px] border-[#B4BDC3]">
-                        <option value="4" className="font-bold text-[12px] text-[#89939A]">4</option>
-                        <option value="8" className="font-bold text-[12px] text-[#89939A]">8</option>
-                        <option value="16" className="font-bold text-[12px] text-[#89939A]">16</option>
-                        <option value="All" className="font-bold text-[12px] text-[#89939A]">All</option>
-                    </select>
+                <div className="w-[136px] h-[40px]">
+                    <ItemSelect />
                 </div>
             </div>
             <div className="grid grid-cols-4 mt-6 gap-4 overflow-hidden">
                 {products.map(product => (
                 <div key={product.id}>
                     <Card 
-                        image={product.image} 
-                        name={product.name} 
-                        price={product.price} 
-                        fullPrice={product.fullPrice} 
-                        screen={product.screen}
-                        capacity={product.capacity}
-                        ram={product.ram}
+                        product={product}
                      />
                 </div>
                 ))}

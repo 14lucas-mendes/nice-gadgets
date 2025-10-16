@@ -2,16 +2,24 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 type CardProps = {
+  product: {
   image: string;
   name: string;
   price: number,
   fullPrice: number;
   screen: string;
   capacity: string;
-  ram: string
+  ram: string,
+  itemId: string,
+  category: string
+  }
+  
 }
 
-export default function Card({image, name, price, fullPrice, screen, capacity, ram}: CardProps) {
+export default function Card({product}: CardProps) {
+  
+  const {image, category, itemId, name, price, fullPrice, screen, capacity, ram} = product
+
   return (
    <div className='flex flex-col'>
         <div className="w-[272px] h-[506px] bg-white rounded-lg border border-slate-400 shadow-md">
@@ -19,13 +27,15 @@ export default function Card({image, name, price, fullPrice, screen, capacity, r
             <div className='w-[208px] h-[196px] flex
             md:hover:scale-105 md:transition-transform md:duration-300 md:ease-in-out
             '>
-              <Image
-              src={`/${image}`}
-              alt="Category Accessories"
-              width={208}
-              height={196}
-              className='object-contain'
-            />
+              <Link href={`/${category}/${itemId}`}>
+                <Image
+                  src={`/${image}`}
+                  alt="Category Accessories"
+                  width={208}
+                  height={196}
+                  className='object-contain'
+                />
+              </Link>
             </div>
             <div className='w-[208px] h-[58px]'>
               <p className='font-semibold text-[14px] mt-4 line-clamp-2 text-[#0F0F11]'>{name}</p>

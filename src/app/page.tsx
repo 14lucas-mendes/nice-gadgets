@@ -4,14 +4,14 @@ import ShopyCategory from "@/components/ShopyCategory";
 import Loading from "./loading";
 import { Suspense } from "react";
 import CardHotPrice from "@/components/CardHotPrice";
-import { getTop10Products, getTopYearProducts } from "@/utils/products";
+import { getTopYearProducts } from "@/utils/products";
 import CardNewModels from "@/components/CardNewModels";
 
 
 
 
 export default async function Home() {
-    const products = await getTop10Products()
+    
     const productsModels = await getTopYearProducts()
 
     return (
@@ -20,7 +20,7 @@ export default async function Home() {
                 <Slider />
                 <CardNewModels products={productsModels} />
                 <ShopyCategory />
-                <CardHotPrice products={products} />
+                <CardHotPrice />
             </Suspense>
         </Container>
          
