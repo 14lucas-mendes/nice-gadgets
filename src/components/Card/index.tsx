@@ -27,15 +27,15 @@ export default function Card({product}: CardProps) {
             <div className='w-[208px] h-[196px] flex
             md:hover:scale-105 md:transition-transform md:duration-300 md:ease-in-out
             '>
-              <Link href={`/${category}/${itemId}`}>
-                <Image
+             <Link href={`/${category}/${itemId}`}>
+             <Image
                   src={`/${image}`}
                   alt="Category Accessories"
                   width={208}
                   height={196}
                   className='object-contain'
                 />
-              </Link>
+             </Link>
             </div>
             <div className='w-[208px] h-[58px]'>
               <p className='font-semibold text-[14px] mt-4 line-clamp-2 text-[#0F0F11]'>{name}</p>

@@ -3,13 +3,18 @@
 
 import { FormControl, InputLabel, MenuItem } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-import { useState } from 'react';
 
-export default function ItemSelect() {
-    const [item, setItem] = useState('')
+type ItemSelectProps = {
+  value: string;
+  setValue: (value: string) => void;
+}
+  
+
+export default function ItemSelect({value, setValue}: ItemSelectProps) {
+    
 
     const handleChange = (event: SelectChangeEvent) => {
-        setItem(event.target.value as string)
+        setValue(event.target.value as string)
     }
 
     return (
@@ -18,7 +23,7 @@ export default function ItemSelect() {
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
-        value={item}
+        value={value}
         label="item"
         onChange={handleChange}
       >

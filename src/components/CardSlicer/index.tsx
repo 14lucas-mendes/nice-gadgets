@@ -5,7 +5,12 @@ import { useRef, useState } from "react";
 import { HeadingCard } from "../HeadingCard";
 import Card from "../Card";
 
-export default function CardSlicer({ products }: { products: Product[]}) {
+type CardSliceProps = {
+    products: Product[],
+    title: string
+}
+
+export default function CardSlicer({products, title}: CardSliceProps) {
 
     const [currentCard, setCurrentCard] = useState(0)
     const cardContainerRef = useRef<HTMLDivElement>(null)
@@ -61,9 +66,9 @@ export default function CardSlicer({ products }: { products: Product[]}) {
         }
 
     return (
-         <div className="w-full md:max-w-6xl mt-6">
+         <div className="w-full md:max-w-6xl">
             <div className="flex justify-between items-center">
-                <HeadingCard as="h2">Hot prices</HeadingCard>
+                <HeadingCard as="h2">{title}</HeadingCard>
             <div className="flex gap-2">
                 <button className="cursor-pointer" onClick={() => handlePrevCard()}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"     className="size-8 text-slate-500">
