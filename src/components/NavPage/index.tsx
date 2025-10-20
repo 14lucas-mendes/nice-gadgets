@@ -1,3 +1,5 @@
+'use client';
+
 import Link from "next/link";
 import { HeadingCard } from "../HeadingCard";
 import ItemSelect from "../Select";
@@ -14,12 +16,44 @@ type NavPageProps = {
 
 export default function NavPage({products, page, title, description }: NavPageProps) {
     const [sortBy, setSortBy] = useState('Newest');
-    const [items, setItems] = useState('All');
+    const [perPage, setPerPage] = useState('All');
 
+    const sortItems = [{
+        label: 'Newest',
+        value: 'Newest'
+    },
+    {
+        label: 'Alphabetically', 
+        value: 'Alphabetically'
+    },
+    {
+        label: 'Cheapest', 
+        value: 'Cheapest'
+    },
+    
+
+    ];
+    const perPageItems = [{
+        label: '4',
+        value: '4'
+    },
+    {
+        label: '8', 
+        value: '8'
+    }, 
+    {
+        label: '16', 
+        value: '16'
+    },
+    {
+        label: 'All', 
+        value: 'All'
+    }
+]
 
   return (
     <>
-    <div className="max-w-6xl mx-auto py-14">
+    <div className="max-w-6xl mx-auto pt-14">
             <div className="flex items-center gap-2">
                 <Link href="/">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
@@ -38,21 +72,25 @@ export default function NavPage({products, page, title, description }: NavPagePr
                 <p className="font-semibold text-[14px] text-[#89939A] mt-2">{description}</p>
             </div>
             <div className="flex items-center gap-4 mt-6">
-                <div className="w-[136px] h-[40px]">
-                    <ItemSelect 
+                <div>
+                    <ItemSelect
+                    items={sortItems}
+                    title="Sort By"
                     value={sortBy}
                     setValue={setSortBy}
                     />
                 </div>
-                <div className="w-[136px] h-[40px]">
+                <div>
                    <ItemSelect 
-                    value={items}
-                    setValue={setItems}
+                    items={perPageItems}
+                    title="Items on page"
+                    value={perPage}
+                    setValue={setPerPage}
                    />
                 </div>
             </div>
     </div>
-    <div className="grid grid-cols-4 mt-2 gap-4 overflow-hidden">
+    <div className="grid grid-cols-4 mt-4 gap-4 overflow-hidden">
         {products.map(product => (
             <div key={product.id} 
             className="">

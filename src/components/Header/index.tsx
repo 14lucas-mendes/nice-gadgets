@@ -3,11 +3,19 @@
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/16/solid";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [activeLink, setActiveLink] = useState('home');
+    const pathname = usePathname();
+    
+
+    const activeLink = pathname === '/' ? 'home'
+    : pathname.startsWith('/phones') ? 'phone'
+    : pathname.startsWith('/accessories') ? 'accessories'
+    : pathname.startsWith('/tablets') ? 'tablets'
+    : '';
 
     return (
         <header className="bg-white shadow-md h-[48px] md:h-[64px] lg:h-[64px] flex">
@@ -32,28 +40,24 @@ export default function Header() {
             ">
                 <Link 
                 className={activeLink === 'home' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 md:hover:py-5 lg:hover:py-6' sm:text-[#89939A]"} 
-                onClick={() => setActiveLink('home')}
                 href="/">
                     Home
                 </Link>
 
                 <Link 
                 className={activeLink === 'phone' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 md:hover:py-5 lg:hover:py-6' sm:text-[#89939A]"} 
-                onClick={() => setActiveLink('phone')}
                 href='/phones'>
                     Phones
                 </Link>
 
                 <Link 
                 className={activeLink === 'accessories' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 md:hover:py-5 lg:hover:py-6' sm:text-[#89939A]"}
-                onClick={() => setActiveLink('accessories')}
                 href='/accessories'>
                     Accessories
                 </Link>
 
                 <Link 
                 className={activeLink === 'tablets' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 md:hover:py-5 lg:hover:py-6' sm:text-[#89939A]"} 
-                onClick={() => setActiveLink('tablets')}
                 href='/tablets'>
                     Tablets
                 </Link>
@@ -63,27 +67,27 @@ export default function Header() {
                 <div className="flex flex-col h-full justify-between">
                     <div className="flex flex-col pt-6 gap-6 items-center text-sm font-extrabold text-[12px] uppercase">
                             <Link className={activeLink === 'home' ? 'border-b-3 py-3.5 border-black text-[#0F0F11]' : 'text-[#89939A]'}
-                            onClick={() => {setActiveLink('home'); setIsMenuOpen(false);}}
+                            onClick={() => {setIsMenuOpen(false);}}
                             href="/">
                                 Home
                             </Link>
 
-                            <Link className={activeLink === 'phones' ? 'border-b-3 py-3.5 border-black text-[#0F0F11]' : 'text-[#89939A]'}
-                            onClick={() => {setActiveLink('phones'); setIsMenuOpen(false);}} 
+                            <Link className={activeLink === 'phone' ? 'border-b-3 py-3.5 border-black text-[#0F0F11]' : 'text-[#89939A]'}
+                            onClick={() => {setIsMenuOpen(false);}} 
                             href="/phones">
                                 Phones
                             </Link>
 
                             <Link 
                             className={activeLink === 'accessories' ? 'border-b-3 py-3.5 border-black text-[#0F0F11]' : 'text-[#89939A]'} 
-                            onClick={() => {setActiveLink('accessories'); setIsMenuOpen(false);}}
+                            onClick={() => {setIsMenuOpen(false);}}
                             href="/accessories">
                                 Accessories
                             </Link>
 
                             <Link 
                             className={activeLink === 'tablets' ? 'border-b-3 py-3.5 border-black text-[#0F0F11]' : 'text-[#89939A]'} 
-                            onClick={() => {setActiveLink('tablets'); setIsMenuOpen(false);}}
+                            onClick={() => {setIsMenuOpen(false);}}
                             href="/tablets">
                                 Tablets
                             </Link>
