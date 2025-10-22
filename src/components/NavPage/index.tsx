@@ -67,7 +67,7 @@ export default function NavPage({products, page, title, description }: NavPagePr
 
   return (
     <>
-    <div className="max-w-7xl mx-auto pt-6">
+    <div className="max-w-6xl mx-auto pt-6">
             <div className="flex items-center gap-2">
                 <Link href="/">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
