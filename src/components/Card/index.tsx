@@ -47,8 +47,8 @@ export default function Card({product}: CardProps) {
               <p className='font-semibold text-[14px] mt-4 line-clamp-2 text-[#0F0F11]'>{name}</p>
             </div>
             <div className='flex flex-row gap-2'>
-              <p className='font-extrabold text-[22px] text-[#0F0F11]'>{price}</p>
-              <p className='font-medium text-[22px] text-[#89939A] line-through'>{fullPrice}</p>
+              <p className='font-extrabold text-[22px] text-[#0F0F11]'>{`R$${price}`}</p>
+              <p className='font-medium text-[22px] text-[#89939A] line-through'>{`R$${fullPrice}`}</p>
             </div>
             <hr />
             <div className='font-semibold text-[14px] text-[#89939A] mt-2'>

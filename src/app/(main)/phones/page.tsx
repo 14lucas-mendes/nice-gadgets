@@ -1,4 +1,5 @@
 import NavPage from "@/components/NavPage";
+import PaginationCard from "@/components/Pagination";
 import { getAllPhonesProducts } from "@/utils/products";
 
 export default async function PhonesPage() {
@@ -14,6 +15,9 @@ export default async function PhonesPage() {
             title="Mobile Phones"
             description={`${products.length} Models`}
             />
+            <div className={`${products.length > 0 ? 'flex justify-center items-center mt-10' : 'hidden'}`}>
+                <PaginationCard />
+            </div>
         </div> 
     );
 }

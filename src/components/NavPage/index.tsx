@@ -18,6 +18,19 @@ export default function NavPage({products, page, title, description }: NavPagePr
     const [sortBy, setSortBy] = useState('Newest');
     const [perPage, setPerPage] = useState('All');
 
+    const sortHandlerProducts = [...products].sort((a, b) => {
+        if (sortBy === 'Newest') {
+            return 0; 
+        } else if (sortBy === 'Alphabetically') {
+            return a.name.localeCompare(b.name);
+        } else if (sortBy === 'Cheapest') {
+            return a.price - b.price;
+        }
+        return 0;
+    });
+
+    const paginatedProducts = perPage === 'All' ? sortHandlerProducts : sortHandlerProducts.slice(0, parseInt(perPage));
+
     const sortItems = [{
         label: 'Newest',
         value: 'Newest'
@@ -92,7 +105,7 @@ export default function NavPage({products, page, title, description }: NavPagePr
             </div>
     </div>
     <div className="grid grid-cols-4 mt-6 gap-4 gap-y-8 overflow-hidden">
-        {products.map(product => (
+        {paginatedProducts.map(product => (
             <div key={product.id} 
             className="">
             <Card 
