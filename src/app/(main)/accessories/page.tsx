@@ -13,7 +13,7 @@ export default async function AccessoriesPage() {
                 products={products}
                 page="Accessories"
                 title="Accessories"
-                description="120 Models."
+                description={`${products.length} Models.`}
             />
         </div>
     );

@@ -11,7 +11,7 @@ export default async function TabletsPage() {
                 products={products}
                 page="Tablets"
                 title="Tablets"
-                description="50 Models."
+                description={`${products.length} Models.`}
             />
         </div>       
     );

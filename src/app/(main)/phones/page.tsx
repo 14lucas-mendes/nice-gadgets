@@ -11,8 +11,8 @@ export default async function PhonesPage() {
             <NavPage
             products={products}
             page="Phones"
-            title="Phones"
-            description="95 Models."
+            title="Mobile Phones"
+            description={`${products.length} Models`}
             />
         </div> 
     );
