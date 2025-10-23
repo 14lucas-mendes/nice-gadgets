@@ -1,23 +1,21 @@
-'use client';
-
 import { Pagination } from "@mui/material"
-import { useState } from "react";
+
+type PaginationCardProps = {
+    currentPage: number;
+    totalPages: number;
+    onPageChange: (event: React.ChangeEvent<unknown>, value: number) => void;
+}
 
 
-
-export default function PaginationCard() {
-    const [page, setPage] = useState(1);
-
-    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-        setPage(value);
-    };
+export default function PaginationCard({ currentPage, totalPages, onPageChange }: PaginationCardProps) {
+    
 
   return (
-    <div>
+    <div className="flex w-full justify-center items-center mt-10">
         <Pagination 
-            count={10} 
-            page={page} 
-            onChange={handleChange} 
+            count={totalPages} 
+            page={currentPage} 
+            onChange={onPageChange} 
             color="primary" 
             shape="rounded"
             size="large"

@@ -6,6 +6,7 @@ import ItemSelect from "../Select";
 import { Product } from "@/types/Product";
 import Card from "../Card";
 import { useState } from "react";
+import PaginationCard from "../Pagination";
 
 type NavPageProps = {
     products: Product[]
@@ -17,10 +18,12 @@ type NavPageProps = {
 export default function NavPage({products, page, title, description }: NavPageProps) {
     const [sortBy, setSortBy] = useState('Newest');
     const [perPage, setPerPage] = useState('All');
+    const [currentPage, setCurrentPage] = useState(1);
 
+    // Mantem a lógica de ordenação
     const sortHandlerProducts = [...products].sort((a, b) => {
         if (sortBy === 'Newest') {
-            return 0; 
+            return b.year - a.year; // Adiciona ordenação por ano
         } else if (sortBy === 'Alphabetically') {
             return a.name.localeCompare(b.name);
         } else if (sortBy === 'Cheapest') {
@@ -29,7 +32,23 @@ export default function NavPage({products, page, title, description }: NavPagePr
         return 0;
     });
 
-    const paginatedProducts = perPage === 'All' ? sortHandlerProducts : sortHandlerProducts.slice(0, parseInt(perPage));
+    // Nova função de paginação simplificada
+    const getPaginatedProducts = () => {
+        if (perPage === 'All') {
+            return sortHandlerProducts;
+        }
+
+        const itemsPerPage = parseInt(perPage);
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+
+        return sortHandlerProducts.slice(startIndex, endIndex);
+    };
+
+    const paginatedProducts = getPaginatedProducts();
+    const totalPages = perPage === 'All' ? 1 : Math.ceil(products.length / parseInt(perPage));
+
+
 
     const sortItems = [{
         label: 'Newest',
@@ -103,17 +122,22 @@ export default function NavPage({products, page, title, description }: NavPagePr
                    />
                 </div>
             </div>
-    </div>
-    <div className="grid grid-cols-4 mt-6 gap-4 gap-y-8 overflow-hidden">
-        {paginatedProducts.map(product => (
-            <div key={product.id} 
-            className="">
-            <Card 
-            product={product}
-            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
+                {paginatedProducts.map((product) => (
+                    <Card key={product.id} product={product} />
+                ))}
             </div>
-        ))}
+
+            {perPage !== 'All' && (
+                <PaginationCard 
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={(event, value) => setCurrentPage(value)}
+                />
+            )}
     </div>
+    
+    
     </>
   );
 }

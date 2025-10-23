@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function CategoryItem() {
   return (
-    <div className="max-w-6xl mx-auto py-6">
+    <div className="max-w-6xl mx-auto py-14">
         <div className="flex items-center gap-2">
             <Link href="/">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
@@ -22,13 +22,13 @@ export default function CategoryItem() {
         </div>
         <div className="flex items-center gap-2 mt-10">
             <Link href={"/phones"}>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}stroke="currentColor"     className="size-4 hover:text-slate-700 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}stroke="currentColor"     className="size-4 ">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                 </svg>
             </Link>
             <div>
                 <Link href={'/phones'}>
-                    <h3 className="font-semibold text-[14px] text-[#89939A]">Back</h3>
+                    <h3 className="font-semibold text-[14px] text-[#89939A] hover:text-slate-800 transition-colors">Back</h3>
                 </Link>
             </div>
         </div>
@@ -37,51 +37,57 @@ export default function CategoryItem() {
         </div>
         <div className="mt-10 flex gap-4">
             <div className="flex flex-col gap-4">
-                <div className="w-20 h-20 bg-red-800 rounded-md">
+                <div className="flex w-20 h-20 bg-red-800 rounded-md relative">
                 <Image 
-                src='/public/img/layout/category-phones.png'
+                src='/img/layout/category-phones.png'
                 alt="Category Phones"
                 fill
+                className="px-auto py-auto object-contain absolute"
                 />
                 </div>
 
-                <div className="w-20 h-20 bg-blue-800 rounded-md">
-               <Image 
-                src='/public/img/layout/category-phones.png'
+                <div className="flex w-20 h-20 bg-blue-800 rounded-md relative">
+                <Image 
+                src='/img/layout/category-phones.png'
                 alt="Category Phones"
                 fill
+                className="px-auto py-auto object-contain absolute"
                 />
                 </div>
 
-                <div className="w-20 h-20 bg-green-800 rounded-md">
+                <div className="flex w-20 h-20 bg-green-800 rounded-md relative">
                 <Image 
-                src='/public/img/layout/category-phones.png'
+                src='/img/layout/category-phones.png'
                 alt="Category Phones"
                 fill
+                className="px-auto py-auto object-contain absolute"
                 />
                 </div>
 
-                <div className="w-20 h-20 bg-yellow-800 rounded-md">
+                <div className="flex w-20 h-20 bg-yellow-800 rounded-md relative">
                 <Image 
-                src='/public/img/layout/category-phones.png'
+                src='/img/layout/category-phones.png'
                 alt="Category Phones"
                 fill
+                className="px-auto py-auto object-contain absolute"
                 />
                 </div>
 
-                <div className="w-20 h-20 bg-pink-800 rounded-md">
+                <div className="flex w-20 h-20 bg-pink-800 rounded-md relative">
                 <Image 
-                src='/public/img/layout/category-phones.png'
+                src='/img/layout/category-phones.png'
                 alt="Category Phones"
                 fill
+                className="px-auto py-auto object-contain absolute"
                 />
                 </div>
             </div>
-            <div className="w-[464px] h-464px] bg-slate-700">
+            <div className="flex w-[464px] h-464px] bg-slate-700 relative">
                 <Image 
-                src='/public/img/layout/category-phones.png'
+                src='/img/layout/category-phones.png'
                 alt="Category Phones"
                 fill
+                className="px-auto py-auto object-contain absolute"
                 />
             </div>
         </div>

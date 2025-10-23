@@ -1,5 +1,9 @@
+import CategoryItem from "@/components/CategoryItem";
+
 export default function AccesoryId() {
     return (
-        <h1>Olá Mundo</h1>
+        <div>
+            <CategoryItem />
+        </div> 
     )
 }

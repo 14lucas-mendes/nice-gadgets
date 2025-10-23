@@ -1,5 +1,9 @@
+import CategoryItem from "@/components/CategoryItem";
+
 export default function TabletsId() {
     return (
-        <div>Tablets Details Page</div>
+       <div>
+            <CategoryItem />
+        </div> 
     )
 }
