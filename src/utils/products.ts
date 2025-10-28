@@ -34,3 +34,21 @@ export async function getAllTabletsProducts(): Promise<Product[]> {
     .then(response => response.json())
     .then(data => data.products as Product[])
 }
+
+export async function getProductById(itemId: string): Promise<Product | null> {
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+  
+  return fetch(`${baseUrl}/api/products/${itemId}`)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return null;
+      }
+    })
+    .then((data) => data ? data.product : null)
+    .catch((error) => {
+      console.error('Erro ao buscar produto:', error);
+      return null;
+    });
+}

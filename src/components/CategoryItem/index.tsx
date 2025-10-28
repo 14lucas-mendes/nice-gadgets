@@ -2,7 +2,35 @@ import Link from "next/link";
 import { HeadingCard } from "../HeadingCard";
 import Image from "next/image";
 
-export default function CategoryItem() {
+type CategoryItemProps = {
+  id: string;
+  category: string;
+  namespaceId: string;
+  name: string;
+  capacityAvailable: string[];
+  capacity: string;
+  priceRegular: number;
+  priceDiscount: number;
+  colorsAvailable: string[];
+  color: string;
+  images: string[];
+  description: Array<{
+    title: string;
+    text: string[];
+  }>;
+  screen: string;
+  resolution: string;
+  processor: string;
+  ram: string;
+  camera: string;
+  zoom: string;
+  cell: string[];
+}
+
+
+
+
+export default function CategoryItem({ productById }: { productById: CategoryItemProps | null }) {
   return (
     <div className="max-w-6xl mx-auto py-14">
         <div className="flex items-center gap-2">

@@ -19,6 +19,7 @@ export default function NavPage({products, page, title, description }: NavPagePr
     const [sortBy, setSortBy] = useState('Newest');
     const [perPage, setPerPage] = useState('All');
     const [currentPage, setCurrentPage] = useState(1);
+ 
 
     // Mantem a lógica de ordenação
     const sortHandlerProducts = [...products].sort((a, b) => {
@@ -47,7 +48,6 @@ export default function NavPage({products, page, title, description }: NavPagePr
 
     const paginatedProducts = getPaginatedProducts();
     const totalPages = perPage === 'All' ? 1 : Math.ceil(products.length / parseInt(perPage));
-
 
 
     const sortItems = [{
@@ -129,7 +129,7 @@ export default function NavPage({products, page, title, description }: NavPagePr
             </div>
 
             {perPage !== 'All' && (
-                <PaginationCard 
+                <PaginationCard
                     currentPage={currentPage}
                     totalPages={totalPages}
                     onPageChange={(event, value) => setCurrentPage(value)}

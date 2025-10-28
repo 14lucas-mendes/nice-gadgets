@@ -25,11 +25,13 @@ type Product = {
   image: string;
 };
 
+
+
 const sortHandlers: Record<Sorting, (a: Product, b: Product) => number> = {
-  [Sorting.PRICE_ASC]: (a: Product, b: Product) => (a.fullPrice - a.price - b.fullPrice - b.price),
-  [Sorting.PRICE_DESC]: (a: Product, b: Product) => (b.fullPrice -b.price - a.fullPrice - a.price),
-  [Sorting.YEAR_ASC]: (a: Product, b: Product) => (a.year - b.year),   // 2020, 2021, 2022...
-  [Sorting.YEAR_DESC]: (a: Product, b: Product) => (b.year - a.year),  // 2024, 2023, 2022...
+  [Sorting.PRICE_ASC]: (a: Product, b: Product) => (a.fullPrice - a.price) - (b.fullPrice - b.price),
+  [Sorting.PRICE_DESC]: (a: Product, b: Product) => (b.fullPrice -b.price) - (a.fullPrice - a.price),
+  [Sorting.YEAR_ASC]: (a: Product, b: Product) => (a.year - b.year), 
+  [Sorting.YEAR_DESC]: (a: Product, b: Product) => (b.year - a.year),  
   [Sorting.TYPE_PRODUCTS]: (a: Product, b: Product) => b.category.localeCompare(a.category)
 };
 
@@ -43,7 +45,7 @@ export async function GET(req: NextRequest) {
   // Parametro de filtro por categoria
   const categoryParam = searchParams.get('category');
   
-  // Parâmetro de ordenação (agora inclui year)
+  // Parâmetro de ordenação
   const sortBy = searchParams.get('sortBy') as Sorting ?? '';
 
   // Filtro por categoria
