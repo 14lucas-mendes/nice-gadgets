@@ -1,17 +1,18 @@
-import CategoryItem from "@/components/CategoryItem";
+import CardItem from "@/components/CardItem";
 import { getProductById } from "@/utils/products";
 
 export default async function PhoneId({
   params,
 }: {
-  params: { itemId: string };
+  params: { productId: string };
 }) {
 
-    const productById = await getProductById(params.itemId);
+    const productById = await getProductById(params.productId);
+  
 
     return (
         <div>
-             <CategoryItem productsById={productById} />
+             <CardItem product={productById} />
         </div> 
     )
 }

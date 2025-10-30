@@ -1,3 +1,4 @@
+import { ProductDetails } from "@/types/ProductDetails";
 import { Product } from "../types/Product";
 
 export async function getTop10Products(): Promise<Product[]> {
@@ -35,20 +36,9 @@ export async function getAllTabletsProducts(): Promise<Product[]> {
     .then(data => data.products as Product[])
 }
 
-export async function getProductById(itemId: string): Promise<Product | null> {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
-  
-  return fetch(`${baseUrl}/api/products/${itemId}`)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        return null;
-      }
-    })
-    .then((data) => data ? data.product : null)
-    .catch((error) => {
-      console.error('Erro ao buscar produto:', error);
-      return null;
-    });
+export async function getProductById(productId: string): Promise<ProductDetails> {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    return fetch(`${baseUrl}/api/products/${productId}`)
+    .then(response => response.json())
+    .then(data => data.product as ProductDetails)
 }

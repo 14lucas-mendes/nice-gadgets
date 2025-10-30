@@ -1,14 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-
-// importando os json de phones, accessories e tablets
-import phonesData from '../../../../public/api/phones.json';
-import accessoriesData from '../../../../public/api/accessories.json';
-import tabletsData from '../../../../public/api/tablets.json';
+import phonesData from '../../../../../public/api/phones.json';
+import accessoriesData from '../../../../../public/api/accessories.json';
+import tabletsData from '../../../../../public/api/tablets.json';
 
 
 // tipo com os detalhes de um item
-
 type ProductDetails = {
   id: string;
   category: string;
@@ -43,14 +40,14 @@ const categoryDataMap: Record<string, ProductDetails[]> = {
 
 
 // Função GET para buscar os detalhes do item pelo itemId
-export async function GET(req: NextRequest, { params }: { params: { itemId: string } }) {
-    const { itemId } = params;
+export async function GET(req: NextRequest, { params }: { params: { productId: string } }) {
+    const { productId } = params;
 
     let productDetails: ProductDetails | null = null;
     let foundCategory = '';
 
     for (const [category, dataArray] of Object.entries(categoryDataMap)) {
-        const found = dataArray.find((item: ProductDetails) => item.id === itemId);
+        const found = dataArray.find((item: ProductDetails) => item.id === productId);
 
         if (found) {
             productDetails = found;
@@ -61,7 +58,7 @@ export async function GET(req: NextRequest, { params }: { params: { itemId: stri
 
     if (!productDetails) {
         return NextResponse.json(
-            { error: 'Product not found', itemId },
+            { error: 'Product not found', productId },
             { status: 404 }
         );
     }
