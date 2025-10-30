@@ -6,16 +6,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
+const routes = {
+    home: { href: '/', isActive: (path: string) => path === '/' },
+    phones: { href: '/products/phones', isActive: (path: string) => path.includes('/phones') },
+    accessories: { href: '/products/accessories', isActive: (path: string) => path.includes('/accessories') },
+    tablets: { href: '/products/tablets', isActive: (path: string) => path.includes('/tablets') },
+}
+
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const pathname = usePathname();
     
 
-    const activeLink = pathname === '/' ? 'home'
-    : pathname.startsWith('/phones') ? 'phone'
-    : pathname.startsWith('/accessories') ? 'accessories'
-    : pathname.startsWith('/tablets') ? 'tablets'
-    : '';
 
     return (
         <header className="bg-white shadow-md h-[48px] md:h-[64px] lg:h-[64px] flex">
@@ -38,59 +40,31 @@ export default function Header() {
             md:flex md:ml-12 md:gap-12 md:items-center md:text-[#89939A] md:text-[14px] md:font-extrabold md:uppercase md:transition-all
             lg:flex lg:ml-16 lg:gap-16 lg:items-center lg:text-[#89939A] lg:text-[14px] lg:font-extrabold lg:uppercase lg:transition-all
             ">
+                {Object.entries(routes).map(([key, route]) => (
                 <Link 
-                className={activeLink === 'home' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 md:hover:py-5 lg:hover:py-6' sm:text-[#89939A]"} 
-                href="/">
-                    Home
+                    key={key}
+                    className={route.isActive(pathname) ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 md:hover:py-5 lg:hover:py-6' sm:text-[#89939A]"} 
+                    href={route.href}>
+                    {key.charAt(0).toUpperCase() + key.slice(1)}
                 </Link>
+                ))}
+               
 
-                <Link 
-                className={activeLink === 'phone' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 md:hover:py-5 lg:hover:py-6' sm:text-[#89939A]"} 
-                href='/phones'>
-                    Phones
-                </Link>
-
-                <Link 
-                className={activeLink === 'accessories' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 md:hover:py-5 lg:hover:py-6' sm:text-[#89939A]"}
-                href='/accessories'>
-                    Accessories
-                </Link>
-
-                <Link 
-                className={activeLink === 'tablets' ? 'text-[#0F0F11] sm:border-b-3 sm:py-3.5 md:py-4.5 lg:py-5' : "sm:hover:border-b-3 sm:hover:border-black sm:hover:py-3.5 md:hover:py-5 lg:hover:py-6' sm:text-[#89939A]"} 
-                href='/tablets'>
-                    Tablets
-                </Link>
             </div>
             {isMenuOpen && (
             <div className="fixed top-0 left-0 mt-12 w-full h-screen bg-white sm:hidden md:hidden lg:hidden z-50">
                 <div className="flex flex-col h-full justify-between">
                     <div className="flex flex-col pt-6 gap-6 items-center text-sm font-extrabold text-[12px] uppercase">
-                            <Link className={activeLink === 'home' ? 'border-b-3 py-3.5 border-black text-[#0F0F11]' : 'text-[#89939A]'}
+                        {Object.entries(routes).map(([key, route]) => (
+                             <Link 
+                             key={key}
+                            className={route.isActive(pathname) ? 'border-b-3 py-3.5 border-black text-[#0F0F11]' : 'text-[#89939A]'}
                             onClick={() => {setIsMenuOpen(false);}}
-                            href="/">
-                                Home
+                            href={route.href}>
+                                {key.charAt(0).toUpperCase() + key.slice(1)}
                             </Link>
-
-                            <Link className={activeLink === 'phone' ? 'border-b-3 py-3.5 border-black text-[#0F0F11]' : 'text-[#89939A]'}
-                            onClick={() => {setIsMenuOpen(false);}} 
-                            href="/phones">
-                                Phones
-                            </Link>
-
-                            <Link 
-                            className={activeLink === 'accessories' ? 'border-b-3 py-3.5 border-black text-[#0F0F11]' : 'text-[#89939A]'} 
-                            onClick={() => {setIsMenuOpen(false);}}
-                            href="/accessories">
-                                Accessories
-                            </Link>
-
-                            <Link 
-                            className={activeLink === 'tablets' ? 'border-b-3 py-3.5 border-black text-[#0F0F11]' : 'text-[#89939A]'} 
-                            onClick={() => {setIsMenuOpen(false);}}
-                            href="/tablets">
-                                Tablets
-                            </Link>
+                        ))}
+                           
                         </div>
                     <div className="flex justify-center mb-12 border-b-2 border-t-2 border-[#E2E6E9] sm:hidden md:hidden lg:hidden">
                         <div className="w-full h-[64px] items-center justify-center flex border-x-2 border-[#E2E6E9] sm:flex sm:flex-row">

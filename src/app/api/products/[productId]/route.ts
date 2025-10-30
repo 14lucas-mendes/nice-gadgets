@@ -40,8 +40,8 @@ const categoryDataMap: Record<string, ProductDetails[]> = {
 
 
 // Função GET para buscar os detalhes do item pelo itemId
-export async function GET(req: NextRequest, { params }: { params: { productId: string } }) {
-    const { productId } = params;
+export async function GET(req: NextRequest, { params }: { params: Promise<{ productId: string }> }) {
+    const { productId } = await params;
 
     let productDetails: ProductDetails | null = null;
     let foundCategory = '';
