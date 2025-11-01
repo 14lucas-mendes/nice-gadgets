@@ -28,11 +28,9 @@ type CategoryItemProps = {
 }
 
 
-
-
-export default function CategoryItem({ productById }: { productById: CategoryItemProps | null }) {
+export default function ContentProductById({ product }: { product: CategoryItemProps | null }) {
   return (
-    <div className="max-w-6xl mx-auto py-14">
+    <div className="max-w-6xl mx-auto py-10">
         <div className="flex items-center gap-2">
             <Link href="/">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
@@ -42,11 +40,11 @@ export default function CategoryItem({ productById }: { productById: CategoryIte
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-[#B4BDC3]">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
             </svg>
-            <h3 className="font-semibold text-[14px] text-[#89939A]">Title</h3>
+            <h3 className="font-semibold text-[14px] text-[#89939A]">{product?.category}</h3>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-[#B4BDC3]">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
             </svg>
-            <h3 className="font-semibold text-[14px] text-[#89939A]">Title</h3>
+            <h3 className="font-semibold text-[12px] text-[#89939A]">{product?.name}</h3>
         </div>
         <div className="flex items-center gap-2 mt-10">
             <Link href={"/phones"}>
@@ -61,64 +59,33 @@ export default function CategoryItem({ productById }: { productById: CategoryIte
             </div>
         </div>
         <div className="mt-4">
-            <HeadingCard as="h1">Category ItemId</HeadingCard>
+            <HeadingCard as="h2">{product?.name}</HeadingCard>
         </div>
-        <div className="mt-10 flex gap-4">
-            <div className="flex flex-col gap-4">
-                <div className="flex w-20 h-20 bg-red-800 rounded-md relative">
-                <Image 
-                src='/img/layout/category-phones.png'
-                alt="Category Phones"
-                fill
-                className="px-auto py-auto object-contain absolute"
-                />
+        
+            <div className="flex flex-row mt-10 gap-2">
+                <div className="flex flex-col gap-4">
+                    {product?.images.map(img => (
+                    <div key={img}>
+                        <div className="w-20 h-20 border rounded-md relative">
+                            <Image 
+                            src={`/${img}`}
+                            alt="Category Phones"
+                            fill
+                            className="px-auto py-auto object-contain absolute"
+                            />
+                        </div>
+                    </div>  
+                ))}
                 </div>
-
-                <div className="flex w-20 h-20 bg-blue-800 rounded-md relative">
-                <Image 
-                src='/img/layout/category-phones.png'
-                alt="Category Phones"
-                fill
-                className="px-auto py-auto object-contain absolute"
-                />
-                </div>
-
-                <div className="flex w-20 h-20 bg-green-800 rounded-md relative">
-                <Image 
-                src='/img/layout/category-phones.png'
-                alt="Category Phones"
-                fill
-                className="px-auto py-auto object-contain absolute"
-                />
-                </div>
-
-                <div className="flex w-20 h-20 bg-yellow-800 rounded-md relative">
-                <Image 
-                src='/img/layout/category-phones.png'
-                alt="Category Phones"
-                fill
-                className="px-auto py-auto object-contain absolute"
-                />
-                </div>
-
-                <div className="flex w-20 h-20 bg-pink-800 rounded-md relative">
-                <Image 
-                src='/img/layout/category-phones.png'
-                alt="Category Phones"
-                fill
-                className="px-auto py-auto object-contain absolute"
-                />
+                <div className="w-[464px] h-[464px] border relative">
+                    <Image
+                    src='/img/layout/category-phones.png'
+                    alt=""
+                    fill
+                    className="absolute object-contain px-auto py-auto"
+                    />
                 </div>
             </div>
-            <div className="flex w-[464px] h-464px] bg-slate-700 relative">
-                <Image 
-                src='/img/layout/category-phones.png'
-                alt="Category Phones"
-                fill
-                className="px-auto py-auto object-contain absolute"
-                />
-            </div>
-        </div>
     </div>
   )
 }

@@ -1,19 +1,21 @@
-import CardItem from "@/components/CardItem";
+import CardProductId from "@/components/CardProductById";
+import ContentProductById from "@/components/ContentProductById";
 import { getProductById } from "@/utils/products";
 
-export default async function PhoneId({
+export default async function ProductId({
   params,
 }: {
-  params: Promise<{ phoneId: string }>;
+  params: Promise<{ productId: string }>;
 }) {
 
-    const { phoneId } = await params;
-    const productById = await getProductById(phoneId);
-  
+    const { productId } = await params;
+    const productById = await getProductById(productId);
+
 
     return (
         <div>
-             <CardItem product={productById} />
+             <ContentProductById product={productById} />
+             <CardProductId product={productById} />
         </div> 
     )
 }

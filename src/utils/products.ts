@@ -35,7 +35,7 @@ export async function getAllTabletsProducts(): Promise<Product[]> {
 
 export async function getProductById(productId: string): Promise<ProductDetails> {
     const url =  fetch(`${baseUrl}/api/products/${productId}`);
-    console.error(`Erro no parametro, ${productId}`)
+    
 
     try {
       const response = await url;

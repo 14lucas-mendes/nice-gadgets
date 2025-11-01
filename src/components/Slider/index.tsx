@@ -24,7 +24,7 @@ export default function Slider() {
       title: "See our special offers",
       description: "Check out the best deals on smartphones with incredible prices!",
       buttonText: "Shop Phones",
-      buttonLink: "/phones"
+      buttonLink: "/products/phones"
     },
     {
       id: 2,
@@ -33,7 +33,7 @@ export default function Slider() {
       title: "Make your best chance",
       description: "Discover our tablet collection with the latest technology.",
       buttonText: "Shop Tablets",
-      buttonLink: "/tablets"
+      buttonLink: "/products/tablets"
     },
     {
       id: 3,
@@ -42,7 +42,7 @@ export default function Slider() {
       title: "Available in our store",
       description: "Find the perfect accessories to complement your devices.",
       buttonText: "Shop Accessories",
-      buttonLink: "/accessories"
+      buttonLink: "/products/accessories"
     }
 ]
 

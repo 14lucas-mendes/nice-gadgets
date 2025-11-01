@@ -33,7 +33,6 @@ export default function CardItem({product}: CardItemProps) {
           </div>
         </div>
       ))}
-        
     </div>
   );
 }

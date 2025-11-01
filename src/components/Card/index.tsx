@@ -24,7 +24,7 @@ export default function Card({product}: CardProps) {
   const router = useRouter();
 
   const navigateToProduct = () => {
-    router.push(`/${category}/${itemId}`);
+    router.push(`/products/${category}/${itemId}`);
   }
 
   return (
