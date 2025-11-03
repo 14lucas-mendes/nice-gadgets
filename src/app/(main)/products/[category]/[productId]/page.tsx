@@ -1,5 +1,4 @@
-import CardProductId from "@/components/CardProductById";
-import ContentProductById from "@/components/ContentProductById";
+import ColorOptions from "@/components/ColorOptions";
 import { getProductById } from "@/utils/products";
 
 export default async function ProductId({
@@ -14,8 +13,7 @@ export default async function ProductId({
 
     return (
         <div>
-             <ContentProductById product={productById} />
-             <CardProductId product={productById} />
+             <ColorOptions product={productById} />
         </div> 
     )
 }

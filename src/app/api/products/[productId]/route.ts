@@ -15,7 +15,7 @@ type ProductDetails = {
   capacity: string;
   priceRegular: number;
   priceDiscount: number;
-  colorsAvailable: string[];
+  colorsAvailable: ColorsKey[];
   color: string;
   images: string[];
   description: Array<{
@@ -30,6 +30,31 @@ type ProductDetails = {
   zoom: string;
   cell: string[];
 }
+
+type ColorMapType = {
+  gold: string;
+  spaceBlack: string;
+  silver: string;
+  spacegray: string;
+  coral: string;
+  red: string;
+  white: string;
+  yellow: string;
+  midnight: string;
+  purple: string;
+  graphite: string;
+  sierrablue: string;
+  blue: string;
+  pink: string;
+  black: string;
+  midnightgreen: string;
+  green: string;
+  rosegold: string;
+  starlight: string;
+  skyblue: string;
+};
+
+type ColorsKey = keyof ColorMapType;
 
 // Mapea a categoria para o json correspondente
 const categoryDataMap: Record<string, ProductDetails[]> = {
