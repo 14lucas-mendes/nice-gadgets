@@ -1,8 +1,22 @@
-export default function IdCard() {
+import { getProductById } from "@/utils/products";
+import ColorOptions from "../ColorOptions";
+import CardDetails from "../CardDetails";
+import PriceDisplay from "../PriceDisplay";
+import AddCardButton from "../AddCardButton";
+import ProductInfo from "../ProductInfo";
+
+export default async function IdCard({ params }: { params: { productId: string } }) {
+    const {productId} = await params;
+    const product = await getProductById(productId);
+
+
     return (
-        <div>
-            <p>Avaliable colors</p>
-            
+        <div className="max-w-80 mx-auto flex flex-col">
+            <ColorOptions product={product} />
+            <CardDetails product={product} />
+            <PriceDisplay product={product} />
+            <AddCardButton />
+            <ProductInfo product={product} />
         </div>
     )
 }

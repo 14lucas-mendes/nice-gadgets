@@ -54,11 +54,11 @@ type CardProps = {
 
 export default function ColorOptions({ product } : {product: CardProps | null}) {
     return (
-        <div className="flex flex-col justify-center items-center gap-4 py-10">
+        <div className="flex flex-col w-full justify-start items-start">
             <div className="text-[#89939A] text-[12px] font-semibold">
                 <p>Avaliable Colors</p>
             </div>
-            <div className="flex flex-row">
+            <div className="flex flex-row mt-2">
                 {product?.colorsAvailable.map(color => (
                 <div key={color}
                 className="flex text-2xl text-center justify-center"
@@ -72,6 +72,7 @@ export default function ColorOptions({ product } : {product: CardProps | null}) 
                 </div>
             ))}
             </div>
+            <hr className="w-full my-6 border-gray-400" />
         </div>
     )
 }

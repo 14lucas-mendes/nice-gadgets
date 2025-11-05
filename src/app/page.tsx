@@ -7,8 +7,6 @@ import CardHotPrice from "@/components/CardHotPrice";
 import CardNewModels from "@/components/CardNewModels";
 
 
-
-
 export default async function Home() {
 
     return (
