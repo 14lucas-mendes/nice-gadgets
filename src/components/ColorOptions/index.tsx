@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link";
 
 const colorMap = {
@@ -53,18 +55,38 @@ type CardProps = {
 
 
 export default function ColorOptions({ product } : {product: CardProps | null}) {
+    
+    // Função para construir o novo productId baseado na cor selecionada
+    const getProductIdByColor = (color: ColorsKey): string => {
+        if (!product) return '';
+        
+        // O formato do ID é: {namespaceId}-{capacity}-{color}
+        // Exemplo: "apple-iphone-11-128gb-black"
+        // O capacity vem como "128GB" e precisa ser convertido para "128gb"
+        const capacityFormatted = product.capacity.toLowerCase();
+        return `${product.namespaceId}-${capacityFormatted}-${color}`;
+    }
+
+    // Função para construir a rota completa
+    const getRoute = (color: ColorsKey): string => {
+        if (!product) return '/';
+        const newProductId = getProductIdByColor(color);
+        return `/products/${product.category}/${newProductId}`;
+    }
+
+    
     return (
         <div className="flex flex-col w-full justify-start items-start">
             <div className="text-[#89939A] text-[12px] font-semibold">
                 <p>Avaliable Colors</p>
             </div>
-            <div className="flex flex-row mt-2">
+            <div className="flex flex-row gap-2 mt-2">
                 {product?.colorsAvailable.map(color => (
                 <div key={color}
                 className="flex text-2xl text-center justify-center"
                 >
-                    <Link href={'/'}
-                    className="w-8 h-8 border-2 border-[#F0F0F0] rounded-full"
+                    <Link href={getRoute(color)}
+                    className={`w-8 h-8 hover:border-2 rounded-full ${product.color === color ? 'border-2 border-gray-600' : ''}`}
                     style={{ backgroundColor: colorMap[color] || color }}
                     >
                 

@@ -11,7 +11,7 @@ export default async function IdCard({ params }: { params: { productId: string }
 
 
     return (
-        <div className="max-w-80 mx-auto flex flex-col">
+        <div className="w-[620px] flex flex-col">
             <ColorOptions product={product} />
             <CardDetails product={product} />
             <PriceDisplay product={product} />

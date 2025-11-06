@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export default function AddCardButton() {
     return (
-        <div className="flex flex-row gap-4 w-full justify-between items-center mt-4">
+        <div className="flex flex-row gap-4 w-full items-center mt-4">
         <Link 
-        className="flex justify-center items-center w-[263px] h-[48px] bg-[#F86800] rounded-[8px]
+        className="flex justify-center items-center w-[263px] h-[48px] bg-[#F86800] hover:bg-orange-600 rounded-[8px]
         font-bold text-[14px] text-white
         "
         href={'/'}
