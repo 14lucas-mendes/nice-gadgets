@@ -13,7 +13,7 @@ export default async function ProductId({ params }: { params: Promise<{ productI
     const product = await getProductById(productId);
 
   return (
-    <div className="max-w-6xl w-full mx-auto">
+    <div className="max-w-6xl mx-auto">
       <HeaderProduct product={product} />
       <div>
       <HeadingCard as="h2">{product?.name}</HeadingCard>

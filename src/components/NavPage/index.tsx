@@ -122,7 +122,7 @@ export default function NavPage({products, page, title, description }: NavPagePr
                    />
                 </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-10 mt-8">
                 {paginatedProducts.map((product) => (
                     <Card key={product.id} product={product} />
                 ))}

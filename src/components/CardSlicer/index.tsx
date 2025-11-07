@@ -84,7 +84,7 @@ export default function CardSlicer({products, title}: CardSliceProps) {
             </div>
             <div
             ref={cardContainerRef}
-            className="flex flex-row mt-6 gap-13 overflow-x-auto md:overflow-hidden snap-x snap-mandatory">
+            className="flex flex-row mt-6 gap-14 overflow-x-auto md:overflow-hidden snap-x snap-mandatory">
                 {products.map(product => (
                 <div key={product.id} 
                 className="flex-shrink-0 w-full sm:w-1/2 md:w-1/5 snap-start">
