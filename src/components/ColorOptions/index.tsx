@@ -1,6 +1,7 @@
 'use client'
 
 import Link from "next/link";
+import { ProductDetails } from "@/types/ProductDetails";
 
 const colorMap = {
     gold: '#FFD700',
@@ -27,34 +28,7 @@ const colorMap = {
 
 type ColorsKey = keyof typeof colorMap;
 
-type CardProps = {
-  id: string;
-  category: string;
-  namespaceId: string;
-  name: string;
-  capacityAvailable: string[];
-  capacity: string;
-  priceRegular: number;
-  priceDiscount: number;
-  colorsAvailable: ColorsKey[];
-  color: string;
-  images: string[];
-  description: Array<{
-    title: string;
-    text: string[];
-  }>;
-  screen: string;
-  resolution: string;
-  processor: string;
-  ram: string;
-  camera: string;
-  zoom: string;
-  cell: string[];
-}
-
-
-
-export default function ColorOptions({ product } : {product: CardProps | null}) {
+export default function ColorOptions({ product } : {product: ProductDetails | null}) {
     
     // Função para construir o novo productId baseado na cor selecionada
     const getProductIdByColor = (color: ColorsKey): string => {
@@ -81,18 +55,21 @@ export default function ColorOptions({ product } : {product: CardProps | null}) 
                 <p>Avaliable Colors</p>
             </div>
             <div className="flex flex-row gap-2 mt-2">
-                {product?.colorsAvailable.map(color => (
-                <div key={color}
-                className="flex text-2xl text-center justify-center"
-                >
-                    <Link href={getRoute(color)}
-                    className={`w-8 h-8 hover:border-2 rounded-full ${product.color === color ? 'border-2 border-gray-600' : ''}`}
-                    style={{ backgroundColor: colorMap[color] || color }}
-                    >
-                
-                    </Link>
-                </div>
-            ))}
+                {product?.colorsAvailable.map(color => {
+                    const colorKey = color as ColorsKey;
+                    return (
+                        <div key={color}
+                        className="flex text-2xl text-center justify-center"
+                        >
+                            <Link href={getRoute(colorKey)}
+                            className={`w-8 h-8 hover:border-2 rounded-full ${product.color === color ? 'border-2 border-gray-600' : ''}`}
+                            style={{ backgroundColor: colorMap[colorKey] || color }}
+                            >
+                        
+                            </Link>
+                        </div>
+                    );
+                })}
             </div>
             <hr className="w-full my-6 border-gray-400" />
         </div>

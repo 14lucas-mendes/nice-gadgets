@@ -1,6 +1,6 @@
 import { getProductById } from "@/utils/products";
 import ColorOptions from "../ColorOptions";
-import CardDetails from "../CardDetails";
+import StorageOptions from "../StorageOptions";
 import PriceDisplay from "../PriceDisplay";
 import AddCardButton from "../AddCardButton";
 import ProductInfo from "../ProductInfo";
@@ -13,9 +13,9 @@ export default async function IdCard({ params }: { params: { productId: string }
     return (
         <div className="w-[320px] flex flex-col">
             <ColorOptions product={product} />
-            <CardDetails product={product} />
+            <StorageOptions product={product} />
             <PriceDisplay product={product} />
-            <AddCardButton />
+            <AddCardButton productId={productId} />
             <ProductInfo product={product} />
         </div>
     )

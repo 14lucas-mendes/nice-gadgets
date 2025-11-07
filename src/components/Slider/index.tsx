@@ -83,7 +83,7 @@ export default function Slider() {
                                     </p>
                                     <Link
                                         href={slide.buttonLink}
-                                        className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold 
+                                        className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold 
                                         px-3 sm:px-4 md:px-6 
                                         py-2 sm:py-2 md:py-2.5
                                         text-xs sm:text-sm md:text-base

@@ -6,6 +6,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import { CartFavoriteProvider } from '@/context/CartFavoriteContext';
 
 export default function RootLayout({
   children,
@@ -17,11 +18,13 @@ export default function RootLayout({
       <body
         className="flex flex-col min-h-screen w-full"
       >
-        <Header />
+        <CartFavoriteProvider>
+          <Header />
 
           {children}
         
-        <Footer />
+          <Footer />
+        </CartFavoriteProvider>
       </body>
     </html>
   );

@@ -18,7 +18,7 @@ export default async function ProductId({ params }: { params: Promise<{ productI
       <div>
       <HeadingCard as="h2">{product?.name}</HeadingCard>
       </div>
-      <div className="flex flex-row items-center justify-center">
+      <div className="flex flex-row max-w-4xl items-center justify-center">
         <ContentProductById product={product} />
         <IdCard params={{ productId: productId }} />
       </div>

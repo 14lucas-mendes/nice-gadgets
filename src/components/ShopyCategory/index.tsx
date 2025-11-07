@@ -25,7 +25,7 @@ export default function ShopyCategory() {
                 sm:h-[187px]
                 md:h-[368px]
                 rounded-lg relative overflow-hidden">
-                    <Link href="/phones">
+                    <Link href="/products/phones">
                         <Image src="/img/layout/banners_phones.png" 
                             alt="category-phones" 
                             fill
@@ -33,7 +33,7 @@ export default function ShopyCategory() {
                         /> 
                     </Link>
                 </div>
-                <Link href="/phones">
+                <Link href="/products/phones">
                     <div className="flex flex-col mt-6">
                         <span className="font-bold text-[20px]" >Mobile Phones</span>
                         <span className="font-semibold text-[14px] text-[#89939A]">95 Phones</span>
@@ -49,7 +49,7 @@ export default function ShopyCategory() {
                     sm:h-[187px] 
                     md:h-[368px]
                     rounded-lg relative overflow-hidden">
-                        <Link href="/accessories">
+                        <Link href="/products/accessories">
                             <Image src="/img/layout/banners_accessories.png" 
                                 alt="category-accessories" 
                                 fill
@@ -57,7 +57,7 @@ export default function ShopyCategory() {
                             />
                         </Link>
                     </div>
-                    <Link href="/accessories">
+                    <Link href="/products/accessories">
                         <div className="flex flex-col mt-6">
                             <span className="font-bold text-[20px]">Accessories</span>
                             <span className="font-semibold text-[14px] text-[#89939A]">100 Models</span>
@@ -73,7 +73,7 @@ export default function ShopyCategory() {
                     sm:h-[187px] 
                     md:h-[368px] 
                     rounded-lg relative overflow-hidden">
-                        <Link href="/tablets">
+                        <Link href="/products/tablets">
                             <Image src="/img/layout/banners_tablets.png" 
                                 alt="category-tablets" 
                                 fill
@@ -81,7 +81,7 @@ export default function ShopyCategory() {
                             /> 
                         </Link>
                     </div>
-                    <Link href="/tablets">
+                    <Link href="/products/tablets">
                         <div className="flex flex-col mt-6">
                             <span className="font-bold text-[20px]">Tablets</span>
                             <span className="font-semibold text-[14px] text-[#89939A]">24 Models</span>

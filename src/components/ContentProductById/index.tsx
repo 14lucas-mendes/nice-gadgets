@@ -58,15 +58,15 @@ export default function ContentProductById({ product }: { product: CategoryItemP
                     </div>  
                 ))}
                 </div>
-                <div className="w-[464px] h-[464px] border relative">
+                <div className="w-[464px] h-[464px] relative">
                     <Image
-                    src={selectedImage ? `/${selectedImage}` : ''}
-                    alt={product?.name || "Product image"}
-                    fill
-                    className="absolute object-contain"
+                        src={selectedImage ? `/${selectedImage}` : (product?.images && product.images.length > 0 ? `/${product.images[0]}` : '/placeholder.jpg')}
+                        alt={product?.name || "Product image"}
+                        fill
+                        className="absolute object-contain"
                     />
                 </div>
+                </div>
             </div>
-    </div>
   )
 }
