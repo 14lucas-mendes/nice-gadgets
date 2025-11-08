@@ -22,6 +22,9 @@ export function CartFavoriteProvider({ children }: { children: ReactNode }) {
 
   // Carregar do localStorage na inicialização
   useEffect(() => {
+    // Verificar se estamos no cliente antes de acessar localStorage
+    if (typeof window === 'undefined') return;
+    
     const savedCart = localStorage.getItem('cartItems');
     const savedFavorites = localStorage.getItem('favoriteItems');
     
@@ -45,10 +48,12 @@ export function CartFavoriteProvider({ children }: { children: ReactNode }) {
 
   // Salvar no localStorage sempre que houver mudanças
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     localStorage.setItem('cartItems', JSON.stringify(Array.from(cartItems.entries())));
   }, [cartItems]);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     localStorage.setItem('favoriteItems', JSON.stringify(Array.from(favoriteItems)));
   }, [favoriteItems]);
 

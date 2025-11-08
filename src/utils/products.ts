@@ -53,3 +53,16 @@ export async function getProductById(productId: string): Promise<ProductDetails>
       throw new Error('Erro ao buscar o produto: ' + (error as Error).message);
     } 
 }
+
+export async function getAllProducts(): Promise<Product[]> {
+    // Buscar todos os produtos sem limite
+    return fetch(`${baseUrl}/api/products?limit=1000&skip=0`)
+    .then(response => response.json())
+    .then(data => data.products as Product[])
+}
+
+export async function getProductsByItemIds(itemIds: string[]): Promise<Product[]> {
+    // Buscar todos os produtos e filtrar pelos itemIds
+    const allProducts = await getAllProducts();
+    return allProducts.filter(product => itemIds.includes(product.itemId));
+}

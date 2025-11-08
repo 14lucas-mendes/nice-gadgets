@@ -95,7 +95,7 @@ export default function Card({product}: CardProps) {
               </button>
               <button 
                 onClick={handleToggleFavorite}
-                className={`flex justify-center items-center rounded-full border w-10 h-10 ${
+                className={`flex justify-center items-center rounded-full border w-10 h-10 cursor-pointer ${
                   isFavorite(itemId) 
                     ? 'border-red-500 bg-red-50' 
                     : 'border-gray-400'
