@@ -6,8 +6,10 @@ interface CartFavoriteContextType {
   cartItems: Map<string, number>;
   favoriteItems: Set<string>;
   addToCart: (productId: string) => void;
+  decrementFromCart: (productId: string) => void;
   removeFromCart: (productId: string) => void;
   toggleFavorite: (productId: string) => void;
+  clearCart: () => void;
   isInCart: (productId: string) => boolean;
   isFavorite: (productId: string) => boolean;
   cartCount: number;
@@ -24,10 +26,10 @@ export function CartFavoriteProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     // Verificar se estamos no cliente antes de acessar localStorage
     if (typeof window === 'undefined') return;
-    
+
     const savedCart = localStorage.getItem('cartItems');
     const savedFavorites = localStorage.getItem('favoriteItems');
-    
+
     if (savedCart) {
       try {
         const cartData = JSON.parse(savedCart);
@@ -36,7 +38,7 @@ export function CartFavoriteProvider({ children }: { children: ReactNode }) {
         console.error('Error loading cart from localStorage:', error);
       }
     }
-    
+
     if (savedFavorites) {
       try {
         setFavoriteItems(new Set(JSON.parse(savedFavorites)));
@@ -58,7 +60,7 @@ export function CartFavoriteProvider({ children }: { children: ReactNode }) {
   }, [favoriteItems]);
 
   const addToCart = (productId: string) => {
-    setCartItems(prev => {
+    setCartItems((prev) => {
       const newMap = new Map(prev);
       const currentQuantity = newMap.get(productId) || 0;
       newMap.set(productId, currentQuantity + 1);
@@ -66,21 +68,27 @@ export function CartFavoriteProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const removeFromCart = (productId: string) => {
-    setCartItems(prev => {
+  const decrementFromCart = (productId: string) => {
+    setCartItems((prev) => {
       const newMap = new Map(prev);
       const currentQuantity = newMap.get(productId) || 0;
       if (currentQuantity > 1) {
         newMap.set(productId, currentQuantity - 1);
-      } else {
-        newMap.delete(productId);
       }
       return newMap;
     });
   };
 
+  const removeFromCart = (productId: string) => {
+    setCartItems((prev) => {
+      const newMap = new Map(prev);
+      newMap.delete(productId);
+      return newMap;
+    });
+  };
+
   const toggleFavorite = (productId: string) => {
-    setFavoriteItems(prev => {
+    setFavoriteItems((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(productId)) {
         newSet.delete(productId);
@@ -89,6 +97,10 @@ export function CartFavoriteProvider({ children }: { children: ReactNode }) {
       }
       return newSet;
     });
+  };
+
+  const clearCart = () => {
+    setCartItems(new Map());
   };
 
   const isInCart = (productId: string) => {
@@ -108,8 +120,10 @@ export function CartFavoriteProvider({ children }: { children: ReactNode }) {
         cartItems,
         favoriteItems,
         addToCart,
+        decrementFromCart,
         removeFromCart,
         toggleFavorite,
+        clearCart,
         isInCart,
         isFavorite,
         cartCount,
@@ -128,4 +142,3 @@ export function useCartFavorite() {
   }
   return context;
 }
-
