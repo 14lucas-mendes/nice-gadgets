@@ -1,22 +1,21 @@
-import { getProductById } from "@/utils/products";
-import ContentProductById from "@/components/ContentProductById";
-import IdCard from "@/components/IdCard";
-import HeaderProduct from "@/components/HeaderProduct";
-import { HeadingCard } from "@/components/HeadingCard";
-import CardDescription from "@/components/CardDescription";
-import CardSpecs from "@/components/CardSpecs";
-import CardNewModels from "@/components/CardNewModels";
-
+import { getProductById } from '@/utils/products';
+import ContentProductById from '@/components/ContentProductById';
+import IdCard from '@/components/IdCard';
+import HeaderProduct from '@/components/HeaderProduct';
+import { HeadingCard } from '@/components/HeadingCard';
+import CardDescription from '@/components/CardDescription';
+import CardSpecs from '@/components/CardSpecs';
+import CardNewModels from '@/components/CardNewModels';
 
 export default async function ProductId({ params }: { params: Promise<{ productId: string }> }) {
-    const { productId } = await params;
-    const product = await getProductById(productId);
+  const { productId } = await params;
+  const product = await getProductById(productId);
 
   return (
     <div className="max-w-6xl mx-auto">
       <HeaderProduct product={product} />
       <div>
-      <HeadingCard as="h2">{product?.name}</HeadingCard>
+        <HeadingCard as="h2">{product?.name}</HeadingCard>
       </div>
       <div className="flex flex-row max-w-4xl items-center justify-center">
         <ContentProductById product={product} />
@@ -31,24 +30,8 @@ export default async function ProductId({ params }: { params: Promise<{ productI
         </div>
       </div>
       <div className="w-full">
-          <CardNewModels />
+        <CardNewModels />
       </div>
     </div>
   );
 }
-
-
-
-
-
-// <IdCard params={{ productId: productId }} /> 
-// 1.phones
-// 2.tablets
-// 3.accessories
-
-// paginas de cada produto
-// 1.phones
-// 2.tablets
-// 3.accessories
-
-// pagina de detalhes de cada produto
