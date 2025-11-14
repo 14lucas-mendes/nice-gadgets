@@ -1,67 +1,24 @@
-/* Estilização das setas de navegação */
-.swiper-button-next,
-.swiper-button-prev {
-  display: none;
-    width: 40px;
+/* Estilos para os botões de navegação customizados */
+.slider-nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  border-radius: 50%;
+  width: 40px;
   height: 40px;
-  transition: all 0.3s ease;
+  display: none; /* Oculto por padrão em mobile */
+  place-items: center;
+  transition: background-color 0.3s ease;
 }
 
-        /* Oculta os botões de navegação por padrão (mobile) */
-.mySwiper .swiper-button-prev,
-.mySwiper .swiper-button-next {
-    display: none;
-}
-
-/* Mostra os botões a partir do breakpoint 'sm' do Tailwind (640px) */
 @media (min-width: 640px) {
-    .mySwiper .swiper-button-prev,
-    .mySwiper .swiper-button-next {
-        display: flex; /* ou block, dependendo de como você quer que apareçam */
-    }
+  .slider-nav-button {
+    display: grid;
+  }
 }
 
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-  transform: scale(1.1);
-}
-
-.swiper-button-next::after,
-.swiper-button-prev::after {
-  font-size: 30px;
-  font-weight: bold;
-}
-
-/* Estilização da paginação (bolinhas) */
-.swiper-pagination {
-   bottom: 10px !important;
-}
-
-.swiper-pagination-bullet {
-  width: 10px;
-  height: 10px;
-  background: #d1d5db;
-  opacity: 1;
-  transition: all 0.3s ease;
-}
-
-.swiper-pagination-bullet-active {
-  background: #718967;
-  width: 10px;
-  height: 10px;
-}
-
-/* Garantir que os slides não se sobreponham */
-.swiper-slide {
-  opacity: 0 !important;
-  transition: opacity 0.3s ease;
-}
-
-.swiper-slide-active {
-  opacity: 1 !important;
-}
-
-/* Ajuste do container do swiper */
-.mySwiper {
-  padding: 20px 0;
+.slider-nav-button:hover {
+  background-color: rgba(0, 0, 0, 0.6);
 }

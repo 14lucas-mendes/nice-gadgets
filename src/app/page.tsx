@@ -1,23 +1,19 @@
-import Slider from '@/components/Slider';
 import Container from '@/components/Container';
 import Loading from './loading';
 import { Suspense } from 'react';
-import { HeadingCard } from '@/components/HeadingCard';
+import Slider from '@/components/Slider';
+
 
 export default async function Home() {
   return (
     <>
-      <div className="sm:max-w-2xl sm:mx-auto md:max-w-5xl md:mx-auto">
-        <HeadingCard as="h1">Welcome to Nice Gadgets store!</HeadingCard>
-        <Slider />
-      </div>
+    <div className='py-6 px-4 sm:px-6 sm:py-8 sm:w-full md:w-full md:py-14 md:px-8 max-w-screen-xl mx-auto'>
+      
+    </div>
+      <Slider />
       <Container>
         <Suspense fallback={<Loading />}></Suspense>
       </Container>
     </>
   );
 }
-
-//<CardNewModels />
-//<ShopyCategory />
-//<CardHotPrice />
