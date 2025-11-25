@@ -57,8 +57,8 @@ export default function CardSlicer({ products, title }: CardSliceProps) {
   };
 
   return (
-    <div className="sm:max-w-2xl w-full md:max-w-6xl">
-      <div className="flex justify-between items-center">
+    <div className="w-full max-w-full sm:max-w-2xl md:max-w-4xl lg:max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
         <HeadingCard as="h2">{title}</HeadingCard>
         <div className="flex gap-2">
           <button className="cursor-pointer" onClick={() => handlePrevCard()}>
@@ -71,10 +71,10 @@ export default function CardSlicer({ products, title }: CardSliceProps) {
       </div>
       <div
         ref={cardContainerRef}
-        className="flex flex-row mt-6 gap-14 overflow-x-auto md:overflow-hidden snap-x snap-mandatory"
+        className="flex flex-row mt-4 sm:mt-6 gap-4 sm:gap-6 md:gap-8 lg:gap-14 overflow-x-auto md:overflow-hidden snap-x snap-mandatory"
       >
         {products.map((product) => (
-          <div key={product.id} className="flex-shrink-0 w-1/2 sm:w-1/2 md:w-1/5 snap-start">
+          <div key={product.id} className="flex-shrink-0 w-full max-w-[calc(100%-1rem)] sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 snap-start">
             <Card product={product} />
           </div>
         ))}

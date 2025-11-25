@@ -4,27 +4,36 @@ import Link from "next/link";
 
 export default function ShopyCategory() {
     return (
-    <div className="w-full max-w-6xl pb-20 mx-auto"> 
+    <div className="w-full max-w-full sm:max-w-2xl md:max-w-4xl lg:max-w-6xl pb-12 sm:pb-16 md:pb-20 mx-auto px-4 sm:px-6"> 
         
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
             <HeadingCard as="h2">Sort By</HeadingCard>
         </div>
 
         <div className="
             grid 
-            grid-cols-1       {/* Mobile-first: 1 coluna por padrão (abaixo de sm) */}
-            gap-8             {/* Espaçamento em mobile */}
-            sm:grid-cols-3    {/* A partir de 'sm' (640px), muda para 3 colunas */}
-            sm:gap-4          {/* Espaçamento menor para 3 colunas (opcional, use o que preferir) */}
+            grid-cols-1
+            gap-6
+            sm:grid-cols-3
+            sm:gap-4
+            md:gap-6
+            lg:gap-8
         ">
             
         <div className="w-full"> 
             <div>
                 <div className="
-                    w-full h-auto aspect-[16/9] min-h-[187px]
-                sm:h-[187px]
-                md:h-[368px]
-                rounded-lg relative overflow-hidden">
+                    w-full 
+                    h-auto 
+                    aspect-[16/9] 
+                    min-h-[180px]
+                    sm:min-h-[187px]
+                    md:min-h-[300px]
+                    lg:min-h-[368px]
+                    rounded-lg 
+                    relative 
+                    overflow-hidden
+                ">
                     <Link href="/products/phones">
                         <Image src="/img/layout/banners_phones.png" 
                             alt="category-phones" 
@@ -34,9 +43,9 @@ export default function ShopyCategory() {
                     </Link>
                 </div>
                 <Link href="/products/phones">
-                    <div className="flex flex-col mt-6">
-                        <span className="font-bold text-[20px]" >Mobile Phones</span>
-                        <span className="font-semibold text-[14px] text-[#89939A]">95 Phones</span>
+                    <div className="flex flex-col mt-4 sm:mt-5 md:mt-6">
+                        <span className="font-bold text-base sm:text-lg md:text-xl" >Mobile Phones</span>
+                        <span className="font-semibold text-xs sm:text-sm md:text-sm text-[#89939A]">95 Phones</span>
                     </div>
                 </Link>
                 </div>
@@ -45,10 +54,17 @@ export default function ShopyCategory() {
             <div className="w-full">
                 <div>
                     <div className="
-                    w-full h-auto aspect-[16/9] min-h-[187px]
-                    sm:h-[187px] 
-                    md:h-[368px]
-                    rounded-lg relative overflow-hidden">
+                    w-full 
+                    h-auto 
+                    aspect-[16/9] 
+                    min-h-[180px]
+                    sm:min-h-[187px]
+                    md:min-h-[300px]
+                    lg:min-h-[368px]
+                    rounded-lg 
+                    relative 
+                    overflow-hidden
+                    ">
                         <Link href="/products/accessories">
                             <Image src="/img/layout/banners_accessories.png" 
                                 alt="category-accessories" 
@@ -58,9 +74,9 @@ export default function ShopyCategory() {
                         </Link>
                     </div>
                     <Link href="/products/accessories">
-                        <div className="flex flex-col mt-6">
-                            <span className="font-bold text-[20px]">Accessories</span>
-                            <span className="font-semibold text-[14px] text-[#89939A]">100 Models</span>
+                        <div className="flex flex-col mt-4 sm:mt-5 md:mt-6">
+                            <span className="font-bold text-base sm:text-lg md:text-xl">Accessories</span>
+                            <span className="font-semibold text-xs sm:text-sm md:text-sm text-[#89939A]">100 Models</span>
                         </div>
                     </Link>
                 </div>
@@ -69,10 +85,17 @@ export default function ShopyCategory() {
             <div className="w-full">
                 <div>
                     <div className="
-                    w-full h-auto aspect-[16/9] min-h-[187px]
-                    sm:h-[187px] 
-                    md:h-[368px] 
-                    rounded-lg relative overflow-hidden">
+                    w-full 
+                    h-auto 
+                    aspect-[16/9] 
+                    min-h-[180px]
+                    sm:min-h-[187px]
+                    md:min-h-[300px]
+                    lg:min-h-[368px]
+                    rounded-lg 
+                    relative 
+                    overflow-hidden
+                    ">
                         <Link href="/products/tablets">
                             <Image src="/img/layout/banners_tablets.png" 
                                 alt="category-tablets" 
@@ -82,9 +105,9 @@ export default function ShopyCategory() {
                         </Link>
                     </div>
                     <Link href="/products/tablets">
-                        <div className="flex flex-col mt-6">
-                            <span className="font-bold text-[20px]">Tablets</span>
-                            <span className="font-semibold text-[14px] text-[#89939A]">24 Models</span>
+                        <div className="flex flex-col mt-4 sm:mt-5 md:mt-6">
+                            <span className="font-bold text-base sm:text-lg md:text-xl">Tablets</span>
+                            <span className="font-semibold text-xs sm:text-sm md:text-sm text-[#89939A]">24 Models</span>
                         </div>
                     </Link>
                 </div>
