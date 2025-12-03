@@ -17,7 +17,7 @@ export default function Footer() {
             <div className="px-4 md:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col items-center gap-6 md:flex-row md:justify-between md:items-center">
                 <Link href="/" className="flex items-center">
                     <Image 
-                    src="/img/icons/Logo.png" 
+                    src="/img/icons/logo.svg" 
                     width={64} 
                     height={22} 
                     alt='logo' 

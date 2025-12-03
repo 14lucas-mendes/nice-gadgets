@@ -129,7 +129,7 @@ export default function Slider(): JSX.Element {
   }, [startAutoplay]);
 
   return (
-    <div className="w-full px-0 sm:px-4 md:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div className="w-full">
       <div
         ref={sliderRef}
         className="relative w-full mx-auto overflow-hidden rounded-lg shadow-lg aspect-[4/5] sm:aspect-[2.6/1] touch-pan-y"
