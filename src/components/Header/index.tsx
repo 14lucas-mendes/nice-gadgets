@@ -33,13 +33,17 @@ export default function Header() {
 
   return (
     <header className="w-full h-12 flex items-center sm:flex sm: justify-between bg-[#FFFFFF] border-b border-[#E2E6E9]">
-      <div className="flex items-center">
+      <div className="flex items-center sm:px-2 sm:py-4">
        <Link href="/">
-        <Image src="/img/icons/logo.svg" alt="logo" width={100} height={100} className="sm:w-[128px] sm:h-[128px]" />
+        <Image src="/img/icons/logo.svg" alt="logo" width={100} height={100} className="sm:w-[150px] sm:h-[150px] md:hover:scale-110 transition-all duration-300 ease-in-out" />
        </Link>
       </div>
       {/* Menu desktop */}
-      <div className="text-[#89939A] font-extrabold text-sm uppercase hidden sm:ml-4 sm:flex items-center sm:w-full sm:gap-8 transition-all duration-300 ease-in-out">
+      <div 
+      className="text-[#89939A] font-extrabold text-sm uppercase hidden items-center
+      sm:w-full sm:ml-4 sm:flex sm:gap-8
+      md:w-full md:ml-8 md:flex md:gap-12
+      transition-all duration-300 ease-in-out">
         {Object.entries(routes).map(([key, route]) => (
           <Link href={route.href} key={key} className={`min-h-[44px] flex items-center ${route.isActive(pathname) ? 'text-[#0F0F11] border-b-2 border-black' : 'hover:border-b-2 hover:border-black hover:text-black'}`}>
              {key.charAt(0).toUpperCase() + key.slice(1)}
@@ -95,6 +99,21 @@ export default function Header() {
           )}
         </button>
       </div>
+
+      {/*Icons for desktop */}
+      <div className="hidden sm:flex md:flex ml-auto">
+        <div className="h-full items-center justify-center flex border-x-2 border-[#E2E6E9] w-16 lg:w-20 min-h-[44px]">
+          <Link href="/favorite" className="flex items-center justify-center w-full">
+            <HeartPlus className='w-5 h-5' />
+          </Link>
+        </div>
+        <div className="h-full items-center justify-center flex w-16 lg:w-20 min-h-[44px]">
+          <Link href="/cart" className="flex items-center justify-center w-full">
+            <ShoppingBag className='w-5 h-5'/>
+          </Link>
+        </div>
+      </div>
+
     </header>
   );
 }
