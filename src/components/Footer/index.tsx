@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import { CircleChevronUp } from 'lucide-react';
 
 export default function Footer() {
     const handleScrollToTop = () => {
@@ -13,45 +13,50 @@ export default function Footer() {
     };
 
     return (
-        <footer className="bg-white inset-shadow-gray-400 w-full py-8 md:py-6">
-            <div className="px-4 md:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col items-center gap-6 md:flex-row md:justify-between md:items-center">
-                <Link href="/" className="flex items-center">
+        <footer 
+        className="bg-white inset-shadow-gray-400 w-full py-8 sm:py-4 border-t border-[#E2E6E9]">
+            <div className="flex flex-col items-start justify-center w-full gap-4 px-6 sm:px-8 sm:flex-row sm:flex-nowrap sm:items-center sm:justify-between">
+                <Link href="/" className="flex-shrink-0 flex items-center justify-start w-full sm:w-auto">
                     <Image 
                     src="/img/icons/logo.svg" 
-                    width={64} 
-                    height={22} 
+                    width={120} 
+                    height={120} 
                     alt='logo' 
-                    className="h-5 w-auto md:h-8 md:hover:scale-110 md:transition-transform md:duration-300 md:ease-in-out lg:hover:scale-110 lg:transition-transform lg:duration-300 lg:ease-in-out"
+                    className="md:hover:scale-110 transition-all duration-300 ease-in-out sm:w-[125px] sm:h-[125px]"
                     />
                 </Link>
 
-                <div className="text-sm font-bold md:font-extrabold text-[#89939A] flex flex-col items-center gap-4 md:flex-row md:gap-8 lg:gap-10">
+                <div 
+                className="text-sm sm:text-base md:text-lg text-[#89939A] font-bold flex flex-col items-start justify-center gap-4 sm:flex-row sm:items-center sm:gap-6">
                     <Link 
-                    className="min-h-[44px] flex items-center justify-center md:hover:text-black md:cursor-pointer md:transition-colors md:duration-300 md:ease-in-out lg:hover:text-black lg:cursor-pointer lg:transition-colors lg:duration-300 lg:ease-in-out"
+                    className="md:hover:text-black md:cursor-pointer md:transition-colors md:duration-300 md:ease-in-out lg:hover:text-black lg:cursor-pointer lg:transition-colors lg:duration-300 lg:ease-in-out"
                     href="https://github.com/14lucas-mendes">
                         GitHub
                     </Link>
                     <Link 
-                    className="min-h-[44px] flex items-center justify-center md:hover:text-black md:cursor-pointer md:transition-colors md:duration-300 md:ease-in-out lg:hover:text-black lg:cursor-pointer lg:transition-colors lg:duration-300 lg:ease-in-out" 
+                    className="md:hover:text-black md:cursor-pointer md:transition-colors md:duration-300 md:ease-in-out lg:hover:text-black lg:cursor-pointer lg:transition-colors lg:duration-300 lg:ease-in-out" 
                     href="https://www.linkedin.com/in/lucas-silva-mendes-5318101a7/">
                         Contacts
                     </Link>
                     <Link 
-                    className="min-h-[44px] flex items-center justify-center md:hover:text-black md:cursor-pointer md:transition-colors md:duration-300 md:ease-in-out lg:hover:text-black lg:cursor-pointer lg:transition-colors lg:duration-300 lg:ease-in-out" 
+                    className="md:hover:text-black md:cursor-pointer md:transition-colors md:duration-300 md:ease-in-out lg:hover:text-black lg:cursor-pointer lg:transition-colors lg:duration-300 lg:ease-in-out" 
                     href="https://www.linkedin.com/in/lucas-silva-mendes-5318101a7/">
                         Rights
                     </Link>
                 </div>
-                <button 
-                onClick={handleScrollToTop}
-                className="font-bold md:font-extrabold text-[#89939A] text-sm flex flex-row items-center gap-2 min-h-[44px] md:cursor-pointer md:transition-colors md:duration-300 md:ease-in-out lg:cursor-pointer lg:transition-colors lg:duration-300 lg:ease-in-out"
-                aria-label="Back to top"
-                >
-                    Back to top
-                    <span className="flex items-center justify-center">
-                        <ExpandLessIcon />
-                    </span>
-                </button>
+
+                <div className="flex w-full items-center justify-center flex-shrink-0 sm:w-auto">
+                    <button 
+                    onClick={handleScrollToTop}
+                    className="font-bold md:font-bold text-[#89939A] w-[170px] text-sm sm:text-base md:text-lg flex flex-row items-center justify-center gap-2 md:cursor-pointer md:transition-colors md:duration-300 md:ease-in-out"
+                    aria-label="Back to top"
+                    >
+                        Back to top
+                        <span className="flex items-center justify-center">
+                            <CircleChevronUp className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12"/>
+                        </span>
+                    </button>
+                </div>
             </div>
         </footer>
     )

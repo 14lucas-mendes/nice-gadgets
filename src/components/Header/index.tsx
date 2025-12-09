@@ -32,10 +32,10 @@ export default function Header() {
   }, [isMenuOpen]);
 
   return (
-    <header className="w-full h-12 flex items-center sm:flex sm: justify-between bg-[#FFFFFF] border-b border-[#E2E6E9]">
+    <header className="w-full h-12 flex items-center sm:flex justify-between bg-[#FFFFFF] border-b border-[#E2E6E9]">
       <div className="flex items-center sm:px-2 sm:py-4">
        <Link href="/">
-        <Image src="/img/icons/logo.svg" alt="logo" width={100} height={100} className="sm:w-[150px] sm:h-[150px] md:hover:scale-110 transition-all duration-300 ease-in-out" />
+        <Image src="/img/icons/logo.svg" alt="logo" width={120} height={120} className="sm:w-[150px] sm:h-[150px] md:hover:scale-110 transition-all duration-300 ease-in-out" />
        </Link>
       </div>
       {/* Menu desktop */}
@@ -113,7 +113,6 @@ export default function Header() {
           </Link>
         </div>
       </div>
-
     </header>
   );
 }
