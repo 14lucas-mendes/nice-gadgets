@@ -1,7 +1,6 @@
 'use client';
 
 import Link from "next/link";
-import { HeadingCard } from "../HeadingCard";
 import ItemSelect from "../Select";
 import { Product } from "@/types/Product";
 import Card from "../Card";
@@ -233,7 +232,7 @@ export default function NavPage({products, page, title, description }: NavPagePr
                 </div>
             </div>
             <div className="mt-10">
-                <HeadingCard as="h1">{title}</HeadingCard>
+                <h1>{title}</h1>
                 <p className="font-semibold text-[14px] text-[#89939A] mt-2">{description}</p>
             </div>
             <div className="flex items-center gap-4 mt-10">

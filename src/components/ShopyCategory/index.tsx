@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { HeadingCard } from "../HeadingCard";
 import Link from "next/link";
 
 export default function ShopyCategory() {
@@ -7,7 +6,7 @@ export default function ShopyCategory() {
     <div className="w-full max-w-full sm:max-w-2xl md:max-w-4xl lg:max-w-6xl pb-12 sm:pb-16 md:pb-20 mx-auto px-4 sm:px-6"> 
         
         <div className="mb-4 sm:mb-6">
-            <HeadingCard as="h2">Sort By</HeadingCard>
+            <h1>Sort By</h1>
         </div>
 
         <div className="
