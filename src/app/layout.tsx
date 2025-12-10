@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className="flex flex-col justify-between min-h-screen w-full"
+        className="flex flex-col min-h-screen w-full"
       >
         <CartFavoriteProvider>
           <Header />

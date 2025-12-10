@@ -48,12 +48,12 @@ export default function Footer() {
                 <div className="flex w-full items-center justify-center flex-shrink-0 sm:w-auto">
                     <button 
                     onClick={handleScrollToTop}
-                    className="font-bold md:font-bold text-[#89939A] w-[170px] text-sm sm:text-base md:text-lg flex flex-row items-center justify-center gap-2 md:cursor-pointer md:transition-colors md:duration-300 md:ease-in-out"
+                    className="font-bold md:font-bold text-[#89939A] w-[170px] text-sm sm:text-base flex flex-row items-center justify-center gap-2 md:cursor-pointer md:transition-colors md:duration-300 md:ease-in-out"
                     aria-label="Back to top"
                     >
                         Back to top
                         <span className="flex items-center justify-center">
-                            <CircleChevronUp className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12"/>
+                            <CircleChevronUp className="w-8 h-8 sm:w-10 sm:h-10"/>
                         </span>
                     </button>
                 </div>

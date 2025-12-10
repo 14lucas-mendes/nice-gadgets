@@ -2,10 +2,9 @@
 
 import { Product } from '@/types/Product';
 import { useRef, useState } from 'react';
-import { HeadingCard } from '../HeadingCard';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import Card from '../Card';
+import { CircleChevronLeft } from 'lucide-react';
+import { CircleChevronRight } from 'lucide-react';
+import ProductCard from '../productCard';
 
 type CardSliceProps = {
   products: Product[];
@@ -112,22 +111,22 @@ export default function CardSlicer({ products, title, noPadding = false }: CardS
   };
 
   return (
-    <div className={`w-full max-w-full overflow-hidden mx-auto ${noPadding ? '' : 'px-4 sm:px-6'}`}>
+    <div className={`w-full max-w-6xl overflow-hidden mx-auto mt-14 ${noPadding ? '' : 'px-4 sm:px-12'}`}>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
-        <HeadingCard as="h2">{title}</HeadingCard>
-        <div className="hidden lg:flex gap-2">
+        <h2 className='text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F0F11]'>{title}</h2>
+        <div className="hidden lg:flex gap-2 text-[#B4BDC3]">
           <button className="cursor-pointer" onClick={() => handlePrevCard()}>
-            <ArrowBackIosIcon />
+            <CircleChevronLeft className='w-8 h-8' />
           </button>
           <button className="cursor-pointer" onClick={() => handleNextCard()}>
-            <ArrowForwardIosIcon />
+            <CircleChevronRight className='w-8 h-8' />
           </button>
         </div>
       </div>
-      <div className={`w-full max-w-full overflow-hidden ${noPadding ? 'sm:overflow-visible' : '-mx-4 sm:-mx-6 px-4 sm:px-6'}`}>
+      <div className={`w-full max-w-full overflow-hidden ${noPadding ? 'sm:overflow-visible' : 'px-0 sm:px-0'}`}>
         <div
           ref={cardContainerRef}
-          className="flex flex-row mt-4 sm:mt-6 gap-4 lg:gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+          className="flex flex-row mt-4 sm:mt-6 gap-3 lg:gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
@@ -135,9 +134,9 @@ export default function CardSlicer({ products, title, noPadding = false }: CardS
           {products.map((product) => (
             <div 
               key={product.id} 
-              className="flex-shrink-0 w-[70vw] sm:w-[calc(50%-8px)] md:w-[calc(33.33%-11px)] lg:w-[calc(25%-18px)] xl:w-[calc(20%-19.2px)] snap-center sm:snap-start"
+              className="flex-shrink-0 w-[70vw] sm:w-[calc(50%-10px)] md:w-[calc(33.33%-12px)] lg:w-[23%] xl:w-[22%] snap-center sm:snap-start"
             >
-              <Card product={product} />
+              <ProductCard product={product} />
             </div>
           ))}
         </div>
