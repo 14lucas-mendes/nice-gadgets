@@ -63,7 +63,7 @@ export default function ProductCard({ product }: CardProps) {
   const favorite = mounted ? isFavorite(itemId) : false;
 
   return (
-    <Card className="flex flex-col w-full h-full border-slate-400 shadow-md hover:shadow-lg transition-shadow overflow-hidden">
+    <Card className="flex flex-col w-[212px] h-[439px] sm:w-[237px] sm:h-[512px] md:w-[272px] md:h-[506px] border-slate-400 shadow-md hover:shadow-lg transition-shadow overflow-hidden">
       
       {/* Área Principal do Card (Imagem + Info) */}
       <CardContent className="flex flex-col flex-grow p-4 sm:p-6 lg:p-4 gap-2">

@@ -3,10 +3,10 @@ import Link from "next/link";
 
 export default function ShopyCategory() {
     return (
-    <div className="w-full max-w-full sm:max-w-2xl md:max-w-4xl lg:max-w-6xl pb-12 sm:pb-16 md:pb-20 mx-auto px-4 sm:px-6"> 
+    <div className="w-full max-w-full mt-14 overflow-hidden sm:px-12 md:max-w-6xl md:mx-auto pb-8"> 
         
         <div className="mb-4 sm:mb-6">
-            <h1>Sort By</h1>
+            <h1 className="text-2xl font-extrabold sm:text-3xl md:text-4xl">Sort By Category</h1>
         </div>
 
         <div className="
@@ -23,9 +23,9 @@ export default function ShopyCategory() {
             <div>
                 <div className="
                     w-full 
-                    h-auto 
-                    aspect-[16/9] 
-                    min-h-[180px]
+                    h-[363px]
+                    sm:h-auto 
+                    sm:aspect-[16/9] 
                     sm:min-h-[187px]
                     md:min-h-[300px]
                     lg:min-h-[368px]

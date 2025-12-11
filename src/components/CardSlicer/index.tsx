@@ -111,7 +111,7 @@ export default function CardSlicer({ products, title, noPadding = false }: CardS
   };
 
   return (
-    <div className={`w-full max-w-6xl overflow-hidden mx-auto mt-14 ${noPadding ? '' : 'px-4 sm:px-12'}`}>
+    <div className={`w-full max-w-full overflow-hidden sm:px-12 md:max-w-6xl md:mx-auto mt-14 ${noPadding ? '' : 'px-4'}`}>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
         <h2 className='text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F0F11]'>{title}</h2>
         <div className="hidden lg:flex gap-2 text-[#B4BDC3]">
@@ -126,7 +126,7 @@ export default function CardSlicer({ products, title, noPadding = false }: CardS
       <div className={`w-full max-w-full overflow-hidden ${noPadding ? 'sm:overflow-visible' : 'px-0 sm:px-0'}`}>
         <div
           ref={cardContainerRef}
-          className="flex flex-row mt-4 sm:mt-6 gap-3 lg:gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+          className="flex flex-row mt-4 sm:mt-6 md:gap-12 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
