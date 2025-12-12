@@ -3,7 +3,7 @@
 import Link from "next/link";
 import ItemSelect from "../Select";
 import { Product } from "@/types/Product";
-import Card from "../Card";
+import ProductCard from "../productCard";
 import { useState, useEffect, useRef } from "react";
 import PaginationCard from "../Pagination";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
@@ -255,7 +255,7 @@ export default function NavPage({products, page, title, description }: NavPagePr
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-10 mt-8">
                 {paginatedProducts.map((product) => (
-                    <Card key={product.id} product={product} />
+                    <ProductCard key={product.id} product={product} />
                 ))}
             </div>
 

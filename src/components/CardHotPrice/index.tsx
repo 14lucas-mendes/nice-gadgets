@@ -6,8 +6,8 @@ export default async function CardHotPrice() {
     const products = await getTop10Products()
 
     return (
-        <div className="pb-8">
-            <CardSlicer products={products} title={'Hot prices'} noPadding={true} />
+        <div className="pb-16">
+            <CardSlicer products={products} title={'Hot prices'} />
         </div>
     );
 }

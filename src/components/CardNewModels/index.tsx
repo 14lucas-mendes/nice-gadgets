@@ -5,7 +5,7 @@ export default async function CardNewModels() {
   const products = await getTopYearProducts();
 
   return (
-    <div className="">
+    <div className='py-14 sm:py-16 md:py-20'>
       <CardSlicer products={products} title={'Brand new Models'} />
     </div>
   );
