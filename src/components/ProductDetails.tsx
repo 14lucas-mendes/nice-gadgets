@@ -25,7 +25,7 @@ type CardProps = {
     cell: string[];
   }
 
-export default async function CardDetails({ product }:{product: CardProps | null}) {
+export default async function ProductDetails({ product }:{product: CardProps | null}) {
 
     return (
         <div className="flex flex-col justify-start items-start w-full">

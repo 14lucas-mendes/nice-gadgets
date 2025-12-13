@@ -1,9 +1,8 @@
-
-import { getAllAccessoriesProducts, getAllPhonesProducts, getAllProducts, getAllTabletsProducts } from "@/utils/products";
+import { getAllAccessoriesProducts, getAllPhonesProducts, getAllTabletsProducts } from "@/utils/products";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function ShopyCategory() {
+export default async function CategoryMenu() {
     const phones = await getAllPhonesProducts();
     const accessories = await getAllAccessoriesProducts();
     const tablets = await getAllTabletsProducts();
@@ -122,5 +121,3 @@ export default async function ShopyCategory() {
     </div>
 )
 }
-
-           

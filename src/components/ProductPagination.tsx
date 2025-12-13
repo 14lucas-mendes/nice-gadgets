@@ -7,7 +7,7 @@ type PaginationCardProps = {
 }
 
 
-export default function PaginationCard({ currentPage, totalPages, onPageChange }: PaginationCardProps) {
+export default function ProductPagination({ currentPage, totalPages, onPageChange }: PaginationCardProps) {
     
 
   return (

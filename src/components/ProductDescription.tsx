@@ -23,7 +23,7 @@ type CardItemProps = {
     cell: string[];
   }
 
-export default function CardDescription({product}: {product:CardItemProps }) {
+export default function ProductDescription({product}: {product:CardItemProps }) {
     return (
         <div className="max-w-[560px] w-full h-full mt-20">
            <p className="text-[22px] font-extrabold">About</p>

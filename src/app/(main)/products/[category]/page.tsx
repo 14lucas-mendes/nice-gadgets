@@ -1,5 +1,5 @@
 
-import NavPage from "@/components/NavPage";
+import PageNavigation from "@/components/NavPage";
 import { getAllAccessoriesProducts, getAllPhonesProducts, getAllTabletsProducts } from "@/utils/products";
 
 enum Categories {
@@ -23,7 +23,7 @@ export default async function CategoryPages({params}: {params: Promise<{category
    
     return (
         <div className="max-w-6xl mx-auto pb-14">
-            <NavPage
+            <PageNavigation
                 products={products}
                 page={category.charAt(0).toUpperCase() + category.slice(1)}
                 title={category.charAt(0).toUpperCase() + category.slice(1)}

@@ -1,10 +1,10 @@
 import { getProductById } from '@/utils/products';
-import ContentProductById from '@/components/ContentProductById';
-import IdCard from '@/components/IdCard';
-import HeaderProduct from '@/components/HeaderProduct';
-import CardDescription from '@/components/CardDescription';
-import CardSpecs from '@/components/CardSpecs';
-import CardNewModels from '@/components/CardNewModels';
+import ProductDetailPage from '@/components/ContentProductById';
+import ProductIdDisplay from '@/components/IdCard';
+import ProductHeader from '@/components/HeaderProduct';
+import ProductDescription from '@/components/CardDescription';
+import ProductSpecifications from '@/components/CardSpecs';
+import NewBadge from '@/components/CardNewModels';
 
 export default async function ProductId({ params }: { params: Promise<{ productId: string }> }) {
   const { productId } = await params;
@@ -12,24 +12,24 @@ export default async function ProductId({ params }: { params: Promise<{ productI
 
   return (
     <div className="max-w-6xl mx-auto">
-      <HeaderProduct product={product} />
+      <ProductHeader product={product} />
       <div>
         <h2>{product?.name}</h2>
       </div>
       <div className="flex flex-row max-w-4xl items-center justify-center">
-        <ContentProductById product={product} />
-        <IdCard params={{ productId: productId }} />
+        <ProductDetailPage product={product} />
+        <ProductIdDisplay params={{ productId: productId }} />
       </div>
       <div className="flex gap-8">
         <div className="w-full">
-          <CardDescription product={product} />
+          <ProductDescription product={product} />
         </div>
         <div className="w-full">
-          <CardSpecs product={product} />
+          <ProductSpecifications product={product} />
         </div>
       </div>
       <div className="w-full">
-        <CardNewModels />
+        <NewBadge />
       </div>
     </div>
   );

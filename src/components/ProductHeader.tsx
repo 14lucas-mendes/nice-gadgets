@@ -26,7 +26,7 @@ type CategoryItemProps = {
     cell: string[];
   }
 
-export default function HeaderProduct({ product }: {product: CategoryItemProps }) {
+export default function ProductHeader({ product }: {product: CategoryItemProps }) {
     return (
         <div className="w-full mx-auto flex flex-col py-6">
             <div className="flex flex-row gap-2">

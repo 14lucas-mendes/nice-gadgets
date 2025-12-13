@@ -1,15 +1,15 @@
-import CardHotPrice from "@/components/CardHotPrice";
-import CardNewModels from "@/components/CardNewModels";
-import CarouselSlider from "@/components/carousel";
-import ShopyCategory from "@/components/ShopyCategory";
+import HotPriceTag from "@/components/CardHotPrice";
+import NewBadge from "@/components/CardNewModels";
+import CarouselSlider from "@/components/Carousel";
+import CategoryMenu from "@/components/ShopyCategory";
 
 export default async function Home() {
   return (
     <div>
       <CarouselSlider />
-      <CardNewModels />
-      <ShopyCategory />
-      <CardHotPrice />
+      <NewBadge />
+      <CategoryMenu />
+      <HotPriceTag />
     </div>
      
   );

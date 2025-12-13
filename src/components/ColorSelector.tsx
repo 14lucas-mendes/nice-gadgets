@@ -28,7 +28,7 @@ const colorMap = {
 
 type ColorsKey = keyof typeof colorMap;
 
-export default function ColorOptions({ product } : {product: ProductDetails | null}) {
+export default function ColorSelector({ product } : {product: ProductDetails | null}) {
     
     // Função para construir o novo productId baseado na cor selecionada
     const getProductIdByColor = (color: ColorsKey): string => {

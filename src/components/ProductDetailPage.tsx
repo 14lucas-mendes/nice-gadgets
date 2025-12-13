@@ -29,7 +29,7 @@ type CategoryItemProps = {
 }
 
 
-export default function ContentProductById({ product }: { product: CategoryItemProps | null }) {
+export default function ProductDetailPage({ product }: { product: CategoryItemProps | null }) {
   const [selectedImage, setSelectedImage] = useState<string>('');
 
   useEffect(() => {
@@ -67,6 +67,6 @@ export default function ContentProductById({ product }: { product: CategoryItemP
                     />
                 </div>
                 </div>
-            </div>
+    </div>
   )
 }

@@ -1,7 +1,7 @@
 import { getTopYearProducts } from '@/utils/products';
-import CardSlicer from '../CardSlicer';
+import CardSlicer from "./CardSlicer";
 
-export default async function CardNewModels() {
+export default async function NewBadge() {
   const products = await getTopYearProducts();
 
   return (

@@ -8,7 +8,7 @@ type AddCardButtonProps = {
   productId: string;
 }
 
-export default function AddCardButton({ productId }: AddCardButtonProps) {
+export default function AddToCartButton({ productId }: AddCardButtonProps) {
     const { addToCart, removeFromCart, toggleFavorite, isFavorite, isInCart } = useCartFavorite();
 
     const handleToggleCart = () => {

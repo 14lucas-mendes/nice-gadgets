@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { ProductDetails } from "@/types/ProductDetails";
 
-export default function StorageOptions({ product }: { product: ProductDetails | null }) {
+export default function StorageSelector({ product }: { product: ProductDetails | null }) {
     const router = useRouter();
     
     // Função para construir o novo productId baseado na capacidade selecionada

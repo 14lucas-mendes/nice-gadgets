@@ -1,13 +1,16 @@
 'use client';
 
 import Link from "next/link";
-import ItemSelect from "../Select";
+
 import { Product } from "@/types/Product";
-import ProductCard from "../productCard";
+
 import { useState, useEffect, useRef } from "react";
-import PaginationCard from "../Pagination";
+
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import ItemSelect from "./Select";
+import ProductCard from "./ProductCard";
+import ProductPagination from "./Pagination";
 
 type NavPageProps = {
     products: Product[]
@@ -16,7 +19,7 @@ type NavPageProps = {
     description: string;
 }
 
-export default function NavPage({products, page, title, description }: NavPageProps) {
+export default function PageNavigation({products, page, title, description }: NavPageProps) {
     const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
@@ -260,7 +263,7 @@ export default function NavPage({products, page, title, description }: NavPagePr
             </div>
 
             {perPage !== 'All' && (
-                <PaginationCard
+                <ProductPagination
                     currentPage={currentPage}
                     totalPages={totalPages}
                     onPageChange={handlePageChange}
@@ -272,4 +275,3 @@ export default function NavPage({products, page, title, description }: NavPagePr
     </>
   );
 }
-

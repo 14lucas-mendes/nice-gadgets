@@ -1,8 +1,10 @@
 import { getTop10Products } from "@/utils/products";
-import CardSlicer from "../CardSlicer";
+import CardSlicer from "./CardSlicer";
 
 
-export default async function CardHotPrice() {
+
+
+export default async function HotPriceTag() {
     const products = await getTop10Products()
 
     return (

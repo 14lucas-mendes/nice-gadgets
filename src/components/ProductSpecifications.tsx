@@ -24,7 +24,7 @@ type CardSpecsProps = {
   }
 
 
-export default function CardSpecs({product}: {product: CardSpecsProps}) {
+export default function ProductSpecifications({product}: {product: CardSpecsProps}) {
     return (
         <div className="w-full h-full flex flex-col gap-2 mt-20">
             <p className="font-bold text-[22px]">Tech Specs</p>
@@ -63,5 +63,3 @@ export default function CardSpecs({product}: {product: CardSpecsProps}) {
         </div>
     )
 }
-
-//

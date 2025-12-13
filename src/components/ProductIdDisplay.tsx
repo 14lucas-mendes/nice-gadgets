@@ -1,0 +1,23 @@
+import { getProductById } from "@/utils/products";
+import ColorSelector from "./ColorSelector";
+import StorageSelector from "./StorageOptions";
+import AddToCartButton from "./AddToCartButton";
+import ProductInfo from "./ProductInfo";
+import ProductPrice from "./ProductPrice";
+
+
+export default async function ProductIdDisplay({ params }: { params: { productId: string } }) {
+    const {productId} = await params;
+    const product = await getProductById(productId);
+
+
+    return (
+        <div className="w-[320px] flex flex-col">
+            <ColorSelector product={product} />
+            <StorageSelector product={product} />
+            <ProductPrice product={product} />
+            <AddToCartButton productId={productId} />
+            <ProductInfo product={product} />
+        </div>
+    )
+}

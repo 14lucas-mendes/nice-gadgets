@@ -24,7 +24,7 @@ type CardProps = {
   }
 
 
-export default function PriceDisplay({ product }:{product: CardProps | null}) {
+export default function ProductPrice({ product }:{product: CardProps | null}) {
     return (
         <div className="flex flex-col w-full justify-start items-start">
             <div className="flex gap-2">

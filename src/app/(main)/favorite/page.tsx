@@ -5,7 +5,7 @@ import { useCartFavorite } from "@/context/CartFavoriteContext";
 import { useEffect, useState } from "react";
 import { Product } from "@/types/Product";
 import { getProductsByItemIds } from "@/utils/products";
-import NavPage from "@/components/NavPage";
+import PageNavigation from "@/components/NavPage";
 
 export default function Favorite() {
     const { favoriteItems, favoriteCount } = useCartFavorite();
@@ -58,7 +58,7 @@ export default function Favorite() {
 
     return (
         <div className="max-w-6xl mx-auto pb-14">
-            <NavPage
+            <PageNavigation
                 products={favoriteProducts}
                 page="Favourites"
                 title="Favourites"
