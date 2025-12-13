@@ -1,16 +1,15 @@
 'use client';
 
-import Link from "next/link";
-
 import { Product } from "@/types/Product";
 
 import { useState, useEffect, useRef } from "react";
 
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import ItemSelect from "./Select";
 import ProductCard from "./ProductCard";
-import ProductPagination from "./Pagination";
+import FilterBar from "./FilterBar";
+import ProductPagination from "./ProductPagination";
+import PageHeader from "./PageHeader";
+
 
 type NavPageProps = {
     products: Product[]
@@ -223,24 +222,10 @@ export default function PageNavigation({products, page, title, description }: Na
   return (
     <>
     <div className="max-w-6xl mx-auto pt-6">
-            <div className="flex items-center gap-2">
-                <Link href="/">
-                    <HomeOutlinedIcon />
-                </Link>
-                <div className="flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-[#B4BDC3]">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                    </svg>
-                    <h3 className="font-semibold text-[14px] text-[#89939A]">{page}</h3>
-                </div>
-            </div>
-            <div className="mt-10">
-                <h1>{title}</h1>
-                <p className="font-semibold text-[14px] text-[#89939A] mt-2">{description}</p>
-            </div>
+            <PageHeader page={page} title={title} description={description} />
             <div className="flex items-center gap-4 mt-10">
                 <div>
-                    <ItemSelect
+                    <FilterBar
                     items={sortItems}
                     title="Sort By"
                     value={sortBy}
@@ -248,7 +233,7 @@ export default function PageNavigation({products, page, title, description }: Na
                     />
                 </div>
                 <div>
-                   <ItemSelect 
+                   <FilterBar 
                     items={perPageItems}
                     title="Items on page"
                     value={perPage}

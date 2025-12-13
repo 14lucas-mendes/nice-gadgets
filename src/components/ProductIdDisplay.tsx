@@ -1,9 +1,9 @@
 import { getProductById } from "@/utils/products";
 import ColorSelector from "./ColorSelector";
-import StorageSelector from "./StorageOptions";
 import AddToCartButton from "./AddToCartButton";
 import ProductInfo from "./ProductInfo";
 import ProductPrice from "./ProductPrice";
+import StorageSelector from "./StorageSelector";
 
 
 export default async function ProductIdDisplay({ params }: { params: { productId: string } }) {

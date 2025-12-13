@@ -1,5 +1,6 @@
 
-import PageNavigation from "@/components/NavPage";
+
+import PageNavigation from "@/components/PageNavigation";
 import { getAllAccessoriesProducts, getAllPhonesProducts, getAllTabletsProducts } from "@/utils/products";
 
 enum Categories {

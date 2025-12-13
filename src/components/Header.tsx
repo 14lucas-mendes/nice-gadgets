@@ -2,12 +2,12 @@
 
 import { CircleX } from 'lucide-react';
 import { TextAlignJustify } from 'lucide-react';
-import { HeartPlus } from 'lucide-react';
-import { ShoppingBag } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import BadgeCart from '@/components/CartBadge';
+import BadgeFavorite from '@/components/FavoriteBadge';
 
 const routes = {
   home: { href: '/', isActive: (path: string) => path === '/' },
@@ -71,14 +71,10 @@ export default function Header() {
             {/* Menu mobile footer */}
             <div className="flex justify-center border-t-2 border-[#E2E6E9]">
               <div className="w-full min-h-[64px] items-center justify-center flex border-r-2 border-[#E2E6E9]">
-                <Link href="/favorite" onClick={() => setIsMenuOpen(false)} className="min-h-[44px] flex items-center justify-center w-full">
-                  <HeartPlus className="w-6 h-6" />
-                </Link>
+                <BadgeFavorite onNavigate={() => setIsMenuOpen(false)} />
               </div>
               <div className="w-full min-h-[64px] items-center justify-center flex">
-                <Link href="/cart" onClick={() => setIsMenuOpen(false)} className="min-h-[44px] flex items-center justify-center w-full">
-                  <ShoppingBag className="w-6 h-6" />
-                </Link>
+                <BadgeCart onNavigate={() => setIsMenuOpen(false)} />
               </div>
             </div>
           </div>
@@ -103,14 +99,10 @@ export default function Header() {
       {/*Icons for desktop */}
       <div className="hidden sm:flex md:flex ml-auto">
         <div className="h-full items-center justify-center flex border-x-2 border-[#E2E6E9] w-16 lg:w-20 min-h-[44px]">
-          <Link href="/favorite" className="flex items-center justify-center w-full">
-            <HeartPlus className='w-5 h-5' />
-          </Link>
+          <BadgeFavorite />
         </div>
         <div className="h-full items-center justify-center flex w-16 lg:w-20 min-h-[44px]">
-          <Link href="/cart" className="flex items-center justify-center w-full">
-            <ShoppingBag className='w-5 h-5'/>
-          </Link>
+          <BadgeCart />
         </div>
       </div>
     </header>

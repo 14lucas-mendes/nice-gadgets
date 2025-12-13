@@ -1,7 +1,9 @@
-import HotPriceTag from "@/components/CardHotPrice";
-import NewBadge from "@/components/CardNewModels";
+
 import CarouselSlider from "@/components/Carousel";
-import CategoryMenu from "@/components/ShopyCategory";
+import CategoryMenu from "@/components/CategoryMenu";
+import HotPriceTag from "@/components/HotPriceTag";
+import NewBadge from "@/components/NewBadge";
+
 
 export default async function Home() {
   return (

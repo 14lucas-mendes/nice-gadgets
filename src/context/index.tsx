@@ -3,9 +3,9 @@
 import Image from 'next/image';
 import { useCartFavorite } from '@/context/CartFavoriteContext';
 import { Product } from '@/types/Product';
-import CloseIcon from '@mui/icons-material/Close';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import { CircleX } from 'lucide-react';
+import { Plus } from 'lucide-react';
+import { Minus } from 'lucide-react';
 
 type CardItemProps = {
   product: Product;
@@ -39,7 +39,7 @@ export default function CardItem({ product }: CardItemProps) {
     <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg mb-4">
       <div className="flex items-center gap-6">
         <button onClick={handleRemove} className="text-gray-400 hover:text-gray-600">
-          <CloseIcon />
+          <CircleX />
         </button>
         <div className="w-24 h-24 flex items-center justify-center">
           <Image
@@ -60,7 +60,7 @@ export default function CardItem({ product }: CardItemProps) {
             className="w-8 h-8 border border-gray-400 rounded-full flex items-center justify-center hover:border-gray-800 transition-colors"
             aria-label="Decrement item"
           >
-            <RemoveIcon fontSize="small" />
+            <Minus fontSize="small" />
           </button>
           <span className="font-bold text-lg">{quantity}</span>
           <button
@@ -68,7 +68,7 @@ export default function CardItem({ product }: CardItemProps) {
             className="w-8 h-8 border border-gray-400 rounded-full flex items-center justify-center hover:border-gray-800 transition-colors"
             aria-label="Increment item"
           >
-            <AddIcon fontSize="small" />
+            <Plus fontSize="small" />
           </button>
         </div>
         <p className="font-extrabold text-2xl text-[#0F0F11] w-24 text-right">

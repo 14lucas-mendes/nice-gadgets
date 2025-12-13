@@ -1,10 +1,11 @@
+import NewBadge from '@/components/NewBadge';
+import ProductDescription from '@/components/ProductDescription';
+import ProductDetailPage from '@/components/ProductDetailPage';
+import ProductHeader from '@/components/ProductHeader';
+import ProductIdDisplay from '@/components/ProductIdDisplay';
+import ProductSpecifications from '@/components/ProductSpecifications';
 import { getProductById } from '@/utils/products';
-import ProductDetailPage from '@/components/ContentProductById';
-import ProductIdDisplay from '@/components/IdCard';
-import ProductHeader from '@/components/HeaderProduct';
-import ProductDescription from '@/components/CardDescription';
-import ProductSpecifications from '@/components/CardSpecs';
-import NewBadge from '@/components/CardNewModels';
+
 
 export default async function ProductId({ params }: { params: Promise<{ productId: string }> }) {
   const { productId } = await params;

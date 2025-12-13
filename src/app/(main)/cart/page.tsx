@@ -4,12 +4,17 @@ import { useEffect, useState } from 'react';
 import { useCartFavorite } from '@/context/CartFavoriteContext';
 import { getProductsByItemIds } from '@/utils/products';
 import { Product } from '@/types/Product';
-import { HeadingCard } from '@/components/HeadingCard';
-import Link from 'next/link';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import CardItem from '@/context';
+import PageHeader from '@/components/PageHeader';
 
-export default function CartPage() {
+type NavPageProps = {
+  products: Product[]
+  page: string;
+  title: string;
+  description: string;
+}
+
+export default function CartPage({ page, title, description }: NavPageProps) {
   const { cartItems, cartCount } = useCartFavorite();
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -38,23 +43,10 @@ export default function CartPage() {
   return (
     <div className="max-w-6xl mx-auto pt-6 pb-16">
       <div className="flex items-center gap-2 mb-10">
-        <Link href="/">
-          <HomeOutlinedIcon />
-        </Link>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="size-5 text-[#B4BDC3]"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-        </svg>
-        <h3 className="font-semibold text-[14px] text-[#89939A]">Cart</h3>
+      <PageHeader page={'Cart'} title={title} description={description} />
       </div>
 
-      <HeadingCard as="h1">Cart</HeadingCard>
+      <h1 className='text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F0F11]'>Cart</h1>
 
       {isLoading ? (
         <p className="mt-8">Loading cart items...</p>
