@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { House } from "lucide-react"; // Ícone padrão do shadcn
+import Link from 'next/link';
+import { House } from 'lucide-react'; // Ícone padrão do shadcn
 
 import {
   Breadcrumb,
@@ -8,7 +8,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from '@/components/ui/breadcrumb';
 
 type HeaderProps = {
   page: string;
@@ -22,7 +22,6 @@ export default function PageHeader({ page, title, description }: HeaderProps) {
       {/* Área do Breadcrumb */}
       <Breadcrumb>
         <BreadcrumbList>
-          
           {/* Item 1: Home */}
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
@@ -39,20 +38,17 @@ export default function PageHeader({ page, title, description }: HeaderProps) {
 
           {/* Item 2: Página Atual */}
           <BreadcrumbItem>
-            <BreadcrumbPage className="font-semibold text-[#89939A]">
+            <BreadcrumbPage className="font-semibold text-[var(--text-muted)]">
               {page}
             </BreadcrumbPage>
           </BreadcrumbItem>
-
         </BreadcrumbList>
       </Breadcrumb>
 
       {/* Área de Título e Descrição */}
       <div>
-        <h1>{title}</h1>
-        <p className="font-semibold text-[14px] text-[#89939A] mt-2">
-          {description}
-        </p>
+        <h1 className="text-3xl font-extrabold sm:text-4xl md:text-5xl">{title}</h1>
+        <p className="font-semibold text-[14px] text-[var(--text-muted)] mt-2">{description}</p>
       </div>
     </div>
   );

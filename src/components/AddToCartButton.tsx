@@ -1,8 +1,9 @@
 'use client';
 
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useCartFavorite } from '@/context/CartFavoriteContext';
+
+import { Heart } from 'lucide-react';
+
 
 type AddCardButtonProps = {
   productId: string;
@@ -45,9 +46,9 @@ export default function AddToCartButton({ productId }: AddCardButtonProps) {
         }`}
         >
             {isFavorite(productId) ? (
-                <FavoriteIcon className="text-red-500" />
+                <Heart className="text-red-500" />
             ) : (
-                <FavoriteBorderIcon />
+                <Heart />
             )}
           </button>
         </div>

@@ -9,7 +9,7 @@ type BadgeFavoriteProps = {
   onNavigate?: () => void;
 };
 
-export default function BadgeFavorite({ onNavigate }: BadgeFavoriteProps) {
+export default function FavoriteBadge({ onNavigate }: BadgeFavoriteProps) {
   const { favoriteCount } = useCartFavorite();
 
   const handleClick = () => {
@@ -22,24 +22,29 @@ export default function BadgeFavorite({ onNavigate }: BadgeFavoriteProps) {
     <Link 
       href="/favorite" 
       onClick={handleClick}
-      className="relative inline-flex items-center justify-center min-h-[44px] w-full"
+      // Removi 'relative' daqui para que o badge não se posicione em relação ao botão inteiro
+      className="inline-flex items-center justify-center min-h-[44px] w-full"
     >
-      <HeartPlus
-        className={`w-5 h-5 sm:w-6 sm:h-6 transition-colors ${
-          favoriteCount > 0 
-            ? "fill-red-500 text-red-500 hover:fill-red-600 hover:text-red-600" 
-            : "text-gray-600 hover:text-gray-900"
-        }`} 
-      />
+      {/* Container wrapper para o posicionamento relativo ao ícone */}
+      <div className="relative inline-flex">
+        <HeartPlus
+          className={`w-5 h-5 sm:w-6 sm:h-6 transition-colors ${
+            favoriteCount > 0 
+              ? "fill-red-500 text-red-500 hover:fill-red-600 hover:text-red-600" 
+              : "text-gray-600 hover:text-gray-900"
+          }`} 
+        />
 
-      {favoriteCount > 0 && (
-        <Badge 
-          variant="default"
-          className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center rounded-full p-0 text-[10px] bg-red-600 hover:bg-red-700 pointer-events-none"
-        >
-          {favoriteCount}
-        </Badge>
-      )}
+        {favoriteCount > 0 && (
+          <Badge 
+            variant="default"
+            // Ajustado posicionamento (-top-1.5) e adicionado ring branco para destaque
+            className="absolute -top-1.5 -right-2 h-2 w-2 sm:h-3 sm:w-3 flex items-center justify-center rounded-full p-0 text-[10px] bg-red-600 hover:bg-red-700 pointer-events-none ring-2 ring-white"
+          >
+            {favoriteCount}
+          </Badge>
+        )}
+      </div>
     </Link>
   );
 }

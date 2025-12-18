@@ -1,12 +1,12 @@
-
 import Header from '@/components/Header';
-import './globals.css'
+import './globals.css';
 import Footer from '@/components/Footer';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { CartFavoriteProvider } from '@/context/CartFavoriteContext';
+import { ThemeProvider } from '@/context/ThemeContext';
 
 export default function RootLayout({
   children,
@@ -15,16 +15,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className="flex flex-col justify-between min-h-screen w-full"
-      >
-        <CartFavoriteProvider>
-          <Header />
+      <body className="flex flex-col justify-between min-h-screen w-full">
+        <ThemeProvider>
+          <CartFavoriteProvider>
+            <Header />
 
-          {children}
-        
-          <Footer />
-        </CartFavoriteProvider>
+            {children}
+
+            <Footer />
+          </CartFavoriteProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

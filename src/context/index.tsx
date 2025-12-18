@@ -50,7 +50,7 @@ export default function CardItem({ product }: CardItemProps) {
             className="object-contain"
           />
         </div>
-        <p className="font-semibold text-sm text-[#0F0F11] w-64">{product.name}</p>
+        <p className="font-semibold text-sm text-[var(--text-primary)] w-64">{product.name}</p>
       </div>
 
       <div className="flex items-center gap-8">
@@ -71,7 +71,7 @@ export default function CardItem({ product }: CardItemProps) {
             <Plus fontSize="small" />
           </button>
         </div>
-        <p className="font-extrabold text-2xl text-[#0F0F11] w-24 text-right">
+        <p className="font-extrabold text-2xl text-[var(--text-primary)] w-24 text-right">
           {`R$${product.price * quantity}`}
         </p>
       </div>

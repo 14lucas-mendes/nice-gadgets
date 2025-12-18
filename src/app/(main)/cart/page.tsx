@@ -6,15 +6,16 @@ import { getProductsByItemIds } from '@/utils/products';
 import { Product } from '@/types/Product';
 import CardItem from '@/context';
 import PageHeader from '@/components/PageHeader';
+import Image from 'next/image';
 
 type NavPageProps = {
-  products: Product[]
+  products: Product[];
   page: string;
   title: string;
   description: string;
-}
+};
 
-export default function CartPage({ page, title, description }: NavPageProps) {
+export default function CartPage() {
   const { cartItems, cartCount } = useCartFavorite();
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -41,17 +42,26 @@ export default function CartPage({ page, title, description }: NavPageProps) {
   }, 0);
 
   return (
-    <div className="max-w-6xl mx-auto pt-6 pb-16">
-      <div className="flex items-center gap-2 mb-10">
-      <PageHeader page={'Cart'} title={title} description={description} />
+    <div className="max-w-6xl mx-auto pt-6">
+      <div className="flex items-center gap-2">
+        <PageHeader page={'Cart'} title={'Your Cart'} description={'Review and manage your selected items'} />
       </div>
 
-      <h1 className='text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F0F11]'>Cart</h1>
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F0F11]">Cart</h1>
 
       {isLoading ? (
         <p className="mt-8">Loading cart items...</p>
       ) : cartProducts.length === 0 ? (
-        <p className="mt-8 text-center text-gray-500">Your cart is empty.</p>
+        <div className="flex justify-center items-center mt-8">
+          <div className="relative w-120 h-120">
+            <Image
+              src="/img/layout/cart-is-empty.png"
+              alt="Cart is empty"
+              fill
+              className="object-contain"
+            />
+          </div>
+        </div>
       ) : (
         <div className="flex flex-col lg:flex-row gap-8 mt-8">
           <div className="flex-grow">

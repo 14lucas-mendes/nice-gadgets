@@ -1,20 +1,26 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: #FAFBFC;
+  background: var(--page-background);
   color: var(--foreground);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   padding: 0;
-  color: #0F0F11;
+  color: var(--heading-color);
   letter-spacing: 0.5px;
 }
 
@@ -98,6 +104,17 @@ h1, h2, h3, h4, h5, h6 {
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  /* Custom variables for page elements */
+  --page-background: #fafbfc;
+  --heading-color: #0f0f11;
+  --header-bg: #ffffff;
+  --header-border: #e2e6e9;
+  --header-text: #89939a;
+  --header-text-active: #0f0f11;
+  --text-muted: #89939a;
+  --text-primary: #0f0f11;
+  --border-light: #b4bdc3;
+  --footer-bg: #ffffff;
 }
 
 .dark {
@@ -132,6 +149,17 @@ h1, h2, h3, h4, h5, h6 {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  /* Custom variables for page elements */
+  --page-background: oklch(0.145 0 0);
+  --heading-color: oklch(0.985 0 0);
+  --header-bg: oklch(0.205 0 0);
+  --header-border: oklch(1 0 0 / 10%);
+  --header-text: oklch(0.708 0 0);
+  --header-text-active: oklch(0.985 0 0);
+  --text-muted: oklch(0.708 0 0);
+  --text-primary: oklch(0.985 0 0);
+  --border-light: oklch(0.556 0 0);
+  --footer-bg: oklch(0.205 0 0);
 }
 
 @layer base {
@@ -142,4 +170,3 @@ h1, h2, h3, h4, h5, h6 {
     @apply bg-background text-foreground;
   }
 }
-

@@ -7,7 +7,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import BadgeCart from '@/components/CartBadge';
-import BadgeFavorite from '@/components/FavoriteBadge';
+import FavoriteBadge from '@/components/FavoriteBadge';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const routes = {
   home: { href: '/', isActive: (path: string) => path === '/' },
@@ -32,33 +33,44 @@ export default function Header() {
   }, [isMenuOpen]);
 
   return (
-    <header className="w-full h-12 flex items-center sm:flex justify-between bg-[#FFFFFF] border-b border-[#E2E6E9]">
+    <header className="w-full h-12 flex items-center sm:flex justify-between bg-[var(--header-bg)] border-b border-[var(--header-border)]">
       <div className="flex items-center sm:px-2 sm:py-4">
-       <Link href="/">
-        <Image src="/img/icons/logo.svg" alt="logo" width={120} height={120} className="sm:w-[150px] sm:h-[150px] md:hover:scale-110 transition-all duration-300 ease-in-out" />
-       </Link>
+        <Link href="/">
+          <Image
+            src="/img/icons/logo.svg"
+            alt="logo"
+            width={120}
+            height={120}
+            className="sm:w-[150px] sm:h-[150px] md:hover:scale-110 transition-all duration-300 ease-in-out"
+          />
+        </Link>
       </div>
       {/* Menu desktop */}
-      <div 
-      className="text-[#89939A] font-extrabold text-sm uppercase hidden items-center
+      <div
+        className="text-[var(--header-text)] font-extrabold text-sm uppercase hidden items-center
       sm:w-full sm:ml-4 sm:flex sm:gap-8
       md:w-full md:ml-8 md:flex md:gap-12
-      transition-all duration-300 ease-in-out">
+      transition-all duration-300 ease-in-out"
+      >
         {Object.entries(routes).map(([key, route]) => (
-          <Link href={route.href} key={key} className={`min-h-[44px] flex items-center ${route.isActive(pathname) ? 'text-[#0F0F11] border-b-2 border-black' : 'hover:border-b-2 hover:border-black hover:text-black'}`}>
-             {key.charAt(0).toUpperCase() + key.slice(1)}
+          <Link
+            href={route.href}
+            key={key}
+            className={`min-h-[44px] flex items-center ${route.isActive(pathname) ? 'text-[var(--header-text-active)] border-b-2 border-black' : 'hover:border-b-2 hover:border-black hover:text-[var(--header-text-active)]'}`}
+          >
+            {key.charAt(0).toUpperCase() + key.slice(1)}
           </Link>
         ))}
       </div>
       {/* Menu mobile */}
       {isMenuOpen && (
-        <div className="fixed top-12 left-0 w-full h-[calc(100vh-3rem)] bg-white sm:hidden md:hidden z-50 overflow-y-auto">
+        <div className="fixed top-12 left-0 w-full h-[calc(100vh-3rem)] bg-[var(--header-bg)] sm:hidden md:hidden z-50 overflow-y-auto">
           <div className="flex flex-col h-full justify-between">
             <div className="flex flex-col pt-8 gap-4 items-center text-sm font-extrabold uppercase">
               {Object.entries(routes).map(([key, route]) => (
                 <Link
                   key={key}
-                  className={`min-h-[44px] flex items-center justify-center ${route.isActive(pathname) ? 'border-b-2 border-black text-[#0F0F11]' : 'text-[#89939A]'}`}
+                  className={`min-h-[44px] flex items-center justify-center ${route.isActive(pathname) ? 'border-b-2 border-black text-[var(--header-text-active)]' : 'text-[var(--header-text)]'}`}
                   onClick={() => {
                     setIsMenuOpen(false);
                   }}
@@ -69,9 +81,12 @@ export default function Header() {
               ))}
             </div>
             {/* Menu mobile footer */}
-            <div className="flex justify-center border-t-2 border-[#E2E6E9]">
-              <div className="w-full min-h-[64px] items-center justify-center flex border-r-2 border-[#E2E6E9]">
-                <BadgeFavorite onNavigate={() => setIsMenuOpen(false)} />
+            <div className="flex justify-center border-t-2 border-[var(--header-border)]">
+              <div className="w-full min-h-[64px] items-center justify-center flex border-r-2 border-[var(--header-border)]">
+                <ThemeToggle />
+              </div>
+              <div className="w-full min-h-[64px] items-center justify-center flex border-r-2 border-[var(--header-border)]">
+                <FavoriteBadge onNavigate={() => setIsMenuOpen(false)} />
               </div>
               <div className="w-full min-h-[64px] items-center justify-center flex">
                 <BadgeCart onNavigate={() => setIsMenuOpen(false)} />
@@ -88,18 +103,17 @@ export default function Header() {
           className="flex items-center justify-center"
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         >
-          {!isMenuOpen ? (
-            <TextAlignJustify className="w-6 h-6" />
-          ) : (
-            <CircleX className="w-6 h-6" />
-          )}
+          {!isMenuOpen ? <TextAlignJustify className="w-6 h-6" /> : <CircleX className="w-6 h-6" />}
         </button>
       </div>
 
       {/*Icons for desktop */}
       <div className="hidden sm:flex md:flex ml-auto">
-        <div className="h-full items-center justify-center flex border-x-2 border-[#E2E6E9] w-16 lg:w-20 min-h-[44px]">
-          <BadgeFavorite />
+        <div className="h-full items-center justify-center flex border-r-2 border-[var(--header-border)] w-16 lg:w-20 min-h-[44px]">
+          <ThemeToggle />
+        </div>
+        <div className="h-full items-center justify-center flex border-x-2 border-[var(--header-border)] w-16 lg:w-20 min-h-[44px]">
+          <FavoriteBadge />
         </div>
         <div className="h-full items-center justify-center flex w-16 lg:w-20 min-h-[44px]">
           <BadgeCart />

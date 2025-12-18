@@ -8,11 +8,7 @@ import { Heart } from 'lucide-react'; // Ícone padrão usado com shadcn
 
 // Componentes do Shadcn
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardFooter,
-} from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 
 type CardProps = {
   product: {
@@ -64,10 +60,8 @@ export default function ProductCard({ product }: CardProps) {
 
   return (
     <Card className="flex flex-col w-[212px] h-[439px] sm:w-[237px] sm:h-[512px] md:w-[272px] md:h-[506px] border-slate-400 shadow-md hover:shadow-lg transition-shadow overflow-hidden">
-      
       {/* Área Principal do Card (Imagem + Info) */}
       <CardContent className="flex flex-col flex-grow p-4 sm:p-6 lg:p-4 gap-2">
-        
         {/* Imagem */}
         <div className="relative w-full aspect-square flex items-center justify-center lg:hover:scale-105 lg:transition-transform lg:duration-300 lg:ease-in-out">
           <Image
@@ -83,34 +77,34 @@ export default function ProductCard({ product }: CardProps) {
 
         {/* Título */}
         <div className="w-full flex items-start mt-2 sm:mt-3 lg:mt-2">
-          <p className="font-semibold text-[14px] line-clamp-2 text-[#0F0F11]">
+          <p className="font-semibold text-[14px] line-clamp-2 text-[var(--text-primary)]">
             {name}
           </p>
         </div>
 
         {/* Preços */}
         <div className="flex flex-row gap-2 flex-wrap items-baseline">
-          <p className="font-extrabold text-base sm:text-lg md:text-xl lg:text-base text-[#0F0F11]">
+          <p className="font-extrabold text-base sm:text-lg md:text-xl lg:text-base text-[var(--text-primary)]">
             {`R$${price}`}
           </p>
-          <p className="font-medium text-xs sm:text-sm text-[#89939A] line-through">
+          <p className="font-medium text-xs sm:text-sm text-[var(--text-muted)] line-through">
             {`R$${fullPrice}`}
           </p>
         </div>
 
         {/* Especificações */}
-        <div className="flex flex-col gap-1 font-semibold text-xs sm:text-sm lg:text-xs text-[#89939A]">
+        <div className="flex flex-col gap-1 font-semibold text-xs sm:text-sm lg:text-xs text-[var(--text-muted)]">
           <div className="flex flex-row justify-between">
             <span>Screen</span>
-            <span className="font-bold text-[#0F0F11]">{screen}</span>
+            <span className="font-bold text-[var(--text-primary)]">{screen}</span>
           </div>
           <div className="flex flex-row justify-between">
             <span>Capacity</span>
-            <span className="font-bold text-[#0F0F11]">{capacity}</span>
+            <span className="font-bold text-[var(--text-primary)]">{capacity}</span>
           </div>
           <div className="flex flex-row justify-between">
             <span>RAM</span>
-            <span className="font-bold text-[#0F0F11]">{ram}</span>
+            <span className="font-bold text-[var(--text-primary)]">{ram}</span>
           </div>
         </div>
       </CardContent>
@@ -135,15 +129,15 @@ export default function ProductCard({ product }: CardProps) {
           size="icon"
           onClick={handleToggleFavorite}
           className={`rounded-full w-10 h-10 md:w-12 md:h-12 lg:w-10 lg:h-10 border flex-shrink-0 ${
-            favorite 
-              ? 'border-red-500 bg-red-50 hover:bg-red-100 hover:text-red-600' 
+            favorite
+              ? 'border-red-500 bg-red-50 hover:bg-red-100 hover:text-red-600'
               : 'border-gray-400 hover:border-gray-500'
           }`}
           aria-label={favorite ? 'Remove from favorites' : 'Add to favorites'}
         >
           <Heart
             className={`w-5 h-5 sm:w-6 sm:h-6 lg:w-5 lg:h-5 transition-colors ${
-              favorite ? 'fill-current text-red-500' : 'text-[#0F0F11]'
+              favorite ? 'fill-current text-red-500' : 'text-[var(--text-primary)]'
             }`}
           />
         </Button>

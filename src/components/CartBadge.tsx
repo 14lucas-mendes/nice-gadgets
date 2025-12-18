@@ -22,17 +22,22 @@ export default function BadgeCart({ onNavigate }: BadgeCartProps) {
     <Link 
       href="/cart" 
       onClick={handleClick}
-      className="relative inline-flex items-center justify-center min-h-[44px] w-full"
+      // Removi o 'relative' daqui. O Link continua centralizando o conteúdo.
+      className="inline-flex items-center justify-center min-h-[44px] w-full"
     >
-      <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600 transition-colors hover:text-gray-900" />
+      {/* Criei este container com 'relative' para prender o badge ao ícone */}
+      <div className="relative inline-flex">
+        <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600 transition-colors hover:text-gray-900" />
 
-      {cartCount > 0 && (
-        <Badge 
-          className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center rounded-full p-0 text-[10px] bg-blue-600 hover:bg-blue-700 pointer-events-none"
-        >
-          {cartCount}
-        </Badge>
-      )}
+        {cartCount > 0 && (
+          <Badge 
+            // Ajustei para -top-1 e -right-1 ou -right-2 para ficar bem na quina do ícone
+            className="absolute -top-1.5 -right-2 h-2 w-2 sm:h-3 sm:w-3 flex items-center justify-center rounded-full p-0 text-[10px] bg-blue-600 hover:bg-blue-700 pointer-events-none ring-2 ring-white"
+          >
+            {cartCount}
+          </Badge>
+        )}
+      </div>
     </Link>
   );
 }
