@@ -1,9 +1,7 @@
-
-import CarouselSlider from "@/components/Carousel";
-import CategoryMenu from "@/components/CategoryMenu";
-import HotPriceTag from "@/components/HotPriceTag";
-import NewBadge from "@/components/NewBadge";
-
+import CarouselSlider from '@/components/Carousel_TEMP';
+import CategoryMenu from '@/components/CategoryMenu';
+import HotPriceTag from '@/components/HotPriceTag';
+import NewBadge from '@/components/NewBadge';
 
 export default async function Home() {
   return (
@@ -13,6 +11,5 @@ export default async function Home() {
       <CategoryMenu />
       <HotPriceTag />
     </div>
-     
   );
 }

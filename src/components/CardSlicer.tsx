@@ -3,7 +3,7 @@
 import { Product } from '@/types/Product';
 import { useRef, useState } from 'react';
 import { CircleChevronLeft, CircleChevronRight } from 'lucide-react';
-import ProductCard from './ProductCard';
+import ProductCard from './ProductCard_TEMP';
 
 type CardSliceProps = {
   products: Product[];
