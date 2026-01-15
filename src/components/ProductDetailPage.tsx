@@ -42,23 +42,17 @@ export default function ProductDetailPage({ product }: { product: CategoryItemPr
 
   return (
     <div className="w-full">
-      {/* CORREÇÃO DO ESTOURO DE TELA:
-         1. 'flex-col-reverse': No mobile, empilha verticalmente (Inverso: Imagem em cima, Thumbs embaixo).
-         2. 'md:flex-row': A partir do tablet/desktop, volta a ficar lado a lado.
-         3. 'w-full': Garante que o container não seja maior que a tela.
-      */}
       <div className="flex flex-col-reverse md:flex-row gap-4 lg:gap-6 w-full">
-        {/* Container das Miniaturas */}
         <div
           className="
             flex 
-            flex-row md:flex-col          /* Mobile: Linha | Desktop: Coluna */
+            flex-row md:flex-col        
             gap-3 
-            justify-center md:justify-start /* Centraliza no mobile */
-            overflow-x-auto md:overflow-visible /* Permite rolar se tiver muitas fotos no mobile */
+            justify-center md:justify-start 
+            overflow-x-auto md:overflow-visible 
             flex-shrink-0 
-            w-full md:w-auto              /* Mobile: Largura total | Desktop: Largura do conteúdo */
-            pb-2 md:pb-0                  /* Espaço extra pro scroll não colar */
+            w-full md:w-auto             
+            pb-2 md:pb-0                 
         "
         >
           {product.images.map((img) => (
@@ -70,7 +64,7 @@ export default function ProductDetailPage({ product }: { product: CategoryItemPr
                   border rounded-md cursor-pointer transition-all duration-200
                   ${
                     selectedImage === img
-                      ? 'border-blue-600 ring-1 ring-blue-600' // Feedback visual de seleção
+                      ? 'border-blue-600 ring-1 ring-blue-600'
                       : 'border-gray-200 hover:border-blue-400'
                   }
                 `}
@@ -88,15 +82,12 @@ export default function ProductDetailPage({ product }: { product: CategoryItemPr
           ))}
         </div>
 
-        {/* Container da Imagem Principal */}
         <div className="flex-1 w-full min-w-0">
-          {' '}
-          {/* min-w-0 é CRUCIAL para evitar overflow em flexbox */}
           <div
             className="
               relative 
               w-full 
-              aspect-square md:aspect-auto md:h-[400px] lg:h-[500px] /* Controla altura no desktop */
+              aspect-square md:aspect-auto md:h-[400px] lg:h-[500px] 
               bg-white rounded-lg flex items-center justify-center
           "
           >
@@ -110,8 +101,8 @@ export default function ProductDetailPage({ product }: { product: CategoryItemPr
               }
               alt={product.name || 'Product image'}
               fill
-              priority // Carrega rápido por ser a imagem principal
-              className="object-contain max-h-[300px] md:max-h-full" // Limita altura no mobile
+              priority
+              className="object-contain max-h-[300px] md:max-h-full"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
