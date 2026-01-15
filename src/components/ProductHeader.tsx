@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import PageHeader from './PageHeader';
 
 type CategoryItemProps = {
