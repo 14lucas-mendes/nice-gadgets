@@ -24,7 +24,7 @@ type CardProps = {
   variant?: 'default' | 'grid';
 };
 
-export default function ProductCard({ product, variant = 'default' }: CardProps) {
+export default function ProductCard({ product }: CardProps) {
   const { image, category, itemId, name, price, fullPrice, screen, capacity, ram } = product;
   const router = useRouter();
   const { addToCart, removeFromCart, toggleFavorite, isFavorite, isInCart } = useCartFavorite();
@@ -57,61 +57,65 @@ export default function ProductCard({ product, variant = 'default' }: CardProps)
   const favorite = mounted ? isFavorite(itemId) : false;
 
   const cardClasses =
-    variant === 'grid'
-      ? 'flex flex-col w-full h-full min-h-[520px] border-slate-400 shadow-md hover:shadow-lg transition-shadow overflow-hidden'
-      : 'flex flex-col w-[212px] sm:w-[237px] md:w-[272px] h-[520px] sm:h-[508px] md:h-[508px] border-slate-400 shadow-md hover:shadow-lg transition-shadow overflow-hidden';
+    'flex flex-col w-full h-full border-slate-400 shadow-md hover:shadow-lg transition-shadow overflow-hidden bg-white dark:bg-gray-900';
 
   return (
     <Card className={cardClasses}>
-      <CardContent className="flex flex-col flex-grow p-4 sm:p-6 md:p-3 gap-2 sm:gap-3 md:gap-2 overflow-hidden">
-        <div className="relative w-full h-32 sm:h-40 md:h-32 flex items-center justify-center lg:hover:scale-105 lg:transition-transform lg:duration-300 lg:ease-in-out flex-shrink-0">
-          <Image
-            src={`/${image}`}
-            alt={name}
-            fill
-            sizes="(max-width: 640px) 70vw, (max-width: 1024px) 40vw, (max-width: 1280px) 25vw, 20vw"
-            className="object-contain cursor-pointer"
-            onClick={navigateToProduct}
-            priority={false}
-          />
-        </div>
-
-        <div className="w-full flex items-start flex-shrink-0">
-          <p className="font-semibold text-[14px] line-clamp-2 text-[var(--text-primary)]">
-            {name}
-          </p>
-        </div>
-
-        <div className="flex flex-row gap-2 flex-wrap items-baseline flex-shrink-0">
-          <p className="font-extrabold text-base sm:text-lg md:text-lg text-[var(--text-primary)]">
-            {`R$${price}`}
-          </p>
-          <p className="font-medium text-xs sm:text-sm text-[var(--text-muted)] line-through">
-            {`R$${fullPrice}`}
-          </p>
-        </div>
-
-        <div className="flex flex-col gap-2 font-semibold text-xs sm:text-sm text-[var(--text-muted)] flex-shrink-0">
-          <div className="flex flex-row justify-between">
-            <span>Screen</span>
-            <span className="font-bold text-[var(--text-primary)]">{screen}</span>
+      <CardContent className="flex flex-col flex-grow p-4 gap-2 justify-between">
+        <div className="flex flex-col gap-4">
+          <div className="relative w-full aspect-square max-h-40 flex items-center justify-center lg:hover:scale-105 lg:transition-transform lg:duration-300 lg:ease-in-out">
+            <Image
+              src={`/${image}`}
+              alt={name}
+              fill
+              className="object-contain cursor-pointer"
+              onClick={navigateToProduct}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              priority={false}
+            />
           </div>
-          <div className="flex flex-row justify-between">
-            <span>Capacity</span>
-            <span className="font-bold text-[var(--text-primary)]">{capacity}</span>
+
+          <div className="w-full">
+            <p
+              className="font-semibold text-sm line-clamp-2 text-[var(--text-primary)] cursor-pointer hover:underline"
+              onClick={navigateToProduct}
+            >
+              {name}
+            </p>
           </div>
-          <div className="flex flex-row justify-between">
-            <span>RAM</span>
-            <span className="font-bold text-[var(--text-primary)]">{ram}</span>
+        </div>
+
+        <div className="flex flex-col gap-3 mt-2">
+          <div className="flex flex-row gap-2 flex-wrap items-baseline">
+            <p className="font-extrabold text-lg text-[var(--text-primary)]">{`R$${price}`}</p>
+            <p className="font-medium text-sm text-[var(--text-muted)] line-through">
+              {`R$${fullPrice}`}
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-1 font-semibold text-xs text-[var(--text-muted)] border-t pt-2 border-gray-100 dark:border-gray-800">
+            <div className="flex flex-row justify-between">
+              <span>Screen</span>
+              <span className="font-bold text-[var(--text-primary)]">{screen}</span>
+            </div>
+            <div className="flex flex-row justify-between">
+              <span>Capacity</span>
+              <span className="font-bold text-[var(--text-primary)]">{capacity}</span>
+            </div>
+            <div className="flex flex-row justify-between">
+              <span>RAM</span>
+              <span className="font-bold text-[var(--text-primary)]">{ram}</span>
+            </div>
           </div>
         </div>
       </CardContent>
-      <CardFooter className="p-4 sm:px-6 sm:pb-4 md:px-4 md:pb-4 flex flex-row gap-2 flex-shrink-0 border-t border-gray-200">
+
+      <CardFooter className="p-4 pt-0 flex flex-row gap-2 border-t border-gray-100 dark:border-gray-800 mt-auto">
         <Button
           onClick={handleToggleCart}
-          className={`flex-1 h-10 sm:h-10 md:h-10 font-bold text-sm transition-colors cursor-pointer ${
+          className={`flex-1 h-10 font-bold text-sm transition-colors ${
             inCart
-              ? 'bg-white border border-orange-500 text-orange-500 hover:bg-orange-50 dark:bg-gray-800 dark:border-purple-500 dark:text-purple-500 dark:hover:bg-purple-50'
+              ? 'bg-white border border-orange-500 text-orange-500 hover:bg-orange-50 dark:bg-transparent dark:border-purple-500 dark:text-purple-500'
               : 'bg-orange-500 hover:bg-orange-600 dark:bg-purple-500 dark:hover:bg-purple-600 text-white'
           }`}
         >
@@ -122,15 +126,15 @@ export default function ProductCard({ product, variant = 'default' }: CardProps)
           variant="outline"
           size="icon"
           onClick={handleToggleFavorite}
-          className={`rounded-full w-10 h-10 sm:w-10 sm:h-10 md:w-10 md:h-10 border flex-shrink-0 cursor-pointer transition-colors${
+          className={`rounded-full w-10 h-10 border transition-colors ${
             favorite
-              ? 'border-red-500 bg-red-50 hover:bg-red-100 hover:text-red-600'
-              : 'border-gray-400 hover:border-gray-500'
+              ? 'border-red-500 bg-red-50 text-red-600'
+              : 'border-gray-300 hover:border-gray-500'
           }`}
           aria-label={favorite ? 'Remove from favorites' : 'Add to favorites'}
         >
           <Heart
-            className={`w-5 h-5 sm:w-5 sm:h-5 md:w-5 md:h-5 transition-colors ${
+            className={`w-5 h-5 ${
               favorite ? 'fill-current text-red-500' : 'text-[var(--text-primary)]'
             }`}
           />
