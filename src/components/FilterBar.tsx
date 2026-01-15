@@ -26,7 +26,6 @@ export default function FilterBar({ value, title, items, setValue, label }: Item
 
   return (
     <div className="flex flex-col gap-2">
-      {/* O Label utiliza o 'id' para focar no select ao ser clicado */}
       <label htmlFor={id} className="text-sm font-medium text-muted-foreground">
         {label}
       </label>

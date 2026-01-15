@@ -56,7 +56,6 @@ export default function ProductCard({ product, variant = 'default' }: CardProps)
   const inCart = mounted ? isInCart(itemId) : false;
   const favorite = mounted ? isFavorite(itemId) : false;
 
-  // Classes condicionais baseadas na variante
   const cardClasses =
     variant === 'grid'
       ? 'flex flex-col w-full h-full min-h-[520px] border-slate-400 shadow-md hover:shadow-lg transition-shadow overflow-hidden'
@@ -64,9 +63,7 @@ export default function ProductCard({ product, variant = 'default' }: CardProps)
 
   return (
     <Card className={cardClasses}>
-      {/* Área Principal do Card (Imagem + Info) */}
       <CardContent className="flex flex-col flex-grow p-4 sm:p-6 md:p-3 gap-2 sm:gap-3 md:gap-2 overflow-hidden">
-        {/* Imagem */}
         <div className="relative w-full h-32 sm:h-40 md:h-32 flex items-center justify-center lg:hover:scale-105 lg:transition-transform lg:duration-300 lg:ease-in-out flex-shrink-0">
           <Image
             src={`/${image}`}
@@ -79,14 +76,12 @@ export default function ProductCard({ product, variant = 'default' }: CardProps)
           />
         </div>
 
-        {/* Título */}
         <div className="w-full flex items-start flex-shrink-0">
           <p className="font-semibold text-[14px] line-clamp-2 text-[var(--text-primary)]">
             {name}
           </p>
         </div>
 
-        {/* Preços */}
         <div className="flex flex-row gap-2 flex-wrap items-baseline flex-shrink-0">
           <p className="font-extrabold text-base sm:text-lg md:text-lg text-[var(--text-primary)]">
             {`R$${price}`}
@@ -96,7 +91,6 @@ export default function ProductCard({ product, variant = 'default' }: CardProps)
           </p>
         </div>
 
-        {/* Especificações - Layout mobile com justify-between, mantém em telas maiores */}
         <div className="flex flex-col gap-2 font-semibold text-xs sm:text-sm text-[var(--text-muted)] flex-shrink-0">
           <div className="flex flex-row justify-between">
             <span>Screen</span>
@@ -112,10 +106,7 @@ export default function ProductCard({ product, variant = 'default' }: CardProps)
           </div>
         </div>
       </CardContent>
-
-      {/* Footer com Botões - Lado a lado no mobile e telas maiores */}
       <CardFooter className="p-4 sm:px-6 sm:pb-4 md:px-4 md:pb-4 flex flex-row gap-2 flex-shrink-0 border-t border-gray-200">
-        {/* Botão Adicionar ao Carrinho */}
         <Button
           onClick={handleToggleCart}
           className={`flex-1 h-10 sm:h-10 md:h-10 font-bold text-sm transition-colors cursor-pointer ${
@@ -127,7 +118,6 @@ export default function ProductCard({ product, variant = 'default' }: CardProps)
           {inCart ? 'Added' : 'Add to cart'}
         </Button>
 
-        {/* Botão Favoritar */}
         <Button
           variant="outline"
           size="icon"

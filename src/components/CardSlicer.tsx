@@ -12,7 +12,12 @@ type CardSliceProps = {
   layout?: 'carousel' | 'grid';
 };
 
-export default function CardSlicer({ products, title, noPadding = false, layout = 'carousel' }: CardSliceProps) {
+export default function CardSlicer({
+  products,
+  title,
+  noPadding = false,
+  layout = 'carousel',
+}: CardSliceProps) {
   const [currentCard, setCurrentCard] = useState(0);
   const cardContainerRef = useRef<HTMLDivElement>(null);
 
@@ -62,9 +67,10 @@ export default function CardSlicer({ products, title, noPadding = false, layout 
     <div
       className={`w-full max-w-full overflow-hidden ${noPadding ? 'p-0' : 'px-4 sm:px-12 md:max-w-6xl md:mx-auto'}`}
     >
-      {/* Header com Título e Botões de Navegação (Desktop) */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
-        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#0F0F11]">{title}</h2>
+        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#0F0F11]">
+          {title}
+        </h2>
         <div className="hidden lg:flex gap-2 text-[#B4BDC3]">
           <button
             className="cursor-pointer hover:text-[#0F0F11] transition-colors"
@@ -81,7 +87,6 @@ export default function CardSlicer({ products, title, noPadding = false, layout 
         </div>
       </div>
 
-      {/* Área dos Cards */}
       {layout === 'grid' ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-10 mt-8">
           {products.map((product) => (
@@ -89,7 +94,9 @@ export default function CardSlicer({ products, title, noPadding = false, layout 
           ))}
         </div>
       ) : (
-        <div className={`w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide ${noPadding ? '' : '-mx-4 sm:mx-0'}`}>
+        <div
+          className={`w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide ${noPadding ? '' : '-mx-4 sm:mx-0'}`}
+        >
           <div
             ref={cardContainerRef}
             className={`flex flex-row mt-4 sm:mt-6 gap-3 sm:gap-12 md:gap-14 lg:gap-18 ${noPadding ? '' : 'px-4 sm:px-0'}`}

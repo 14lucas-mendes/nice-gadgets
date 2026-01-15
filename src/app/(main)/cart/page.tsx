@@ -36,10 +36,8 @@ export default function CartPage() {
   }, 0);
 
   const handleCheckout = () => {
-    // Simulação fictícia: limpar o carrinho
     clearCart();
     setIsModalOpen(false);
-    // Aqui poderia adicionar uma mensagem de sucesso ou redirecionar
   };
 
   const handleCancel = () => {

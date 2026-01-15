@@ -38,7 +38,6 @@ export async function getProductById(productId: string): Promise<ProductDetails>
     const response = await fetch(`${baseUrl}/api/products/${productId}`);
 
     if (!response.ok) {
-      // Se a resposta não for JSON, .text() é mais seguro
       const errorText = await response.text();
       throw new Error(`Falha ao buscar o produto: ${response.statusText} - ${errorText}`);
     }
@@ -51,14 +50,12 @@ export async function getProductById(productId: string): Promise<ProductDetails>
 }
 
 export async function getAllProducts(): Promise<Product[]> {
-  // Buscar todos os produtos sem limite
   return fetch(`${baseUrl}/api/products?limit=1000&skip=0`)
     .then((response) => response.json())
     .then((data) => data.products as Product[]);
 }
 
 export async function getProductsByItemIds(itemIds: string[]): Promise<Product[]> {
-  // Buscar todos os produtos e filtrar pelos itemIds
   const allProducts = await getAllProducts();
   return allProducts.filter((product) => itemIds.includes(product.itemId));
 }

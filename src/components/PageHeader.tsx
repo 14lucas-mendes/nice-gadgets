@@ -19,24 +19,19 @@ type HeaderProps = {
 export default function PageHeader({ page, title, description }: HeaderProps) {
   return (
     <div className="flex flex-col gap-10">
-      {/* Área do Breadcrumb */}
       <Breadcrumb>
         <BreadcrumbList>
-          {/* Item 1: Home */}
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
               <Link href="/">
                 <House className="h-5 w-5" />
-                {/* sr-only serve para leitores de tela saberem o que é o ícone */}
                 <span className="sr-only">Home</span>
               </Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
 
-          {/* Separador Automático (/) ou Chevron */}
           <BreadcrumbSeparator />
 
-          {/* Item 2: Página Atual */}
           <BreadcrumbItem>
             <BreadcrumbPage className="font-semibold text-[var(--text-muted)]">
               {page}
@@ -45,10 +40,11 @@ export default function PageHeader({ page, title, description }: HeaderProps) {
         </BreadcrumbList>
       </Breadcrumb>
 
-      {/* Área de Título e Descrição */}
       <div>
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold">{title}</h1>
-        <p className="font-semibold text-xs sm:text-sm md:text-[14px] text-[var(--text-muted)] mt-2">{description}</p>
+        <p className="font-semibold text-xs sm:text-sm md:text-[14px] text-[var(--text-muted)] mt-2">
+          {description}
+        </p>
       </div>
     </div>
   );

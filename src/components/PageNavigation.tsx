@@ -22,7 +22,6 @@ export default function PageNavigation({ products, page, title, description }: N
   const router = useRouter();
   const pathname = usePathname();
 
-  // Ref para controlar se devemos prevenir scroll
   const shouldPreventScroll = useRef(false);
   const scrollPosition = useRef(0);
 
@@ -33,7 +32,6 @@ export default function PageNavigation({ products, page, title, description }: N
   ) => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
 
-    // Atualizar ou remover sort
     if (params.sort !== undefined) {
       if (params.sort && params.sort !== '') {
         current.set('sort', params.sort);
@@ -65,7 +63,6 @@ export default function PageNavigation({ products, page, title, description }: N
     const newUrl = `${pathname}${query}`;
 
     if (preventScroll) {
-      // Salvar a posição do scroll e marcar para prevenir scroll
       scrollPosition.current = window.scrollY;
       shouldPreventScroll.current = true;
     }
@@ -87,7 +84,6 @@ export default function PageNavigation({ products, page, title, description }: N
     return '';
   };
 
-  // Ler valores iniciais da URL
   const sortParam = searchParams.get('sort');
   const perPageParam = searchParams.get('perPage');
   const pageParam = searchParams.get('page');
@@ -99,7 +95,6 @@ export default function PageNavigation({ products, page, title, description }: N
     return isNaN(page) || page < 1 ? 1 : page;
   });
 
-  // Sincronizar estados com a URL quando ela mudar (navegação do navegador)
   useEffect(() => {
     const sortParam = searchParams.get('sort');
     const perPageParam = searchParams.get('perPage');
@@ -110,13 +105,10 @@ export default function PageNavigation({ products, page, title, description }: N
     const page = pageParam ? parseInt(pageParam) : 1;
     setCurrentPage(isNaN(page) || page < 1 ? 1 : page);
 
-    // Se devemos prevenir scroll, restaurar a posição após a renderização
     if (shouldPreventScroll.current) {
       const targetScroll = scrollPosition.current;
       shouldPreventScroll.current = false;
 
-      // Restaurar a posição do scroll em múltiplos momentos para garantir
-      // que seja mantida mesmo se o Next.js tentar fazer scroll automático
       const restoreScroll = () => {
         window.scrollTo({
           top: targetScroll,
@@ -124,24 +116,21 @@ export default function PageNavigation({ products, page, title, description }: N
         });
       };
 
-      // Restaurar imediatamente e em múltiplos frames
       restoreScroll();
       requestAnimationFrame(restoreScroll);
       requestAnimationFrame(() => {
         requestAnimationFrame(restoreScroll);
       });
 
-      // Também restaurar após um pequeno delay para garantir
       setTimeout(restoreScroll, 0);
       setTimeout(restoreScroll, 10);
       setTimeout(restoreScroll, 50);
     }
   }, [searchParams]);
 
-  // Mantem a lógica de ordenação
   const sortHandlerProducts = [...products].sort((a, b) => {
     if (sortBy === 'Newest') {
-      return b.year - a.year; // Adiciona ordenação por ano
+      return b.year - a.year;
     } else if (sortBy === 'Alphabetically') {
       return a.name.localeCompare(b.name);
     } else if (sortBy === 'Cheapest') {
@@ -150,7 +139,6 @@ export default function PageNavigation({ products, page, title, description }: N
     return 0;
   });
 
-  // Nova função de paginação simplificada
   const getPaginatedProducts = () => {
     if (perPage === 'All') {
       return sortHandlerProducts;
@@ -167,22 +155,17 @@ export default function PageNavigation({ products, page, title, description }: N
   const totalPages =
     perPage === 'All' ? 1 : Math.ceil(sortHandlerProducts.length / parseInt(perPage));
 
-  // Handlers para atualizar estado e URL
   const handleSortChange = (value: string) => {
     const sortURL = getSortURLFromValue(value);
-    // Resetar página para 1 quando mudar sort (remover page da URL se for 1)
     updateURL({ sort: sortURL || null, page: null });
   };
 
   const handlePerPageChange = (value: string) => {
     const perPageValue = value === 'All' ? null : value;
-    // Resetar página para 1 quando mudar perPage (remover page da URL se for 1)
     updateURL({ perPage: perPageValue, page: null });
   };
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    // Se a página for 1, remover o parâmetro page da URL
-    // Usar preventScroll=true para evitar que a página role para baixo
     updateURL({ page: value === 1 ? null : value.toString() }, true);
   };
 

@@ -4,8 +4,6 @@ import phonesData from '../../../../../public/api/phones.json';
 import accessoriesData from '../../../../../public/api/accessories.json';
 import tabletsData from '../../../../../public/api/tablets.json';
 
-
-// tipo com os detalhes de um item
 type ProductDetails = {
   id: string;
   category: string;
@@ -29,7 +27,7 @@ type ProductDetails = {
   camera: string;
   zoom: string;
   cell: string[];
-}
+};
 
 type ColorMapType = {
   gold: string;
@@ -63,33 +61,32 @@ const categoryDataMap: Record<string, ProductDetails[]> = {
   tablets: tabletsData as ProductDetails[],
 };
 
-
 // Função GET para buscar os detalhes do item pelo itemId
-export async function GET(req: NextRequest, { params }: { params: Promise<{ productId: string }> }) {
-    const { productId } = await params;
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{ productId: string }> },
+) {
+  const { productId } = await params;
 
-    let productDetails: ProductDetails | null = null;
-    let foundCategory = '';
+  let productDetails: ProductDetails | null = null;
+  let foundCategory = '';
 
-    for (const [category, dataArray] of Object.entries(categoryDataMap)) {
-        const found = dataArray.find((item: ProductDetails) => item.id === productId);
+  for (const [category, dataArray] of Object.entries(categoryDataMap)) {
+    const found = dataArray.find((item: ProductDetails) => item.id === productId);
 
-        if (found) {
-            productDetails = found;
-            foundCategory = category;
-            break;
-        }
+    if (found) {
+      productDetails = found;
+      foundCategory = category;
+      break;
     }
+  }
 
-    if (!productDetails) {
-        return NextResponse.json(
-            { error: 'Product not found', productId },
-            { status: 404 }
-        );
-    }
+  if (!productDetails) {
+    return NextResponse.json({ error: 'Product not found', productId }, { status: 404 });
+  }
 
-    return NextResponse.json({
-        product: productDetails,
-        category: foundCategory,
-    });
+  return NextResponse.json({
+    product: productDetails,
+    category: foundCategory,
+  });
 }
