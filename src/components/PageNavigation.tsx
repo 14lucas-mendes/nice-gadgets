@@ -5,7 +5,7 @@ import { Product } from '@/types/Product';
 import { useState, useEffect, useRef } from 'react';
 
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
-import ProductCard from './ProductCard_TEMP';
+import ProductCard from './ProductCard';
 import FilterBar from './FilterBar';
 import ProductPagination from './ProductPagination';
 import PageHeader from './PageHeader';
