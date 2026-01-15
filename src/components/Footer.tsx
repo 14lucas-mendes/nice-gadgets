@@ -13,8 +13,8 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[var(--footer-bg)] inset-shadow-gray-400 w-full py-8 sm:py-4 border-t border-[var(--header-border)]">
-      <div className="flex flex-col items-start justify-center w-full gap-4 px-6 sm:px-8 sm:flex-row sm:flex-nowrap sm:items-center sm:justify-between">
+    <footer className="bg-[var(--footer-bg)] inset-shadow-gray-400 w-full border-t border-[var(--header-border)] md:h-24">
+      <div className="flex flex-col items-start justify-center w-full gap-4 px-6 sm:px-8 sm:flex-row sm:flex-nowrap sm:items-center sm:justify-between h-full">
         <Link href="/" className="flex-shrink-0 flex items-center justify-start w-full sm:w-auto">
           <Image
             src="/img/icons/logo.svg"

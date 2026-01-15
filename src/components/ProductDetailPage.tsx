@@ -40,33 +40,36 @@ export default function ProductDetailPage({ product }: { product: CategoryItemPr
 
   return (
     <div className="w-full">
-            <div className="flex flex-row mt-10 gap-2">
-                <div className="flex flex-col gap-4">
-                    {product?.images.map(img => (
-                    <div key={img}>
-                        <div 
-                          className="w-20 h-20 border rounded-md relative cursor-pointer hover:border-blue-500 transition-colors"
-                          onClick={() => setSelectedImage(img)}
-                        >
-                            <Image 
-                            src={`/${img}`}
-                            alt="Category Phones"
-                            fill
-                            className="object-contain absolute"
-                            />
-                        </div>
-                    </div>  
-                ))}
-                </div>
-                <div className="w-[464px] h-[464px] relative">
-                    <Image
-                        src={selectedImage ? `/${selectedImage}` : (product?.images && product.images.length > 0 ? `/${product.images[0]}` : '/placeholder.jpg')}
-                        alt={product?.name || "Product image"}
-                        fill
-                        className="absolute object-contain"
-                    />
-                </div>
-                </div>
+      <div className="flex flex-row gap-2 sm:gap-4 lg:gap-6">
+        {/* Miniaturas Verticais - Coluna à esquerda */}
+        <div className="flex flex-col gap-2 lg:gap-4 flex-shrink-0">
+          {product?.images.map(img => (
+            <div key={img}>
+              <div 
+                className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 border rounded-md relative cursor-pointer hover:border-blue-500 transition-colors"
+                onClick={() => setSelectedImage(img)}
+              >
+                <Image 
+                  src={`/${img}`}
+                  alt="Product thumbnail"
+                  fill
+                  className="object-contain rounded-md"
+                />
+              </div>
+            </div>  
+          ))}
+        </div>
+        
+        {/* Imagem Principal - Ocupa o restante do espaço */}
+        <div className="w-full aspect-square relative flex-1 min-w-0">
+          <Image
+            src={selectedImage ? `/${selectedImage}` : (product?.images && product.images.length > 0 ? `/${product.images[0]}` : '/placeholder.jpg')}
+            alt={product?.name || "Product image"}
+            fill
+            className="object-contain"
+          />
+        </div>
+      </div>
     </div>
   )
 }

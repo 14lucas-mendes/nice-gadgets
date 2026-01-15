@@ -33,22 +33,22 @@ export default function StorageSelector({ product }: { product: ProductDetails |
 
   return (
     <div className="flex flex-col w-full justify-start items-start">
-      <div className="text-[var(--text-muted)] text-[12px] font-semibold">
+      <div className="text-[var(--text-muted)] text-xs sm:text-[12px] font-semibold">
         <p>Select Capacity</p>
       </div>
-      <div className="flex flex-row gap-2 mt-2">
+      <div className="flex flex-row gap-2 mt-2 flex-wrap">
         {product?.capacityAvailable.map((capacity) => (
           <button
             key={capacity}
             type="button"
             onClick={() => handleCapacityClick(capacity)}
-            className={`px-4 py-2 text-[14px] font-medium border rounded-md hover:border-blue-500 transition-colors cursor-pointer ${product.capacity === capacity ? 'border-2 border-gray-600' : 'border-gray-300'}`}
+            className={`px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm md:text-[14px] font-medium border rounded-md hover:border-blue-500 transition-colors cursor-pointer ${product.capacity === capacity ? 'border-2 border-gray-600' : 'border-gray-300'}`}
           >
             {capacity}
           </button>
         ))}
       </div>
-      <hr className="w-full my-6 border-gray-400" />
+      <hr className="w-full my-4 sm:my-6 border-gray-400" />
     </div>
   );
 }

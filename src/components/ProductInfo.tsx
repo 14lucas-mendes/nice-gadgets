@@ -25,22 +25,22 @@ type CardProps = {
 
 export default function ProductInfo({ product }: { product: CardProps | null }) {
   return (
-    <div className="w-full mt-8">
+    <div className="w-full mt-6 sm:mt-8">
       <div className="flex flex-row justify-between items-center">
-        <p className="font-semibold text-[12px] text-[var(--text-muted)]">Screen: </p>
-        <p className="font-bold text-[12px] text-[var(--text-primary)]">{product?.screen}</p>
+        <p className="font-semibold text-xs sm:text-[12px] text-[var(--text-muted)]">Screen: </p>
+        <p className="font-bold text-xs sm:text-[12px] text-[var(--text-primary)]">{product?.screen}</p>
       </div>
       <div className="flex flex-row justify-between items-center">
-        <p className="font-semibold text-[12px] text-[var(--text-muted)]">Resolution: </p>
-        <p className="font-bold text-[12px] text-[var(--text-primary)]">{product?.resolution}</p>
+        <p className="font-semibold text-xs sm:text-[12px] text-[var(--text-muted)]">Resolution: </p>
+        <p className="font-bold text-xs sm:text-[12px] text-[var(--text-primary)]">{product?.resolution}</p>
       </div>
       <div className="flex flex-row justify-between items-center">
-        <p className="font-semibold text-[12px] text-[var(--text-muted)]">Processor: </p>
-        <p className="font-bold text-[12px] text-[var(--text-primary)]">{product?.processor}</p>
+        <p className="font-semibold text-xs sm:text-[12px] text-[var(--text-muted)]">Processor: </p>
+        <p className="font-bold text-xs sm:text-[12px] text-[var(--text-primary)]">{product?.processor}</p>
       </div>
       <div className="flex flex-row justify-between items-center">
-        <p className="font-semibold text-[12px] text-[var(--text-muted)]">RAM: </p>
-        <p className="font-bold text-[12px] text-[var(--text-primary)]">{product?.ram}</p>
+        <p className="font-semibold text-xs sm:text-[12px] text-[var(--text-muted)]">RAM: </p>
+        <p className="font-bold text-xs sm:text-[12px] text-[var(--text-primary)]">{product?.ram}</p>
       </div>
     </div>
   );

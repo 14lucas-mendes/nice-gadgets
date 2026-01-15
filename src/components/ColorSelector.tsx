@@ -51,7 +51,7 @@ export default function ColorSelector({ product } : {product: ProductDetails | n
     
     return (
         <div className="flex flex-col w-full justify-start items-start">
-            <div className="text-[#89939A] text-[12px] font-semibold">
+            <div className="text-[#89939A] text-xs sm:text-[12px] font-semibold">
                 <p>Avaliable Colors</p>
             </div>
             <div className="flex flex-row gap-2 mt-2">
@@ -62,7 +62,7 @@ export default function ColorSelector({ product } : {product: ProductDetails | n
                         className="flex text-2xl text-center justify-center"
                         >
                             <Link href={getRoute(colorKey)}
-                            className={`w-8 h-8 hover:border-2 rounded-full ${product.color === color ? 'border-2 border-gray-600' : ''}`}
+                            className={`w-7 h-7 sm:w-8 sm:h-8 hover:border-2 rounded-full ${product.color === color ? 'border-2 border-gray-600' : ''}`}
                             style={{ backgroundColor: colorMap[colorKey] || color }}
                             >
                         
@@ -71,7 +71,7 @@ export default function ColorSelector({ product } : {product: ProductDetails | n
                     );
                 })}
             </div>
-            <hr className="w-full my-6 border-gray-400" />
+            <hr className="w-full my-4 sm:my-6 border-gray-400" />
         </div>
     )
 }

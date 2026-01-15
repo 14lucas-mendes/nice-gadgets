@@ -25,13 +25,13 @@ type CardItemProps = {
 
 export default function ProductDescription({ product }: { product: CardItemProps }) {
   return (
-    <div className="max-w-[560px] w-full h-full mt-20">
-      <p className="text-[22px] font-extrabold">About</p>
-      <div className="mt-12">
+    <div className="w-full h-full">
+      <p className="text-lg sm:text-xl md:text-[22px] font-extrabold">About</p>
+      <div className="mt-6 sm:mt-8 md:mt-12">
         {product.description.map((item, index) => (
           <div key={index}>
-            <p className="pb-4 font-bold text-[20px]">{item.title}</p>
-            <p className="pb-8 font-medium text-[14px] text-[var(--text-muted)]">{item.text}</p>
+            <p className="pb-3 sm:pb-4 font-bold text-base sm:text-lg md:text-[20px]">{item.title}</p>
+            <p className="pb-6 sm:pb-8 font-medium text-xs sm:text-sm md:text-[14px] text-[var(--text-muted)]">{item.text}</p>
           </div>
         ))}
       </div>

@@ -12,7 +12,7 @@ export default async function ProductIdDisplay({ params }: { params: { productId
 
 
     return (
-        <div className="w-[320px] flex flex-col">
+        <div className="w-full flex flex-col">
             <ColorSelector product={product} />
             <StorageSelector product={product} />
             <ProductPrice product={product} />

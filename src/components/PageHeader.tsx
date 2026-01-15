@@ -47,8 +47,8 @@ export default function PageHeader({ page, title, description }: HeaderProps) {
 
       {/* Área de Título e Descrição */}
       <div>
-        <h1 className="text-3xl font-extrabold sm:text-4xl md:text-5xl">{title}</h1>
-        <p className="font-semibold text-[14px] text-[var(--text-muted)] mt-2">{description}</p>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold">{title}</h1>
+        <p className="font-semibold text-xs sm:text-sm md:text-[14px] text-[var(--text-muted)] mt-2">{description}</p>
       </div>
     </div>
   );
