@@ -1,4 +1,4 @@
-import CarouselSlider from '@/components/Carousel_TEMP';
+import CarouselSlider from '@/components/Carousel';
 import CategoryMenu from '@/components/CategoryMenu';
 import HotPriceTag from '@/components/HotPriceTag';
 import NewBadge from '@/components/NewBadge';
