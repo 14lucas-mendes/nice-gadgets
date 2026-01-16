@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import phonesData from '../../../../../public/api/phones.json';
-import accessoriesData from '../../../../../public/api/accessories.json';
-import tabletsData from '../../../../../public/api/tablets.json';
+import phonesData from '@/data/phones.json';
+import accessoriesData from '@/data/accessories.json';
+import tabletsData from '@/data/tablets.json';
 
 type ProductDetails = {
   id: string;
