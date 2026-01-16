@@ -12,7 +12,7 @@ export default async function ProductId({ params }: { params: Promise<{ productI
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-hidden pb-10">
-      <ProductHeader product={product} />
+      <ProductHeader product={product!} />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-6">
         <div className="lg:col-span-7">
@@ -26,10 +26,10 @@ export default async function ProductId({ params }: { params: Promise<{ productI
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-16 lg:mt-24 items-start">
         <div className="w-full">
-          <ProductDescription product={product} />
+          <ProductDescription product={product!} />
         </div>
         <div className="w-full">
-          <ProductSpecifications product={product} />
+          <ProductSpecifications product={product!} />
         </div>
       </div>
 
