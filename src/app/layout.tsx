@@ -1,6 +1,6 @@
-import Header from '@/components/Header';
+import Header from '@/components/Header/index';
 import './globals.css';
-import Footer from '@/components/Footer';
+import Footer from '@/components/Footer/index';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
