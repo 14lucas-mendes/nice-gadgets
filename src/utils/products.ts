@@ -12,16 +12,18 @@ const allProducts = [
 ] as unknown as ProductDetails[];
 
 const mapDetailToSummary = (detail: ProductDetails): Product => {
+  const detailData = detail as ProductDetails & { year?: number };
+
   return {
     ...detail,
 
-    itemId: detail.id, // Product usa itemId, JSON usa id
-    fullPrice: detail.priceRegular, // Product usa fullPrice, JSON usa priceRegular
-    price: detail.priceDiscount, // Product usa price, JSON usa priceDiscount
+    itemId: detail.id,
+    fullPrice: detail.priceRegular,
+    price: detail.priceDiscount,
 
     image: detail.images[0] || '',
 
-    year: (detail as any).year || 2023,
+    year: detailData.year || 2023,
   } as unknown as Product;
 };
 
