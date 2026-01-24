@@ -4,37 +4,47 @@ import {
   getAllPhonesProducts,
   getAllTabletsProducts,
 } from '@/utils/products';
+import { capitalize } from '@/lib/catalog-utils';
+import { notFound } from 'next/navigation';
+import type { Product } from '@/types/Product';
 
-enum Categories {
-  Accessories = 'accessories',
-  Phones = 'phones',
-  Tablets = 'tablets',
-}
+const VALID_CATEGORIES = ['accessories', 'phones', 'tablets'] as const;
+type ValidCategory = (typeof VALID_CATEGORIES)[number];
 
-type CategoryHandlers = Record<Categories, () => Promise<import('@/types/product').Product[]>>;
-
-const categoryHandlers: CategoryHandlers = {
-  [Categories.Accessories]: getAllAccessoriesProducts,
-  [Categories.Phones]: getAllPhonesProducts,
-  [Categories.Tablets]: getAllTabletsProducts,
+const categoryHandlers: Record<ValidCategory, () => Promise<Product[]>> = {
+  accessories: getAllAccessoriesProducts,
+  phones: getAllPhonesProducts,
+  tablets: getAllTabletsProducts,
 };
 
-export default async function CategoryPages({
-  params,
-}: {
-  params: Promise<{ category: Categories }>;
-}) {
+interface CategoryPageProps {
+  params: Promise<{ category: string }>;
+}
+
+export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category } = await params;
-  const products = await categoryHandlers[category]();
+
+  // Validate category
+  if (!VALID_CATEGORIES.includes(category as ValidCategory)) {
+    notFound();
+  }
+
+  const products = await categoryHandlers[category as ValidCategory]();
+  const capitalizedCategory = capitalize(category);
 
   return (
-    <div className="max-w-6xl mx-auto pb-14">
-      <PageNavigation
-        products={products}
-        page={category.charAt(0).toUpperCase() + category.slice(1)}
-        title={category.charAt(0).toUpperCase() + category.slice(1)}
-        description={`${products.length} Models.`}
-      />
-    </div>
+    <PageNavigation
+      products={products}
+      page={capitalizedCategory}
+      title={capitalizedCategory}
+      description={`${products.length} models`}
+    />
   );
+}
+
+// Generate static params for build time
+export async function generateStaticParams() {
+  return VALID_CATEGORIES.map((category) => ({
+    category,
+  }));
 }

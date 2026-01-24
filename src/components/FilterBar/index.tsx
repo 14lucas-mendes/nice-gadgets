@@ -7,26 +7,27 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-
 import { useId } from 'react';
 
-type ItemSelectProps = {
-  items: {
-    label: string;
-    value: string;
-  }[];
+interface FilterItem {
+  label: string;
+  value: string;
+}
+
+interface FilterBarProps {
+  items: readonly FilterItem[];
   title: string;
-  label: string; // Nova prop para o texto do Label
+  label: string;
   value: string;
   setValue: (value: string) => void;
-};
+}
 
-export default function FilterBar({ value, title, items, setValue, label }: ItemSelectProps) {
-  const id = useId(); // Gera um ID único para acessibilidade
+export default function FilterBar({ value, title, items, setValue, label }: FilterBarProps) {
+  const id = useId();
 
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="text-sm font-medium text-muted-foreground">
+      <label htmlFor={id} className="text-sm font-medium text-[var(--text-muted)]">
         {label}
       </label>
 

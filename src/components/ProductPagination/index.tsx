@@ -10,23 +10,23 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination';
 
-type PaginationCardProps = {
+interface ProductPaginationProps {
   currentPage: number;
   totalPages: number;
-
   onPageChange: (event: React.ChangeEvent<unknown>, value: number) => void;
-};
+}
 
 export default function ProductPagination({
   currentPage,
   totalPages,
   onPageChange,
-}: PaginationCardProps) {
+}: ProductPaginationProps) {
   const handlePageChange = (page: number) => {
     onPageChange({} as React.ChangeEvent<unknown>, page);
   };
 
-  const generatePaginationItems = () => {
+  const generatePaginationItems = (): (number | string)[] => {
+    // Sempre mostra até 7 páginas
     if (totalPages <= 7) {
       return Array.from({ length: totalPages }, (_, i) => i + 1);
     }
@@ -53,25 +53,31 @@ export default function ProductPagination({
     return items;
   };
 
+  const canGoPrevious = currentPage > 1;
+  const canGoNext = currentPage < totalPages;
+
   return (
     <div className="flex w-full justify-center items-center mt-10">
       <Pagination>
         <PaginationContent>
+          {/* Previous Button */}
           <PaginationItem>
             <PaginationPrevious
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                if (currentPage > 1) handlePageChange(currentPage - 1);
+                if (canGoPrevious) handlePageChange(currentPage - 1);
               }}
-              className={currentPage <= 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+              className={!canGoPrevious ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+              aria-disabled={!canGoPrevious}
             />
           </PaginationItem>
 
+          {/* Page Numbers */}
           {generatePaginationItems().map((item, index) => {
             if (typeof item === 'string') {
               return (
-                <PaginationItem key={`ellipsis-${index}`}>
+                <PaginationItem key={`${item}-${index}`}>
                   <PaginationEllipsis />
                 </PaginationItem>
               );
@@ -87,6 +93,8 @@ export default function ProductPagination({
                     handlePageChange(item);
                   }}
                   className="cursor-pointer"
+                  aria-label={`Ir para página ${item}`}
+                  aria-current={currentPage === item ? 'page' : undefined}
                 >
                   {item}
                 </PaginationLink>
@@ -94,16 +102,16 @@ export default function ProductPagination({
             );
           })}
 
+          {/* Next Button */}
           <PaginationItem>
             <PaginationNext
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                if (currentPage < totalPages) handlePageChange(currentPage + 1);
+                if (canGoNext) handlePageChange(currentPage + 1);
               }}
-              className={
-                currentPage >= totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'
-              }
+              className={!canGoNext ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+              aria-disabled={!canGoNext}
             />
           </PaginationItem>
         </PaginationContent>
