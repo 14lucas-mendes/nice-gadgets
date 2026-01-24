@@ -1,16 +1,13 @@
 export interface Product {
-    id: number;
-    category: string;
-    itemId: string;
-    name: string;
-    fullPrice: number;
-    price: number;
-    screen: string,
-    capacity: string,
-    color: string,
-    ram: string,
-    year: number,
-    image: string,
+  image: string;
+  name: string;
+  price: number;
+  fullPrice: number;
+  screen: string;
+  capacity: string;
+  ram: string;
+  itemId: string;
+  category: string;
 }
 
-export type CardNewModels = Product[];
+export type ProductCardVariant = 'default' | 'compact' | 'grid';

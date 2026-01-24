@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useCartFavorite } from '@/context/CartFavoriteContext';
 import { getProductsByItemIds } from '@/utils/products';
-import { Product } from '@/types/Product';
+import { Product } from '@/types/product';
 import CardItem from '@/context';
 import PageHeader from '@/components/PageHeader';
 import Image from 'next/image';

@@ -2,7 +2,7 @@
 
 import { useCartFavorite } from '@/context/CartFavoriteContext';
 import { useEffect, useState } from 'react';
-import { Product } from '@/types/Product';
+import { Product } from '@/types/product';
 import { getProductsByItemIds } from '@/utils/products';
 import PageNavigation from '@/components/PageNavigation';
 

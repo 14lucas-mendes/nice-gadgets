@@ -1,5 +1,5 @@
 import { ProductDetails } from '@/types/ProductDetails';
-import { Product } from '@/types/Product';
+import { Product } from '@/types/product';
 
 import phonesData from '@/data/phones.json';
 import tabletsData from '@/data/tablets.json';
