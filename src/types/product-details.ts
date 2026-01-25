@@ -1,6 +1,4 @@
-import PageHeader from './PageHeader';
-
-type CategoryItemProps = {
+export interface ProductDetail {
   id: string;
   category: string;
   namespaceId: string;
@@ -23,12 +21,9 @@ type CategoryItemProps = {
   camera: string;
   zoom: string;
   cell: string[];
-};
+}
 
-export default function ProductHeader({ product }: { product: CategoryItemProps }) {
-  return (
-    <div className="w-full mx-auto flex flex-col py-6">
-      <PageHeader page={product.category} title={product.name} description={''} />
-    </div>
-  );
+export interface ProductSpec {
+  label: string;
+  value: string;
 }

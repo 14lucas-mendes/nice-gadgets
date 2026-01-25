@@ -1,12 +1,12 @@
 import PageNavigation from '@/components/PageNavigation';
+import { capitalize } from '@/lib/catalog-utils';
+import { notFound } from 'next/navigation';
 import {
   getAllAccessoriesProducts,
   getAllPhonesProducts,
   getAllTabletsProducts,
-} from '@/utils/products';
-import { capitalize } from '@/lib/catalog-utils';
-import { notFound } from 'next/navigation';
-import type { Product } from '@/types/Product';
+} from '@/lib/product-queries';
+import type { Product } from '@/types/product';
 
 const VALID_CATEGORIES = ['accessories', 'phones', 'tablets'] as const;
 type ValidCategory = (typeof VALID_CATEGORIES)[number];

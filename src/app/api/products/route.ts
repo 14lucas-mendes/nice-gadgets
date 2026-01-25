@@ -1,73 +1,54 @@
-// src/app/api/products/route.ts
-import jsonProducts from '@/data/products.json';
-import { NextResponse, NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import type { Product } from '@/types/product';
+import { getAllProducts } from '@/lib/product-queries';
+import { sortProducts, SortOption } from '@/lib/product-sorting';
 
-enum Sorting {
-  PRICE_ASC = 'priceAsc',
-  PRICE_DESC = 'priceDesc',
-  YEAR_ASC = 'yearAsc', // Ordenar por ano crescente (mais antigo → mais novo)
-  YEAR_DESC = 'yearDesc', // Ordenar por ano decrescente (mais novo → mais antigo)
-  TYPE_PRODUCTS = 'all',
+interface ProductsResponse {
+  products: Product[];
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+  hasMore: boolean;
 }
 
-type Product = {
-  id: number;
-  category: string;
-  itemId: string;
-  name: string;
-  fullPrice: number;
-  price: number;
-  screen: string;
-  capacity: string;
-  color: string;
-  ram: string;
-  year: number;
-  image: string;
-};
-
-const sortHandlers: Record<Sorting, (a: Product, b: Product) => number> = {
-  [Sorting.PRICE_ASC]: (a: Product, b: Product) => a.fullPrice - a.price - (b.fullPrice - b.price),
-  [Sorting.PRICE_DESC]: (a: Product, b: Product) => b.fullPrice - b.price - (a.fullPrice - a.price),
-  [Sorting.YEAR_ASC]: (a: Product, b: Product) => a.year - b.year,
-  [Sorting.YEAR_DESC]: (a: Product, b: Product) => b.year - a.year,
-  [Sorting.TYPE_PRODUCTS]: (a: Product, b: Product) => b.category.localeCompare(a.category),
-};
-
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest): Promise<NextResponse<ProductsResponse>> {
   const searchParams = req.nextUrl.searchParams;
 
-  // Parâmetros de paginação
-  const limit = Number(searchParams.get('limit')) || 10;
-  const skip = Number(searchParams.get('skip')) || 0;
+  // Paginação
+  const page = Math.max(1, Number(searchParams.get('page')) || 1);
+  const pageSize = Math.max(1, Math.min(100, Number(searchParams.get('pageSize')) || 10));
 
-  // Parametro de filtro por categoria
-  const categoryParam = searchParams.get('category');
+  // Filtros
+  const category = searchParams.get('category');
+  const sortBy = (searchParams.get('sortBy') as SortOption) || SortOption.YEAR_DESC;
 
-  // Parâmetro de ordenação
-  const sortBy = (searchParams.get('sortBy') as Sorting) ?? '';
+  // Buscar produtos
+  const allProducts = await getAllProducts();
 
-  // Filtro por categoria
-  const filteredProducts = jsonProducts.filter((product: Product) => {
-    if (!categoryParam) {
-      return true;
-    }
+  // Filtrar por categoria
+  const filteredProducts = category
+    ? allProducts.filter((p) => p.category.toLowerCase() === category.toLowerCase())
+    : allProducts;
 
-    return product.category.toLowerCase() === categoryParam.toLowerCase();
-  });
+  // Ordenar
+  const sortedProducts = sortProducts(filteredProducts, sortBy);
 
-  // Ordenar os produtos
-  const sortHandler = sortHandlers[sortBy] || sortHandlers[Sorting.TYPE_PRODUCTS];
-  const sortedProducts = [...filteredProducts].sort(sortHandler);
+  // Paginar
+  const startIndex = (page - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const paginatedProducts = sortedProducts.slice(startIndex, endIndex);
 
-  // Aplicar paginação
-  const products = sortedProducts.slice(skip, skip + limit);
+  // Metadata
+  const total = sortedProducts.length;
+  const totalPages = Math.ceil(total / pageSize);
 
-  // Retornar resultados
   return NextResponse.json({
-    products,
-    total: sortedProducts.length,
-    limit,
-    skip,
-    hasMore: skip + limit < sortedProducts.length,
+    products: paginatedProducts,
+    total,
+    page,
+    pageSize,
+    totalPages,
+    hasMore: page < totalPages,
   });
 }

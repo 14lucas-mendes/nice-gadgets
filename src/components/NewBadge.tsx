@@ -1,8 +1,8 @@
-import { getTopYearProducts } from '@/utils/products';
+import { getNewestProducts } from '@/lib/product-queries';
 import CardSlicer from './CardSlicer';
 
 export default async function NewBadge() {
-  const products = await getTopYearProducts();
+  const products = await getNewestProducts();
 
   return (
     <div className="w-full max-w-6xl mx-auto py-14 sm:py-16 md:py-20">

@@ -1,13 +1,14 @@
 export interface Product {
-  image: string;
+  id: number;
+  category: string;
+  itemId: string;
   name: string;
-  price: number;
   fullPrice: number;
+  price: number;
   screen: string;
   capacity: string;
+  color: string;
   ram: string;
-  itemId: string;
-  category: string;
+  year: number;
+  image: string;
 }
-
-export type ProductCardVariant = 'default' | 'compact' | 'grid';

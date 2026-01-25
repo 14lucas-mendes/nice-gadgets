@@ -2,7 +2,7 @@ import {
   getAllPhonesProducts,
   getAllAccessoriesProducts,
   getAllTabletsProducts,
-} from '@/utils/products';
+} from '@/lib/product-queries';
 import { CATEGORIES } from '@/constants/categories';
 
 export interface CategoryWithCount {

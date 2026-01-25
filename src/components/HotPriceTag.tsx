@@ -1,8 +1,8 @@
-import { getTop10Products } from '@/utils/products';
+import { getTopPriceProducts } from '@/lib/product-queries';
 import CardSlicer from './CardSlicer';
 
 export default async function HotPriceTag() {
-  const products = await getTop10Products();
+  const products = await getTopPriceProducts();
 
   return (
     <div className="w-full max-w-6xl mx-auto pb-16">

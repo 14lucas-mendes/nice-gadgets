@@ -1,6 +1,6 @@
 'use client';
 
-import type { Product } from '@/types/Product';
+import type { Product } from '@/types/product';
 import { useMemo } from 'react';
 import { useCatalogFilters } from '@/hooks/useCatalogFilters';
 import { sortProducts, paginateProducts, calculateTotalPages } from '@/lib/catalog-utils';
