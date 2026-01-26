@@ -30,7 +30,7 @@ export default function CarouselSlider({
 
   return (
     <section
-      className="w-full max-w-full overflow-hidden sm:px-12 md:max-w-6xl md:mx-auto"
+      className="w-full max-w-full overflow-hidden sm:px-12 md:max-w-7xl md:mx-auto"
       aria-label="Carrossel de produtos em destaque"
     >
       <CarouselHeader title={title} subtitle={subtitle} />

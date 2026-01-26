@@ -48,18 +48,18 @@ export function CheckoutModal({
 
         {/* Content */}
         <h2 className="text-2xl font-bold text-center mb-2 text-gray-900 dark:text-white">
-          Confirm Purchase
+          Confirmar compra
         </h2>
 
         <p className="text-center text-gray-600 dark:text-gray-300 mb-6">
-          You are about to complete the purchase of <strong>{itemCount}</strong>{' '}
-          {itemCount === 1 ? 'item' : 'items'} totaling{' '}
+          Você está prestes a concluir a compra de <strong>{itemCount}</strong>{' '}
+          {itemCount === 1 ? 'item' : 'items'} totalizando{' '}
           <strong>{formatCurrency(totalPrice)}</strong>.
         </p>
 
         <div className="bg-orange-50 dark:bg-purple-950 border border-orange-200 dark:border-purple-800 rounded-lg p-4 mb-6">
           <p className="text-sm text-orange-800 dark:text-purple-200 text-center">
-            ⚠️ This is a demo simulation. No real purchase will be made.
+            ⚠️ Esta é uma simulação de demonstração. Nenhuma compra real será efetuada.
           </p>
         </div>
 
@@ -69,14 +69,14 @@ export function CheckoutModal({
             onClick={onClose}
             className="flex-1 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
           >
-            Cancel
+            Cancelar
           </button>
           <button
             onClick={onConfirm}
             className="flex-1 bg-green-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-600 transition-colors flex items-center justify-center gap-2"
           >
             <Check className="w-5 h-5" />
-            Confirm
+            Confirmar
           </button>
         </div>
       </div>

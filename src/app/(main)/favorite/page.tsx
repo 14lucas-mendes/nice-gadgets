@@ -46,12 +46,12 @@ export default function FavoritesPage() {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <EmptyState
-          imageSrc="/img/layout/favorites-is-empty.png"
+          imageSrc="/img/layout/product-not-found.png"
           imageAlt="No favorites yet"
-          title="No favorites yet"
-          description="Start adding products to your favorites to see them here!"
+          title="Ainda não há favoritos"
+          description="Comece a adicionar produtos aos seus favoritos para vê-los aqui!"
           action={{
-            label: 'Explore Products',
+            label: 'Explorar produtos',
             href: '/products/phones',
           }}
         />

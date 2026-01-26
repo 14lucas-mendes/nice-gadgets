@@ -25,11 +25,11 @@ export function CartSummary({ totalPrice, itemCount, onCheckout }: CartSummaryPr
             onClick={onCheckout}
             disabled={itemCount === 0}
           >
-            Proceed to Checkout
+            Fazer o check-out
           </button>
 
           <p className="text-xs text-[var(--text-muted)] mt-4 text-center">
-            Taxes and shipping calculated at checkout
+            Impostos e frete calculados no momento da finalização da compra.
           </p>
         </div>
       </div>

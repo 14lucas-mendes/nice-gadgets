@@ -1,7 +1,6 @@
 'use client';
 
-import BadgeCart from '../CartBadge';
-import FavoriteBadge from '../FavoriteBadge';
+import { CartBadge, FavoriteBadge } from '../Badges';
 import ThemeToggle from '../ThemeToggle';
 
 export default function HeaderActions() {
@@ -13,11 +12,9 @@ export default function HeaderActions() {
       <div className={`${actionClasses} border-r-2 ${borderClasses}`}>
         <ThemeToggle />
       </div>
-      <div className={`${actionClasses} border-x-2 ${borderClasses}`}>
+      <div className="flex gap-4">
         <FavoriteBadge />
-      </div>
-      <div className={actionClasses}>
-        <BadgeCart />
+        <CartBadge />
       </div>
     </div>
   );

@@ -72,10 +72,10 @@ export default function CartPage() {
         <EmptyState
           imageSrc="/img/layout/cart-is-empty.png"
           imageAlt="Empty cart"
-          title="Your cart is empty"
-          description="Add some products to get started!"
+          title="Seu carrinho está vazio"
+          description="Adicione alguns produtos para começar!"
           action={{
-            label: 'Start Shopping',
+            label: 'Começar a comprar',
             href: '/products/phones',
           }}
         />
