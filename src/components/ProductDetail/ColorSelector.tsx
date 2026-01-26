@@ -16,7 +16,7 @@ export default function ColorSelector({ product }: ColorSelectorProps) {
         Available Colors
       </p>
 
-      <div className="flex flex-row flex-wrap gap-2">
+      <div className="flex flex-row flex-wrap gap-2 w-full">
         {product.colorsAvailable.map((color) => {
           const isSelected = product.color === color;
           const colorHex = getColorHex(color);

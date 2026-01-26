@@ -22,7 +22,7 @@ export default function StorageSelector({ product }: StorageSelectorProps) {
         Select Capacity
       </p>
 
-      <div className="flex flex-row flex-wrap gap-2">
+      <div className="flex flex-row flex-wrap gap-2 w-full">
         {product.capacityAvailable.map((capacity) => {
           const isSelected = product.capacity === capacity;
 
@@ -32,11 +32,12 @@ export default function StorageSelector({ product }: StorageSelectorProps) {
               type="button"
               onClick={() => handleCapacityClick(capacity)}
               className={`
-                px-3 py-2 sm:px-4 sm:py-2.5
+                px-2.5 py-1.5 sm:px-3 sm:py-2
                 text-xs sm:text-sm font-medium 
                 border-2 rounded-lg 
                 transition-all duration-200
                 hover:border-orange-400 dark:hover:border-purple-400
+                flex-shrink-0
                 ${
                   isSelected
                     ? 'border-gray-800 dark:border-white bg-gray-50 dark:bg-gray-800'

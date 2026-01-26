@@ -23,12 +23,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
   }
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 sm:pb-14 md:pb-20">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 sm:pb-14 md:pb-20 overflow-x-hidden">
       {/* Breadcrumb + Title */}
       <ProductHeader product={product} />
 
       {/* Grid Principal - Mobile: Stack, Desktop: 7/5 columns */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 mt-4 sm:mt-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 mt-4 sm:mt-6 w-full">
         {/* Galeria de Imagens - 58% width desktop */}
         <div className="lg:col-span-7">
           <ProductImageGallery product={product} />

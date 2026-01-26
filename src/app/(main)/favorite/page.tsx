@@ -1,67 +1,72 @@
 'use client';
 
+import { useMemo } from 'react';
 import { useCartFavorite } from '@/context/CartFavoriteContext';
-import { useEffect, useState } from 'react';
-import { Product } from '@/types/product';
-import { getProductsByItemIds } from '@/utils/products';
+import { useProductsFromIds } from '@/hooks/useProductsFromIds';
 import PageNavigation from '@/components/PageNavigation';
+import { EmptyState } from '@/components/EmptyState/EmptyState';
+import { Skeleton } from '@/components/ui/skeleton';
 
-export default function Favorite() {
+export default function FavoritesPage() {
   const { favoriteItems, favoriteCount } = useCartFavorite();
-  const [favoriteProducts, setFavoriteProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const loadFavoriteProducts = async () => {
-      setIsLoading(true);
-      try {
-        const itemIds = Array.from(favoriteItems);
-        if (itemIds.length > 0) {
-          const products = await getProductsByItemIds(itemIds);
-          setFavoriteProducts(products);
-        } else {
-          setFavoriteProducts([]);
-        }
-      } catch (error) {
-        console.error('Error loading favorite products:', error);
-        setFavoriteProducts([]);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  // Get product IDs from favorites
+  const itemIds = useMemo(() => Array.from(favoriteItems), [favoriteItems]);
 
-    loadFavoriteProducts();
-  }, [favoriteItems]);
+  // Fetch products
+  const { products: favoriteProducts, isLoading, error } = useProductsFromIds(itemIds);
 
+  // Loading State
   if (isLoading) {
     return (
-      <div className="max-w-6xl mx-auto w-full pt-6">
-        <h1>Favourites</h1>
-        <p className="font-semibold text-[14px] text-[#89939A] mt-2">Carregando...</p>
-      </div>
-    );
-  }
-
-  // Se não houver favoritos, mostrar estado vazio
-  if (favoriteCount === 0 || favoriteProducts.length === 0) {
-    return (
-      <div className="max-w-6xl mx-auto w-full pt-6">
-        <div className="flex justify-center items-center mt-10">
-          <p className="text-[#89939A] text-5xl font-semibold">
-            Você não tem produtos favoritados ainda.
-          </p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <Skeleton className="h-10 w-48 mb-6" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[1, 2, 3, 4].map((i) => (
+            <Skeleton key={i} className="h-96" />
+          ))}
         </div>
       </div>
     );
   }
 
+  // Error State
+  if (error) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="p-4 bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-lg">
+          <p className="text-red-800 dark:text-red-200">Error loading favorites: {error.message}</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Empty State
+  if (favoriteCount === 0 || favoriteProducts.length === 0) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <EmptyState
+          imageSrc="/img/layout/favorites-is-empty.png"
+          imageAlt="No favorites yet"
+          title="No favorites yet"
+          description="Start adding products to your favorites to see them here!"
+          action={{
+            label: 'Explore Products',
+            href: '/products/phones',
+          }}
+        />
+      </div>
+    );
+  }
+
+  // Favorites Grid
   return (
-    <div className="max-w-6xl mx-auto pb-14">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14">
       <PageNavigation
         products={favoriteProducts}
-        page="Favourites"
-        title="Favourites"
-        description={`${favoriteCount} ${favoriteCount === 1 ? 'item' : 'itens'}`}
+        page="Favorites"
+        title="Your Favorites"
+        description={`${favoriteCount} ${favoriteCount === 1 ? 'item' : 'items'}`}
       />
     </div>
   );

@@ -14,6 +14,7 @@ interface CartFavoriteContextType {
   isFavorite: (productId: string) => boolean;
   cartCount: number;
   favoriteCount: number;
+  decrementCart: (itemId: string) => void;
 }
 
 const CartFavoriteContext = createContext<CartFavoriteContextType | undefined>(undefined);
@@ -87,6 +88,21 @@ export function CartFavoriteProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const decrementCart = (itemId: string) => {
+    setCartItems((prev) => {
+      const newCart = new Map(prev);
+      const currentQty = newCart.get(itemId) || 0;
+
+      if (currentQty <= 1) {
+        newCart.delete(itemId);
+      } else {
+        newCart.set(itemId, currentQty - 1);
+      }
+
+      return newCart;
+    });
+  };
+
   const toggleFavorite = (productId: string) => {
     setFavoriteItems((prev) => {
       const newSet = new Set(prev);
@@ -127,6 +143,7 @@ export function CartFavoriteProvider({ children }: { children: ReactNode }) {
         isInCart,
         isFavorite,
         cartCount,
+        decrementCart,
         favoriteCount: favoriteItems.size,
       }}
     >

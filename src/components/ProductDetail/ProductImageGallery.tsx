@@ -67,7 +67,7 @@ export function ProductImageGallery({ product }: ProductImageGalleryProps) {
               fill
               priority
               className="object-contain p-4 sm:p-6 md:p-8"
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 768px) calc(100vw - 3rem), (max-width: 1024px) calc(100vw - 4rem), (100vw - 6rem) / 2"
             />
           </div>
         </div>
