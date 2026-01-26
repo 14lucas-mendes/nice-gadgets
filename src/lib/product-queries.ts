@@ -1,4 +1,4 @@
-import type { Product } from '@/types/product';
+import type { Product } from '@/types/product-temp';
 import type { ProductDetail } from '@/types/product-details';
 import { getAllProductDetails, findProductDetailById } from './product-data';
 import { mapDetailsToSummaries } from './product-mapper';

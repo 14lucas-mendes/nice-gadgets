@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useCartFavorite } from '@/context/CartFavoriteContext';
-import { Product } from '@/types/product';
+import { Product } from '@/types/product-temp';
 import { CircleX } from 'lucide-react';
 import { Plus } from 'lucide-react';
 import { Minus } from 'lucide-react';

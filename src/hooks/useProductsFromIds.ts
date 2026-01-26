@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import type { Product } from '@/types/product';
+import type { Product } from '@/types/product-temp';
 import { getProductsByItemIds } from '@/lib/product-queries';
 
 export function useProductsFromIds(itemIds: string[]) {

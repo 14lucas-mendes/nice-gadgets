@@ -1,4 +1,4 @@
-import type { Product } from '@/types/product';
+import type { Product } from '@/types/product-temp';
 import type { ProductDetail } from '@/types/product-details';
 
 // Campos que precisam de default se não existirem

@@ -1,6 +1,6 @@
 'use client';
 
-import { type Product } from '@/types/product';
+import { type Product } from '@/types/product-temp';
 import ProductCard from '@/components/ProductCard';
 import { useCarouselNavigation } from '@/hooks/useCarouselNavigation';
 import { NavigationButtons } from './NavigationButtons';

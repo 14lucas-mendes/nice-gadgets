@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useCartFavorite } from '@/context/CartFavoriteContext';
 import { formatCurrency } from '@/lib/formatters';
 import { Trash2, Plus, Minus } from 'lucide-react';
-import type { Product } from '@/types/product';
+import type { Product } from '@/types/product-temp';
 
 interface CartItemProps {
   product: Product;

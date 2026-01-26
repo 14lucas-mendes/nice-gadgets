@@ -1,4 +1,4 @@
-import type { Product } from '@/types/product';
+import type { Product } from '@/types/product-temp';
 import type { SortOption } from '@/types/catalog';
 
 export function sortProducts(products: Product[], sortBy: SortOption): Product[] {

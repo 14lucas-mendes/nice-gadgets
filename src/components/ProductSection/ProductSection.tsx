@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import CardSlicer from '@/components/CardSlicer';
 import { CardSlicerSkeleton } from '@/components/CardSlicer/CardSlicerSkeleton';
-import type { Product } from '@/types/product';
+import type { Product } from '@/types/product-temp';
 
 interface ProductSectionProps {
   title: string;

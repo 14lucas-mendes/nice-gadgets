@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 import { useCartFavorite } from '@/context/CartFavoriteContext';
 import { formatProductUrl } from '@/lib/formatters';
-import type { Product } from '@/types/product';
+import type { Product } from '@/types/product-temp';
 
 export function useProductCard(product: Product) {
   const router = useRouter();

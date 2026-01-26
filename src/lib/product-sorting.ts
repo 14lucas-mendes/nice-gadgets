@@ -1,4 +1,4 @@
-import type { Product } from '@/types/product';
+import type { Product } from '@/types/product-temp';
 
 export enum SortOption {
   PRICE_ASC = 'price_asc',

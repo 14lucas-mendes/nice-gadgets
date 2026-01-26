@@ -6,7 +6,7 @@ import {
   getAllPhonesProducts,
   getAllTabletsProducts,
 } from '@/lib/product-queries';
-import type { Product } from '@/types/product';
+import type { Product } from '@/types/product-temp';
 
 const VALID_CATEGORIES = ['accessories', 'phones', 'tablets'] as const;
 type ValidCategory = (typeof VALID_CATEGORIES)[number];

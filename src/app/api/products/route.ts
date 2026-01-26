@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import type { Product } from '@/types/product';
+import type { Product } from '@/types/product-temp';
 import { getAllProducts } from '@/lib/product-queries';
 import { sortProducts, SortOption } from '@/lib/product-sorting';
 

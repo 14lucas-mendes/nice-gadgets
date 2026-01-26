@@ -8,7 +8,7 @@ import { ProductSpecs } from './ProductSpecs';
 import { AddToCartButton } from './AddToCartButton';
 import { FavoriteButton } from './FavoriteButton';
 import { useProductCard } from '@/hooks/useProductCard';
-import type { Product, ProductCardVariant } from '@/types/product';
+import type { Product, ProductCardVariant } from '@/types/product-temp';
 
 interface ProductCardProps {
   product: Product;
