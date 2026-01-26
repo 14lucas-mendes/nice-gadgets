@@ -12,3 +12,4 @@ export interface Product {
   year: number;
   image: string;
 }
+export type ProductCardVariant = 'default' | 'compact' | 'grid';

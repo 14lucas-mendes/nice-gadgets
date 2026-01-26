@@ -1,4 +1,4 @@
-import type { Product } from '@/types/Product';
+import type { Product } from '@/types/product';
 import type { ProductDetail } from '@/types/product-details';
 
 // Campos que precisam de default se não existirem
@@ -14,7 +14,6 @@ export function mapDetailToSummary(detail: ProductDetail): Product {
     id: parseInt(detail.id) || 0, // Se id não for número, usa 0
     itemId: detail.id,
     category: detail.category,
-    namespaceId: detail.namespaceId,
 
     // Preços
     fullPrice: detail.priceRegular,

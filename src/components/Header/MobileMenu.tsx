@@ -8,10 +8,9 @@ import { CartBadge, FavoriteBadge } from '../Badges';
 interface MobileMenuProps {
   pathName: string;
   onClose: () => void;
-  setMenuOpen: (open: boolean) => void;
 }
 
-export default function MobileMenu({ pathName, onClose, setMenuOpen }: MobileMenuProps) {
+export default function MobileMenu({ pathName, onClose }: MobileMenuProps) {
   return (
     <div className="fixed top-12 left-0 w-full h-[calc(100vh-3rem)] bg-[var(--header-bg)] sm:hidden z-50 overflow-y-auto">
       <div className="flex flex-col h-full justify-between">
@@ -37,7 +36,7 @@ export default function MobileMenu({ pathName, onClose, setMenuOpen }: MobileMen
             <ThemeToggle />
           </div>
           <div className="w-full min-h-[64px] items-center justify-center flex border-r-2 border-[var(--header-border)]">
-            <FavoriteBadge onNavigate={() => setMenuOpen(false)} />
+            <FavoriteBadge onNavigate={() => onClose()} />
           </div>
           <div className="w-full min-h-[64px] items-center justify-center flex">
             <CartBadge onNavigate={onClose} />
