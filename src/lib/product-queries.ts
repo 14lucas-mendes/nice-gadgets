@@ -1,7 +1,7 @@
 import type { Product } from '@/types/product';
 import type { ProductDetail } from '@/types/product-details';
 import { getAllProductDetails, findProductDetailById } from './product-data';
-import { mapDetailToSummary, mapDetailsToSummaries } from './product-mapper';
+import { mapDetailsToSummaries } from './product-mapper';
 import { sortProducts, SortOption } from './product-sorting';
 import { PRODUCT_LIMITS } from '@/constants/products';
 
