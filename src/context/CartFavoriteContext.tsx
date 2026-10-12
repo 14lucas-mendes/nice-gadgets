@@ -1,6 +1,16 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import {
+  getBrowserStorage,
+  parseCartItems,
+  parseFavoriteItems,
+  readStorageValue,
+  serializeCartItems,
+  serializeFavoriteItems,
+  STORAGE_KEYS,
+  writeStorageValueAfterRestore,
+} from '@/lib/persistence';
 
 interface CartFavoriteContextType {
   cartItems: Map<string, number>;
@@ -22,96 +32,100 @@ const CartFavoriteContext = createContext<CartFavoriteContextType | undefined>(u
 export function CartFavoriteProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<Map<string, number>>(new Map());
   const [favoriteItems, setFavoriteItems] = useState<Set<string>>(new Set());
+  const [isRestored, setIsRestored] = useState(false);
 
-  // Carregar do localStorage na inicialização
   useEffect(() => {
-    // Verificar se estamos no cliente antes de acessar localStorage
-    if (typeof window === 'undefined') return;
+    const storage = getBrowserStorage();
 
-    const savedCart = localStorage.getItem('cartItems');
-    const savedFavorites = localStorage.getItem('favoriteItems');
-
-    if (savedCart) {
-      try {
-        const cartData = JSON.parse(savedCart);
-        setCartItems(new Map(cartData));
-      } catch (error) {
-        console.error('Error loading cart from localStorage:', error);
-      }
-    }
-
-    if (savedFavorites) {
-      try {
-        setFavoriteItems(new Set(JSON.parse(savedFavorites)));
-      } catch (error) {
-        console.error('Error loading favorites from localStorage:', error);
-      }
-    }
+    setCartItems(parseCartItems(readStorageValue(storage, STORAGE_KEYS.cartItems)));
+    setFavoriteItems(
+      parseFavoriteItems(readStorageValue(storage, STORAGE_KEYS.favoriteItems)),
+    );
+    setIsRestored(true);
   }, []);
 
-  // Salvar no localStorage sempre que houver mudanças
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    localStorage.setItem('cartItems', JSON.stringify(Array.from(cartItems.entries())));
-  }, [cartItems]);
+    writeStorageValueAfterRestore(
+      getBrowserStorage(),
+      STORAGE_KEYS.cartItems,
+      serializeCartItems(cartItems),
+      isRestored,
+    );
+  }, [cartItems, isRestored]);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    localStorage.setItem('favoriteItems', JSON.stringify(Array.from(favoriteItems)));
-  }, [favoriteItems]);
+    writeStorageValueAfterRestore(
+      getBrowserStorage(),
+      STORAGE_KEYS.favoriteItems,
+      serializeFavoriteItems(favoriteItems),
+      isRestored,
+    );
+  }, [favoriteItems, isRestored]);
 
   const addToCart = (productId: string) => {
+    if (productId.trim() === '') {
+      return;
+    }
+
     setCartItems((prev) => {
-      const newMap = new Map(prev);
-      const currentQuantity = newMap.get(productId) || 0;
-      newMap.set(productId, currentQuantity + 1);
-      return newMap;
+      const next = new Map(prev);
+      const currentQuantity = next.get(productId) ?? 0;
+      next.set(productId, currentQuantity + 1);
+      return next;
     });
   };
 
   const decrementFromCart = (productId: string) => {
     setCartItems((prev) => {
-      const newMap = new Map(prev);
-      const currentQuantity = newMap.get(productId) || 0;
+      const next = new Map(prev);
+      const currentQuantity = next.get(productId) ?? 0;
+
       if (currentQuantity > 1) {
-        newMap.set(productId, currentQuantity - 1);
+        next.set(productId, currentQuantity - 1);
       }
-      return newMap;
+
+      return next;
     });
   };
 
   const removeFromCart = (productId: string) => {
     setCartItems((prev) => {
-      const newMap = new Map(prev);
-      newMap.delete(productId);
-      return newMap;
+      const next = new Map(prev);
+      next.delete(productId);
+      return next;
     });
   };
 
   const decrementCart = (itemId: string) => {
     setCartItems((prev) => {
-      const newCart = new Map(prev);
-      const currentQty = newCart.get(itemId) || 0;
+      const next = new Map(prev);
+      const currentQuantity = next.get(itemId) ?? 0;
 
-      if (currentQty <= 1) {
-        newCart.delete(itemId);
+      if (currentQuantity <= 1) {
+        next.delete(itemId);
       } else {
-        newCart.set(itemId, currentQty - 1);
+        next.set(itemId, currentQuantity - 1);
       }
 
-      return newCart;
+      return next;
     });
   };
 
   const toggleFavorite = (productId: string) => {
+    if (productId.trim() === '') {
+      return;
+    }
+
     setFavoriteItems((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(productId)) {
-        newSet.delete(productId);
+      const next = new Set(prev);
+
+      if (next.has(productId)) {
+        next.delete(productId);
       } else {
-        newSet.add(productId);
+        next.add(productId);
       }
-      return newSet;
+
+      return next;
     });
   };
 
@@ -119,16 +133,12 @@ export function CartFavoriteProvider({ children }: { children: ReactNode }) {
     setCartItems(new Map());
   };
 
-  const isInCart = (productId: string) => {
-    return cartItems.has(productId);
-  };
-
-  const isFavorite = (productId: string) => {
-    return favoriteItems.has(productId);
-  };
-
-  // Calcular total de itens no carrinho (soma das quantidades)
-  const cartCount = Array.from(cartItems.values()).reduce((sum, quantity) => sum + quantity, 0);
+  const isInCart = (productId: string) => cartItems.has(productId);
+  const isFavorite = (productId: string) => favoriteItems.has(productId);
+  const cartCount = Array.from(cartItems.values()).reduce(
+    (sum, quantity) => sum + quantity,
+    0,
+  );
 
   return (
     <CartFavoriteContext.Provider
@@ -154,8 +164,10 @@ export function CartFavoriteProvider({ children }: { children: ReactNode }) {
 
 export function useCartFavorite() {
   const context = useContext(CartFavoriteContext);
-  if (context === undefined) {
+
+  if (!context) {
     throw new Error('useCartFavorite must be used within a CartFavoriteProvider');
   }
+
   return context;
 }

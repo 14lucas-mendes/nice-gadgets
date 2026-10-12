@@ -1,6 +1,12 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import {
+  getBrowserStorage,
+  readStorageValue,
+  STORAGE_KEYS,
+  writeStorageValue,
+} from '@/lib/persistence';
 
 type Theme = 'light' | 'dark';
 
@@ -11,40 +17,43 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+function getSystemTheme(): Theme {
+  if (
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+  ) {
+    return 'dark';
+  }
+
+  return 'light';
+}
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>('light');
+  const [isRestored, setIsRestored] = useState(false);
 
-  // Carregar do localStorage na inicialização
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    const savedTheme = readStorageValue(getBrowserStorage(), STORAGE_KEYS.theme);
+    const restoredTheme =
+      savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : getSystemTheme();
 
-    const savedTheme = localStorage.getItem('theme') as Theme;
-    if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
-      setTheme(savedTheme);
-    } else {
-      // Detectar preferência do sistema
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setTheme(prefersDark ? 'dark' : 'light');
-    }
+    setTheme(restoredTheme);
+    setIsRestored(true);
   }, []);
 
-  // Aplicar a classe .dark ao html quando o tema mudar
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
+    if (!isRestored) {
+      return;
     }
 
-    // Salvar no localStorage
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+    const root = document.documentElement;
+    root.classList.toggle('dark', theme === 'dark');
+    writeStorageValue(getBrowserStorage(), STORAGE_KEYS.theme, theme);
+  }, [isRestored, theme]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+    setTheme((previousTheme) => (previousTheme === 'light' ? 'dark' : 'light'));
   };
 
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
@@ -52,8 +61,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
 export function useTheme() {
   const context = useContext(ThemeContext);
-  if (context === undefined) {
+
+  if (!context) {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
+
   return context;
 }
