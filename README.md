@@ -65,6 +65,7 @@ Outros comandos:
 ```bash
 npm run build          # build de produção
 npm run lint           # verificação com ESLint
+npm run test:catalog    # contrato de filtros e paginação
 npm run test:persistence  # contrato de persistência
 npm run validate:data  # consistência entre os catálogos de produtos
 ```

@@ -13,7 +13,7 @@ import {
 interface ProductPaginationProps {
   currentPage: number;
   totalPages: number;
-  onPageChange: (event: React.ChangeEvent<unknown>, value: number) => void;
+  onPageChange: (page: number) => void;
 }
 
 export default function ProductPagination({
@@ -21,12 +21,7 @@ export default function ProductPagination({
   totalPages,
   onPageChange,
 }: ProductPaginationProps) {
-  const handlePageChange = (page: number) => {
-    onPageChange({} as React.ChangeEvent<unknown>, page);
-  };
-
   const generatePaginationItems = (): (number | string)[] => {
-    // Sempre mostra até 7 páginas
     if (totalPages <= 7) {
       return Array.from({ length: totalPages }, (_, i) => i + 1);
     }
@@ -60,20 +55,21 @@ export default function ProductPagination({
     <div className="flex w-full justify-center items-center mt-10">
       <Pagination>
         <PaginationContent>
-          {/* Previous Button */}
           <PaginationItem>
             <PaginationPrevious
               href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                if (canGoPrevious) handlePageChange(currentPage - 1);
+              onClick={(event) => {
+                event.preventDefault();
+
+                if (canGoPrevious) {
+                  onPageChange(currentPage - 1);
+                }
               }}
               className={!canGoPrevious ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
               aria-disabled={!canGoPrevious}
             />
           </PaginationItem>
 
-          {/* Page Numbers */}
           {generatePaginationItems().map((item, index) => {
             if (typeof item === 'string') {
               return (
@@ -88,9 +84,9 @@ export default function ProductPagination({
                 <PaginationLink
                   href="#"
                   isActive={currentPage === item}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handlePageChange(item);
+                  onClick={(event) => {
+                    event.preventDefault();
+                    onPageChange(item);
                   }}
                   className="cursor-pointer"
                   aria-label={`Ir para página ${item}`}
@@ -102,13 +98,15 @@ export default function ProductPagination({
             );
           })}
 
-          {/* Next Button */}
           <PaginationItem>
             <PaginationNext
               href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                if (canGoNext) handlePageChange(currentPage + 1);
+              onClick={(event) => {
+                event.preventDefault();
+
+                if (canGoNext) {
+                  onPageChange(currentPage + 1);
+                }
               }}
               className={!canGoNext ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
               aria-disabled={!canGoNext}

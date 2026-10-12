@@ -1,5 +1,6 @@
 import type { Product } from '@/types/product-temp';
-import type { SortOption } from '@/types/catalog';
+import type { PerPageOption, SortOption } from '@/types/catalog';
+import { normalizePage, parsePageSize } from './catalog-filters';
 
 export function sortProducts(products: Product[], sortBy: SortOption): Product[] {
   const sorted = [...products];
@@ -16,21 +17,29 @@ export function sortProducts(products: Product[], sortBy: SortOption): Product[]
   }
 }
 
-export function paginateProducts(products: Product[], page: number, perPage: string): Product[] {
+export function paginateProducts(
+  products: Product[],
+  page: number,
+  perPage: PerPageOption,
+): Product[] {
   if (perPage === 'all') {
     return products;
   }
 
-  const itemsPerPage = parseInt(perPage);
-  const startIndex = (page - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
+  const itemsPerPage = parsePageSize(perPage);
+  const totalPages = calculateTotalPages(products.length, perPage);
+  const safePage = normalizePage(page, totalPages);
+  const startIndex = (safePage - 1) * itemsPerPage;
 
-  return products.slice(startIndex, endIndex);
+  return products.slice(startIndex, startIndex + itemsPerPage);
 }
 
-export function calculateTotalPages(totalItems: number, perPage: string): number {
-  if (perPage === 'all') return 1;
-  return Math.ceil(totalItems / parseInt(perPage));
+export function calculateTotalPages(totalItems: number, perPage: PerPageOption): number {
+  if (perPage === 'all') {
+    return 1;
+  }
+
+  return Math.max(1, Math.ceil(totalItems / parsePageSize(perPage)));
 }
 
 export function capitalize(str: string): string {
