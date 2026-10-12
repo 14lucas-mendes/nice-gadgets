@@ -30,7 +30,6 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@eslint/eslintrc": "^3",
     "eslint": "^9.32.0",
     "eslint-config-next": "15.4.5",
     "eslint-config-prettier": "^10.1.8",
