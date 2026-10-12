@@ -2,6 +2,8 @@ import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { matchesProductIdentity } from '../src/lib/product-data-matching.mjs';
+
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 
 function readJson(fileName) {
@@ -24,7 +26,7 @@ const summariesByItemId = new Map(
 
 function findSummary(detail) {
   return (
-    summariesByItemId.get(detail.id) ??
+    summaries.find((summary) => matchesProductIdentity(summary, detail.id)) ??
     summaries.find(
       (summary) =>
         summary.category === detail.category &&
