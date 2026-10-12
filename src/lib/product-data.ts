@@ -3,6 +3,7 @@ import type { ProductDetail } from '@/types/product-details';
 import phonesData from '@/data/phones.json';
 import tabletsData from '@/data/tablets.json';
 import accessoriesData from '@/data/accessories.json';
+import { matchesProductIdentity } from './product-data-matching.mjs';
 
 // Cache de dados (evita re-parse do JSON)
 let cachedProducts: ProductDetail[] | null = null;
@@ -28,5 +29,5 @@ export function getProductDetailsByCategory(category: string): ProductDetail[] {
 
 export function findProductDetailById(productId: string): ProductDetail | null {
   const allProducts = getAllProductDetails();
-  return allProducts.find((p) => p.id === productId || p.namespaceId === productId) || null;
+  return allProducts.find((product) => matchesProductIdentity(product, productId)) ?? null;
 }

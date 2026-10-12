@@ -2,11 +2,15 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22.6"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "validate:data": "node scripts/validate-product-data.mjs"
   },
   "dependencies": {
     "@fontsource/roboto": "^5.2.8",
