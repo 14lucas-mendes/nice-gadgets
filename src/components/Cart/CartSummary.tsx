@@ -1,12 +1,19 @@
+import type { RefObject } from 'react';
 import { formatCurrency } from '@/lib/formatters';
 
 interface CartSummaryProps {
   totalPrice: number;
   itemCount: number;
   onCheckout: () => void;
+  checkoutButtonRef?: RefObject<HTMLButtonElement | null>;
 }
 
-export function CartSummary({ totalPrice, itemCount, onCheckout }: CartSummaryProps) {
+export function CartSummary({
+  totalPrice,
+  itemCount,
+  onCheckout,
+  checkoutButtonRef,
+}: CartSummaryProps) {
   return (
     <aside className="lg:w-96 flex-shrink-0">
       <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 sticky top-6">
@@ -21,6 +28,8 @@ export function CartSummary({ totalPrice, itemCount, onCheckout }: CartSummaryPr
           <hr className="w-full my-6 border-gray-200 dark:border-gray-700" />
 
           <button
+            ref={checkoutButtonRef}
+            type="button"
             className="w-full h-12 sm:h-14 bg-orange-500 dark:bg-purple-500 text-white font-bold rounded-lg hover:bg-orange-600 dark:hover:bg-purple-600 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={onCheckout}
             disabled={itemCount === 0}
