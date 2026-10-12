@@ -20,9 +20,6 @@ const details = [
 ];
 
 const normalize = (value) => String(value).toLowerCase().replace(/\s+/g, '');
-const summariesByItemId = new Map(
-  summaries.map((summary) => [summary.itemId, summary]),
-);
 
 function findSummary(detail) {
   return (
