@@ -8,27 +8,23 @@ import type { Product } from '@/types/product-temp';
 
 export function useProductCard(product: Product) {
   const router = useRouter();
-  const { addToCart, removeFromCart, toggleFavorite, isFavorite, isInCart } = useCartFavorite();
+  const { addToCart, toggleFavorite, isFavorite, isInCart } = useCartFavorite();
 
   const navigateToProduct = useCallback(() => {
     router.push(formatProductUrl(product.category, product.itemId));
   }, [router, product.category, product.itemId]);
 
-  const handleToggleCart = useCallback(
-    (e: React.MouseEvent) => {
-      e.stopPropagation();
-      if (isInCart(product.itemId)) {
-        removeFromCart(product.itemId);
-      } else {
-        addToCart(product.itemId);
-      }
+  const handleAddToCart = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
+      addToCart(product.itemId);
     },
-    [product.itemId, isInCart, addToCart, removeFromCart],
+    [product.itemId, addToCart],
   );
 
   const handleToggleFavorite = useCallback(
-    (e: React.MouseEvent) => {
-      e.stopPropagation();
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
       toggleFavorite(product.itemId);
     },
     [product.itemId, toggleFavorite],
@@ -36,7 +32,7 @@ export function useProductCard(product: Product) {
 
   return {
     navigateToProduct,
-    handleToggleCart,
+    handleAddToCart,
     handleToggleFavorite,
     isInCart: isInCart(product.itemId),
     isFavorite: isFavorite(product.itemId),
