@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import type { Product } from '@/types/product-temp';
+import { PRODUCT_LIMITS } from '@/constants/products';
 import { getAllProducts } from '@/lib/product-queries';
 import { sortProducts, SortOption } from '@/lib/product-sorting';
 
@@ -15,31 +16,27 @@ interface ProductsResponse {
 export async function GET(req: NextRequest): Promise<NextResponse<ProductsResponse>> {
   const searchParams = req.nextUrl.searchParams;
 
-  // Paginação
   const page = Math.max(1, Number(searchParams.get('page')) || 1);
-  const pageSize = Math.max(1, Math.min(100, Number(searchParams.get('pageSize')) || 10));
+  const pageSize = Math.max(
+    1,
+    Math.min(100, Number(searchParams.get('pageSize')) || PRODUCT_LIMITS.DEFAULT_PAGE_SIZE),
+  );
 
-  // Filtros
   const category = searchParams.get('category');
+  const idsParam = searchParams.get('ids');
+  const itemIds = idsParam === null ? null : new Set(idsParam.split(',').filter(Boolean));
   const sortBy = (searchParams.get('sortBy') as SortOption) || SortOption.YEAR_DESC;
 
-  // Buscar produtos
   const allProducts = await getAllProducts();
+  const filteredProducts = allProducts.filter((product) => {
+    const matchesCategory = !category || product.category.toLowerCase() === category.toLowerCase();
+    const matchesIds = itemIds === null || itemIds.has(product.itemId);
+    return matchesCategory && matchesIds;
+  });
 
-  // Filtrar por categoria
-  const filteredProducts = category
-    ? allProducts.filter((p) => p.category.toLowerCase() === category.toLowerCase())
-    : allProducts;
-
-  // Ordenar
   const sortedProducts = sortProducts(filteredProducts, sortBy);
-
-  // Paginar
   const startIndex = (page - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
-  const paginatedProducts = sortedProducts.slice(startIndex, endIndex);
-
-  // Metadata
+  const paginatedProducts = sortedProducts.slice(startIndex, startIndex + pageSize);
   const total = sortedProducts.length;
   const totalPages = Math.ceil(total / pageSize);
 

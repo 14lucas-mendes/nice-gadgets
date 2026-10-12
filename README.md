@@ -26,6 +26,8 @@ Projeto individual desenvolvido durante a formação na Mate Academy. Foi criado
 
 **Filtros guardados na URL.** Ordenação, itens por página e página atual ficam nos parâmetros da URL (`useCatalogFilters`). Assim, é possível compartilhar ou recarregar uma listagem sem perder o estado.
 
+**Dados do catálogo.** Os preços exibidos usam `priceRegular`/`priceDiscount` dos arquivos de detalhes. `products.json` fornece os metadados de catálogo (`id`/`year`) usados para formar os resumos, e a validação do CI confirma que os 194 detalhes têm correspondência.
+
 **Dados lidos no servidor, interação no cliente.** As páginas de categoria são Server Components e leem os JSON mockados por meio de funções em `lib/product-queries.ts`. Os trechos interativos (carrinho, filtros, carrossel, tema) são Client Components.
 
 ## O que o projeto ainda não tem

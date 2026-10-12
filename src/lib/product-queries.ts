@@ -5,59 +5,35 @@ import { mapDetailsToSummaries } from './product-mapper';
 import { sortProducts, SortOption } from './product-sorting';
 import { PRODUCT_LIMITS } from '@/constants/products';
 
-// ==========================================
-// QUERIES DE PRODUCT DETAIL
-// ==========================================
-
 export async function getProductById(productId: string): Promise<ProductDetail | null> {
   return findProductDetailById(productId);
 }
 
-// ==========================================
-// QUERIES DE PRODUCT SUMMARY
-// ==========================================
-
 export async function getAllProducts(): Promise<Product[]> {
-  const details = getAllProductDetails();
-  return mapDetailsToSummaries(details);
+  return mapDetailsToSummaries(getAllProductDetails());
 }
 
 export async function getProductsByItemIds(itemIds: string[]): Promise<Product[]> {
-  const details = getAllProductDetails();
-  const filtered = details.filter((product) => itemIds.includes(product.id));
-  return mapDetailsToSummaries(filtered);
+  const requestedIds = new Set(itemIds);
+  const details = getAllProductDetails().filter((product) => requestedIds.has(product.id));
+  return mapDetailsToSummaries(details);
 }
-
-// ==========================================
-// TOP PRODUCTS (por preço)
-// ==========================================
 
 export async function getTopPriceProducts(
   limit: number = PRODUCT_LIMITS.TOP_PRODUCTS,
 ): Promise<Product[]> {
-  const products = await getAllProducts();
-  const sorted = sortProducts(products, SortOption.PRICE_DESC);
+  const sorted = sortProducts(await getAllProducts(), SortOption.PRICE_DESC);
   return sorted.slice(0, limit);
 }
-
-// ==========================================
-// NEWEST PRODUCTS (por ano)
-// ==========================================
 
 export async function getNewestProducts(
   limit: number = PRODUCT_LIMITS.TOP_PRODUCTS,
 ): Promise<Product[]> {
-  const products = await getAllProducts();
-  const sorted = sortProducts(products, SortOption.YEAR_DESC);
+  const sorted = sortProducts(await getAllProducts(), SortOption.YEAR_DESC);
   return sorted.slice(0, limit);
 }
 
-// Alias para compatibilidade (se já está usando)
 export const getTopYearProducts = getNewestProducts;
-
-// ==========================================
-// PRODUCTS POR CATEGORIA
-// ==========================================
 
 export async function getProductsByCategory(
   category: string,
@@ -66,14 +42,16 @@ export async function getProductsByCategory(
     limit?: number;
   },
 ): Promise<Product[]> {
-  const { sortBy = SortOption.PRICE_DESC, limit = PRODUCT_LIMITS.CATEGORY_MAX } = options || {};
+  const { sortBy = SortOption.PRICE_DESC, limit } = options || {};
 
-  const details = getAllProductDetails();
-  const filtered = details.filter((p) => p.category === category);
-  const products = mapDetailsToSummaries(filtered);
-  const sorted = sortProducts(products, sortBy);
+  const sorted = sortProducts(
+    mapDetailsToSummaries(
+      getAllProductDetails().filter((product) => product.category === category),
+    ),
+    sortBy,
+  );
 
-  return sorted.slice(0, limit);
+  return limit === undefined ? sorted : sorted.slice(0, Math.max(0, limit));
 }
 
 export async function getAllPhonesProducts(): Promise<Product[]> {

@@ -2,7 +2,10 @@ import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { matchesProductIdentity } from '../src/lib/product-data-matching.mjs';
+import {
+  matchesProductIdentity,
+  matchesProductMetadata,
+} from '../src/lib/product-data-matching.mjs';
 
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 
@@ -19,20 +22,10 @@ const details = [
   ...readJson('accessories.json'),
 ];
 
-const normalize = (value) => String(value).toLowerCase().replace(/\s+/g, '');
-
 function findSummary(detail) {
   return (
     summaries.find((summary) => matchesProductIdentity(summary, detail.id)) ??
-    summaries.find(
-      (summary) =>
-        summary.category === detail.category &&
-        normalize(summary.capacity) === normalize(detail.capacity) &&
-        normalize(summary.color) === normalize(detail.color) &&
-        normalize(summary.itemId).startsWith(
-          normalize(`${detail.namespaceId}-${detail.capacity}-`),
-        ),
-    )
+    summaries.find((summary) => matchesProductMetadata(summary, detail))
   );
 }
 
