@@ -20,7 +20,7 @@ Projeto individual desenvolvido durante a formação na Mate Academy. Foi criado
 
 ## Decisões técnicas
 
-**Persistência em `localStorage`.** Como não existe backend, carrinho, favoritos e tema são salvos no navegador. Isso mantém o projeto simples, mas os dados ficam presos àquele navegador e não sincronizam entre dispositivos.
+**Persistência em `localStorage`.** Como não existe backend, carrinho, favoritos e tema são salvos no navegador. O adaptador em `src/lib/persistence.ts` valida os dados restaurados e ignora entradas inválidas; quando o armazenamento está bloqueado, o estado continua utilizável apenas em memória.
 
 **Estado global com Context API.** O carrinho e os favoritos vivem em um contexto (`CartFavoriteContext`) e o tema em outro (`ThemeContext`). Para o tamanho do projeto, isso evita adicionar uma biblioteca de estado.
 
@@ -34,7 +34,6 @@ Projeto individual desenvolvido durante a formação na Mate Academy. Foi criado
 
 - Backend, banco de dados e autenticação
 - Checkout e pagamento
-- Testes automatizados
 - A rota `GET /api/products` (com paginação, filtro e ordenação) existe, mas hoje a interface não a consome
 
 ## Tecnologias
@@ -45,12 +44,12 @@ Projeto individual desenvolvido durante a formação na Mate Academy. Foi criado
 | Linguagem | TypeScript |
 | Estilo | Tailwind CSS 4 |
 | Componentes | Radix UI, Embla Carousel, Lucide React |
-| Qualidade | ESLint, Prettier |
+| Qualidade | ESLint, Prettier, Node.js Test Runner |
 | Deploy | Vercel |
 
 ## Como rodar
 
-Requisito: Node.js 22.6 ou superior (exigência do Next.js 16 e versão usada no CI).
+Requisito: Node.js 22.6 ou superior (exigência do Next.js 16 e versão usada no CI). O CI usa o mesmo requisito mínimo e instala pelo lockfile.
 
 ```bash
 git clone https://github.com/14lucas-mendes/nice-gadgets.git
@@ -66,6 +65,7 @@ Outros comandos:
 ```bash
 npm run build          # build de produção
 npm run lint           # verificação com ESLint
+npm run test:persistence  # contrato de persistência
 npm run validate:data  # consistência entre os catálogos de produtos
 ```
 
