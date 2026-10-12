@@ -1,6 +1,23 @@
 # Proposta de refatoração do Nice Gadgets
 
-Status: proposta para revisão; implementação ainda não iniciada.
+Status: proposta aprovada; implementação distribuída nas PRs #2–#9. A auditoria visual no navegador continua pendente.
+
+## Acompanhamento da execução
+
+As etapas estão separadas em PRs draft, cada uma com branch própria e CI verde quando há código executável:
+
+| Etapa | PR | Branch | Estado |
+| --- | --- | --- | --- |
+| Qualidade e CI | [#2](https://github.com/14lucas-mendes/nice-gadgets/pull/2) | `chore/quality-checks` | Aberta; CI verde |
+| Fronteiras de dados | [#3](https://github.com/14lucas-mendes/nice-gadgets/pull/3) | `refactor/product-data-boundaries` | Aberta; CI verde |
+| Estado persistido | [#4](https://github.com/14lucas-mendes/nice-gadgets/pull/4) | `fix/persisted-shopping-state` | Aberta; CI verde |
+| URL e paginação | [#5](https://github.com/14lucas-mendes/nice-gadgets/pull/5) | `fix/catalog-url-pagination` | Aberta; CI verde |
+| Ações de produto | [#6](https://github.com/14lucas-mendes/nice-gadgets/pull/6) | `refactor/shared-product-actions` | Aberta; CI verde |
+| Diálogo de checkout | [#7](https://github.com/14lucas-mendes/nice-gadgets/pull/7) | `fix/accessible-checkout-dialog` | Aberta; CI verde |
+| Navegação móvel | [#8](https://github.com/14lucas-mendes/nice-gadgets/pull/8) | `fix/mobile-navigation-accessibility` | Aberta; CI verde |
+| Arquitetura e contribuição | [#9](https://github.com/14lucas-mendes/nice-gadgets/pull/9) | `docs/architecture-and-contributing` | Aberta; CI verde |
+
+As PRs de implementação foram abertas sobre `chore/quality-checks` enquanto a PR #2 aguarda integração. Após a integração, cada PR deve ser retargeteada para `develop` e revisada novamente contra a árvore resultante.
 
 ## Objetivo e limites
 
