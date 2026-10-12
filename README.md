@@ -48,7 +48,7 @@ Projeto individual desenvolvido durante a formação na Mate Academy. Foi criado
 
 ## Como rodar
 
-Requisito: Node.js 22 ou superior (exigência do Next.js 16 e versão usada no CI).
+Requisito: Node.js 22.6 ou superior (exigência do Next.js 16 e versão usada no CI).
 
 ```bash
 git clone https://github.com/14lucas-mendes/nice-gadgets.git
