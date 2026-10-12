@@ -21,6 +21,10 @@ export interface ProductDetail {
   camera: string;
   zoom: string;
   cell: string[];
+
+  /** Metadata shared with the catalog summary, added by the server data layer. */
+  catalogId?: number;
+  year?: number;
 }
 
 export interface ProductSpec {

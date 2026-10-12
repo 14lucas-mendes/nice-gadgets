@@ -1,33 +1,69 @@
 import type { ProductDetail } from '@/types/product-details';
 
-import phonesData from '@/data/phones.json';
-import tabletsData from '@/data/tablets.json';
 import accessoriesData from '@/data/accessories.json';
-import { matchesProductIdentity } from './product-data-matching.mjs';
+import phonesData from '@/data/phones.json';
+import productsData from '@/data/products.json';
+import tabletsData from '@/data/tablets.json';
+import { matchesProductIdentity, matchesProductMetadata } from './product-data-matching.mjs';
 
-// Cache de dados (evita re-parse do JSON)
+interface CatalogSummary {
+  id: number;
+  itemId: string;
+  category: string;
+  capacity: string;
+  color: string;
+  year: number;
+}
+
+const catalogSummaries = productsData as CatalogSummary[];
 let cachedProducts: ProductDetail[] | null = null;
+
+function findCatalogSummary(detail: ProductDetail): CatalogSummary | undefined {
+  return (
+    catalogSummaries.find((summary) =>
+      matchesProductIdentity(summary, detail.id),
+    ) ??
+    catalogSummaries.find((summary) => matchesProductMetadata(summary, detail))
+  );
+}
+
+function enrichDetail(detail: ProductDetail): ProductDetail {
+  const summary = findCatalogSummary(detail);
+
+  if (!summary) {
+    throw new Error(`Missing catalog metadata for product "${detail.id}"`);
+  }
+
+  return {
+    ...detail,
+    catalogId: summary.id,
+    year: summary.year,
+  };
+}
 
 export function getAllProductDetails(): ProductDetail[] {
   if (cachedProducts) {
     return cachedProducts;
   }
 
-  cachedProducts = [
+  const rawProducts = [
     ...(phonesData as ProductDetail[]),
     ...(tabletsData as ProductDetail[]),
     ...(accessoriesData as ProductDetail[]),
   ];
 
+  cachedProducts = rawProducts.map(enrichDetail);
   return cachedProducts;
 }
 
 export function getProductDetailsByCategory(category: string): ProductDetail[] {
-  const allProducts = getAllProductDetails();
-  return allProducts.filter((p) => p.category === category);
+  return getAllProductDetails().filter((product) => product.category === category);
 }
 
 export function findProductDetailById(productId: string): ProductDetail | null {
-  const allProducts = getAllProductDetails();
-  return allProducts.find((product) => matchesProductIdentity(product, productId)) ?? null;
+  return (
+    getAllProductDetails().find((product) =>
+      matchesProductIdentity(product, productId),
+    ) ?? null
+  );
 }
