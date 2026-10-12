@@ -1,41 +1,37 @@
 'use client';
 
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { DEFAULT_FILTERS } from '@/constants/catalog';
-import type { SortOption, PerPageOption, CatalogState } from '@/types/catalog';
+import {
+  parsePage,
+  parsePerPageOption,
+  parseSortOption,
+} from '@/lib/catalog-filters';
+import type { CatalogState, PerPageOption, SortOption } from '@/types/catalog';
 
 export function useCatalogFilters() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  const search = searchParams.toString();
 
-  // Parse initial state from URL
-  const getInitialState = useCallback((): CatalogState => {
-    const sort = (searchParams.get('sort') as SortOption) || DEFAULT_FILTERS.sort;
-    const perPage = (searchParams.get('perPage') as PerPageOption) || DEFAULT_FILTERS.perPage;
-    const page = parseInt(searchParams.get('page') || '1');
+  const state = useMemo<CatalogState>(
+    () => ({
+      sortBy: parseSortOption(searchParams.get('sort')),
+      perPage: parsePerPageOption(searchParams.get('perPage')),
+      currentPage: parsePage(searchParams.get('page')),
+    }),
+    [searchParams],
+  );
 
-    return {
-      sortBy: sort,
-      perPage,
-      currentPage: isNaN(page) || page < 1 ? 1 : page,
-    };
-  }, [searchParams]);
-
-  const [state, setState] = useState<CatalogState>(getInitialState);
-
-  // Sync state with URL
-  useEffect(() => {
-    setState(getInitialState());
-  }, [searchParams, getInitialState]);
-
-  // Update URL
   const updateURL = useCallback(
-    (updates: Partial<CatalogState>, options?: { scroll?: boolean }) => {
-      const current = new URLSearchParams(Array.from(searchParams.entries()));
+    (
+      updates: Partial<CatalogState>,
+      options?: { replace?: boolean; scroll?: boolean },
+    ) => {
+      const current = new URLSearchParams(search);
 
-      // Update sort
       if (updates.sortBy !== undefined) {
         if (updates.sortBy === DEFAULT_FILTERS.sort) {
           current.delete('sort');
@@ -44,7 +40,6 @@ export function useCatalogFilters() {
         }
       }
 
-      // Update perPage
       if (updates.perPage !== undefined) {
         if (updates.perPage === DEFAULT_FILTERS.perPage) {
           current.delete('perPage');
@@ -53,7 +48,6 @@ export function useCatalogFilters() {
         }
       }
 
-      // Update page
       if (updates.currentPage !== undefined) {
         if (updates.currentPage === 1) {
           current.delete('page');
@@ -62,16 +56,17 @@ export function useCatalogFilters() {
         }
       }
 
-      const search = current.toString();
-      const query = search ? `?${search}` : '';
-      const newUrl = `${pathname}${query}`;
+      const query = current.toString();
+      const destination = pathname + (query ? '?' + query : '');
+      const navigation = options?.replace ? router.replace : router.push;
 
-      router.push(newUrl, { scroll: options?.scroll ?? true });
+      navigation(destination, {
+        scroll: options?.scroll ?? true,
+      });
     },
-    [searchParams, pathname, router],
+    [pathname, router, search],
   );
 
-  // Handlers
   const handleSortChange = useCallback(
     (sortBy: SortOption) => {
       updateURL({ sortBy, currentPage: 1 }, { scroll: false });
@@ -93,10 +88,18 @@ export function useCatalogFilters() {
     [updateURL],
   );
 
+  const replacePage = useCallback(
+    (page: number) => {
+      updateURL({ currentPage: page }, { replace: true, scroll: false });
+    },
+    [updateURL],
+  );
+
   return {
     ...state,
     handleSortChange,
     handlePerPageChange,
     handlePageChange,
+    replacePage,
   };
 }

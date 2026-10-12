@@ -1,5 +1,9 @@
-export type SortOption = 'newest' | 'alphabetically' | 'cheapest';
-export type PerPageOption = '4' | '8' | '16' | 'all';
+import type {
+  PerPageOption,
+  SortOption,
+} from '@/lib/catalog-filters';
+
+export type { PerPageOption, SortOption };
 
 export interface CatalogFilters {
   sort: SortOption;

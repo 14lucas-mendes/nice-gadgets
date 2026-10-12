@@ -1,9 +1,10 @@
 'use client';
 
 import type { Product } from '@/types/product-temp';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useCatalogFilters } from '@/hooks/useCatalogFilters';
-import { sortProducts, paginateProducts, calculateTotalPages } from '@/lib/catalog-utils';
+import { normalizePage } from '@/lib/catalog-filters';
+import { paginateProducts, calculateTotalPages, sortProducts } from '@/lib/catalog-utils';
 import PageHeader from '@/components/PageHeader/index';
 import { CatalogFilters } from '@/components/Catalog/CatalogFilters';
 import { CatalogGrid } from '@/components/Catalog/CatalogGrid';
@@ -22,22 +23,33 @@ export default function PageNavigation({
   title,
   description,
 }: PageNavigationProps) {
-  const { sortBy, perPage, currentPage, handleSortChange, handlePerPageChange, handlePageChange } =
-    useCatalogFilters();
+  const {
+    sortBy,
+    perPage,
+    currentPage,
+    handleSortChange,
+    handlePerPageChange,
+    handlePageChange,
+    replacePage,
+  } = useCatalogFilters();
 
-  // Memoize sorted products
   const sortedProducts = useMemo(() => sortProducts(products, sortBy), [products, sortBy]);
 
-  // Memoize paginated products
-  const paginatedProducts = useMemo(
-    () => paginateProducts(sortedProducts, currentPage, perPage),
-    [sortedProducts, currentPage, perPage],
-  );
-
-  // Calculate total pages
   const totalPages = useMemo(
     () => calculateTotalPages(sortedProducts.length, perPage),
     [sortedProducts.length, perPage],
+  );
+  const safeCurrentPage = normalizePage(currentPage, totalPages);
+
+  useEffect(() => {
+    if (currentPage !== safeCurrentPage) {
+      replacePage(safeCurrentPage);
+    }
+  }, [currentPage, replacePage, safeCurrentPage]);
+
+  const paginatedProducts = useMemo(
+    () => paginateProducts(sortedProducts, safeCurrentPage, perPage),
+    [sortedProducts, safeCurrentPage, perPage],
   );
 
   return (
@@ -55,9 +67,9 @@ export default function PageNavigation({
 
       {perPage !== 'all' && totalPages > 1 && (
         <ProductPagination
-          currentPage={currentPage}
+          currentPage={safeCurrentPage}
           totalPages={totalPages}
-          onPageChange={(_, page) => handlePageChange(page)}
+          onPageChange={handlePageChange}
         />
       )}
     </div>

@@ -33,6 +33,9 @@ jobs:
       - name: Test persistence contract
         run: npm run test:persistence
 
+      - name: Test catalog filters
+        run: npm run test:catalog
+
       - name: Lint
         run: npm run lint
 
