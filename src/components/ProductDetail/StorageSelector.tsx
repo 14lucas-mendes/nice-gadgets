@@ -2,13 +2,14 @@
 
 import { useRouter } from 'next/navigation';
 import type { ProductDetail } from '@/types/product-details';
-import { getProductUrlByCapacity } from '@/lib/product-url';
+import { getProductUrlByCapacity, variantsMatch } from '@/lib/product-url';
 
 interface StorageSelectorProps {
   product: ProductDetail;
+  capacities: string[];
 }
 
-export default function StorageSelector({ product }: StorageSelectorProps) {
+export default function StorageSelector({ product, capacities }: StorageSelectorProps) {
   const router = useRouter();
 
   const handleCapacityClick = (capacity: string) => {
@@ -23,8 +24,8 @@ export default function StorageSelector({ product }: StorageSelectorProps) {
       </p>
 
       <div className="flex flex-row flex-wrap gap-2 w-full">
-        {product.capacityAvailable.map((capacity) => {
-          const isSelected = product.capacity === capacity;
+        {capacities.map((capacity) => {
+          const isSelected = variantsMatch(product.capacity, capacity);
 
           return (
             <button

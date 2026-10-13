@@ -6,6 +6,7 @@ import {
   matchesProductIdentity,
   matchesProductMetadata,
 } from '../src/lib/product-data-matching.mjs';
+import { buildProductId } from '../src/lib/product-url.ts';
 
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 
@@ -31,8 +32,15 @@ function findSummary(detail) {
 
 const usedSummaryIds = new Set();
 const unmatchedDetails = [];
+const invalidIds = [];
 
 for (const detail of details) {
+  const expectedId = buildProductId(detail.namespaceId, detail.capacity, detail.color);
+
+  if (detail.id !== expectedId) {
+    invalidIds.push(`${detail.id} (expected ${expectedId})`);
+  }
+
   const summary = findSummary(detail);
 
   if (!summary || usedSummaryIds.has(summary.itemId)) {
@@ -46,7 +54,8 @@ for (const detail of details) {
 if (
   details.length !== summaries.length ||
   unmatchedDetails.length > 0 ||
-  usedSummaryIds.size !== summaries.length
+  usedSummaryIds.size !== summaries.length ||
+  invalidIds.length > 0
 ) {
   throw new Error(
     [
@@ -54,6 +63,7 @@ if (
       `Details: ${details.length}`,
       `Summaries: ${summaries.length}`,
       `Unmatched or duplicated details: ${unmatchedDetails.join(', ') || 'none'}`,
+      `Ids outside buildProductId contract: ${invalidIds.join(', ') || 'none'}`,
     ].join(' '),
   );
 }

@@ -36,6 +36,9 @@ jobs:
       - name: Test catalog filters
         run: npm run test:catalog
 
+      - name: Test product variant URLs
+        run: npm run test:product-url
+
       - name: Lint
         run: npm run lint
 
