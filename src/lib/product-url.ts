@@ -27,12 +27,16 @@ export function getProductUrlByCapacity(product: ProductDetail, capacity: string
   return buildProductUrl(product.category, product.namespaceId, capacity, product.color);
 }
 
+export function variantsMatch(left: string, right: string): boolean {
+  return formatVariantSlug(left) === formatVariantSlug(right);
+}
+
 export function getSelectableColors(
   product: ProductDetail,
   existingIds: ReadonlySet<string>,
 ): string[] {
   return product.colorsAvailable.filter((color) => {
-    if (color === product.color) {
+    if (variantsMatch(color, product.color)) {
       return true;
     }
 
@@ -45,7 +49,7 @@ export function getSelectableCapacities(
   existingIds: ReadonlySet<string>,
 ): string[] {
   return product.capacityAvailable.filter((capacity) => {
-    if (capacity === product.capacity) {
+    if (variantsMatch(capacity, product.capacity)) {
       return true;
     }
 

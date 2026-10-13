@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import type { ProductDetail } from '@/types/product-details';
 import { getColorHex } from '@/constants/colors';
-import { getProductUrlByColor } from '@/lib/product-url';
+import { getProductUrlByColor, variantsMatch } from '@/lib/product-url';
 
 interface ColorSelectorProps {
   product: ProductDetail;
@@ -19,7 +19,7 @@ export default function ColorSelector({ product, colors }: ColorSelectorProps) {
 
       <div className="flex flex-row flex-wrap gap-2 w-full">
         {colors.map((color) => {
-          const isSelected = product.color === color;
+          const isSelected = variantsMatch(product.color, color);
           const colorHex = getColorHex(color);
           const url = getProductUrlByColor(product, color);
 

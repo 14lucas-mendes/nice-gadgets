@@ -4,6 +4,7 @@ import test from 'node:test';
 import phones from '../src/data/phones.json' with { type: 'json' };
 import tablets from '../src/data/tablets.json' with { type: 'json' };
 import accessories from '../src/data/accessories.json' with { type: 'json' };
+import { matchesProductIdentity } from '../src/lib/product-data-matching.mjs';
 import {
   buildProductId,
   formatVariantSlug,
@@ -11,6 +12,7 @@ import {
   getProductUrlByColor,
   getSelectableCapacities,
   getSelectableColors,
+  variantsMatch,
 } from '../src/lib/product-url.ts';
 
 const catalog = [...phones, ...tablets, ...accessories];
@@ -21,6 +23,8 @@ test('normaliza fragmentos de capacidade e cor para o formato dos ids', () => {
   assert.equal(formatVariantSlug('  SPACE GRAY '), 'space-gray');
   assert.equal(formatVariantSlug('128GB'), '128gb');
   assert.equal(formatVariantSlug('rosegold'), 'rosegold');
+  assert.equal(variantsMatch('space-gray', 'space gray'), true);
+  assert.equal(variantsMatch('512GB', '512gb'), true);
 });
 
 test('monta ids com cores compostas sem espaços', () => {
@@ -56,7 +60,7 @@ test('gera urls de variante que existem no catálogo local', () => {
   assert.equal(catalogIds.has('apple-watch-series-3-42mm-space-gray'), true);
 });
 
-test('oculta opções de variante sem produto correspondente', () => {
+test('inclui o iPhone 14 Pro 512GB Gold nas capacidades selecionáveis', () => {
   const product = phones.find((item) => item.id === 'apple-iphone-14-pro-1tb-gold');
   assert.ok(product);
 
@@ -70,10 +74,19 @@ test('oculta opções de variante sem produto correspondente', () => {
   assert.deepEqual(colors, ['spaceblack', 'gold']);
   assert.ok(capacities.includes('1TB'));
   assert.ok(capacities.includes('128GB'));
-  assert.equal(capacities.includes('512GB'), false);
+  assert.equal(capacities.includes('512GB'), true);
+  assert.equal(catalogIds.has('apple-iphone-14-pro-512gb-gold'), true);
 });
 
-test('links selecionáveis do catálogo resolvem para ids existentes', () => {
+test('oculta opções quando o conjunto de ids não contém a variante', () => {
+  const product = phones.find((item) => item.id === 'apple-iphone-14-pro-1tb-gold');
+  assert.ok(product);
+
+  const capacities = getSelectableCapacities(product, new Set([product.id]));
+  assert.deepEqual(capacities, ['1TB']);
+});
+
+test('links selecionáveis resolvem pela identidade real do catálogo', () => {
   const broken = [];
 
   for (const product of catalog) {
@@ -85,14 +98,16 @@ test('links selecionáveis do catálogo resolvem para ids existentes', () => {
 
     for (const color of getSelectableColors(product, siblingIds)) {
       const id = buildProductId(product.namespaceId, product.capacity, color);
-      if (!catalogIds.has(id) && color !== product.color) {
+      const resolves = catalog.some((item) => matchesProductIdentity(item, id));
+      if (!resolves) {
         broken.push(`${product.id} -> color ${color} => ${id}`);
       }
     }
 
     for (const capacity of getSelectableCapacities(product, siblingIds)) {
       const id = buildProductId(product.namespaceId, capacity, product.color);
-      if (!catalogIds.has(id) && capacity !== product.capacity) {
+      const resolves = catalog.some((item) => matchesProductIdentity(item, id));
+      if (!resolves) {
         broken.push(`${product.id} -> capacity ${capacity} => ${id}`);
       }
     }

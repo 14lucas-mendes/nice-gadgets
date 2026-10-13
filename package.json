@@ -13,7 +13,7 @@
     "test:catalog": "node --experimental-strip-types --test scripts/catalog-pagination.test.mjs",
     "test:persistence": "node --experimental-strip-types --test scripts/persistence.test.mjs",
     "test:product-url": "node --experimental-strip-types --test scripts/product-url.test.mjs",
-    "validate:data": "node scripts/validate-product-data.mjs"
+    "validate:data": "node --experimental-strip-types scripts/validate-product-data.mjs"
   },
   "dependencies": {
     "@fontsource/roboto": "^5.2.8",

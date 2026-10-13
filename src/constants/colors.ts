@@ -24,6 +24,7 @@ export const COLOR_MAP = {
 export type ColorKey = keyof typeof COLOR_MAP;
 
 export function getColorHex(color: string): string {
-  const colorKey = color.toLowerCase().replace(/\s+/g, '') as ColorKey;
-  return COLOR_MAP[colorKey] || '#CCCCCC'; // Fallback color
+  // Accept "space gray", "space-gray" and "spacegray" as the same key.
+  const colorKey = color.toLowerCase().replace(/[\s-]+/g, '') as ColorKey;
+  return COLOR_MAP[colorKey] || '#CCCCCC';
 }
