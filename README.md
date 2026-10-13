@@ -67,6 +67,7 @@ npm run build          # build de produção
 npm run lint           # verificação com ESLint
 npm run test:catalog    # contrato de filtros e paginação
 npm run test:persistence  # contrato de persistência
+npm run test:product-url  # contrato de urls de variantes
 npm run validate:data  # consistência entre os catálogos de produtos
 ```
 

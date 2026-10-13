@@ -7,9 +7,10 @@ import { getProductUrlByColor } from '@/lib/product-url';
 
 interface ColorSelectorProps {
   product: ProductDetail;
+  colors: string[];
 }
 
-export default function ColorSelector({ product }: ColorSelectorProps) {
+export default function ColorSelector({ product, colors }: ColorSelectorProps) {
   return (
     <div className="flex flex-col w-full">
       <p className="text-[var(--text-muted)] text-xs sm:text-sm font-semibold mb-2">
@@ -17,7 +18,7 @@ export default function ColorSelector({ product }: ColorSelectorProps) {
       </p>
 
       <div className="flex flex-row flex-wrap gap-2 w-full">
-        {product.colorsAvailable.map((color) => {
+        {colors.map((color) => {
           const isSelected = product.color === color;
           const colorHex = getColorHex(color);
           const url = getProductUrlByColor(product, color);

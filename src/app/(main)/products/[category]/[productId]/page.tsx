@@ -1,4 +1,8 @@
-import { getProductById } from '@/lib/product-queries';
+import { getProductById, getProductIdsByNamespace } from '@/lib/product-queries';
+import {
+  getSelectableCapacities,
+  getSelectableColors,
+} from '@/lib/product-url';
 import { notFound } from 'next/navigation';
 import { ProductHeader } from '@/components/ProductDetail/ProductHeader';
 import { ProductImageGallery } from '@/components/ProductDetail/ProductImageGallery';
@@ -22,6 +26,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
+  const siblingIds = await getProductIdsByNamespace(product.namespaceId);
+  const availableColors = getSelectableColors(product, siblingIds);
+  const availableCapacities = getSelectableCapacities(product, siblingIds);
+
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 sm:pb-14 md:pb-20 overflow-x-hidden">
       {/* Breadcrumb + Title */}
@@ -36,7 +44,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         {/* Seletor + Preço + Ações - 42% width desktop */}
         <div className="lg:col-span-5">
-          <ProductActions product={product} productId={productId} />
+          <ProductActions
+            product={product}
+            productId={productId}
+            availableColors={availableColors}
+            availableCapacities={availableCapacities}
+          />
         </div>
       </div>
 

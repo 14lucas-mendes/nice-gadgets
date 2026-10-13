@@ -9,6 +9,14 @@ export async function getProductById(productId: string): Promise<ProductDetail |
   return findProductDetailById(productId);
 }
 
+export async function getProductIdsByNamespace(namespaceId: string): Promise<Set<string>> {
+  return new Set(
+    getAllProductDetails()
+      .filter((product) => product.namespaceId === namespaceId)
+      .map((product) => product.id),
+  );
+}
+
 export async function getAllProducts(): Promise<Product[]> {
   return mapDetailsToSummaries(getAllProductDetails());
 }
